@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   return (
@@ -20,9 +21,14 @@ export default function Login() {
       <button type="submit" data-testid="common_login__button-login">
         Login
       </button>
-      <button type="button" data-testid="common_login__button-register">
-        Ainda não tenho conta
-      </button>
+      <Link to="/register">
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+        >
+          Ainda não tenho conta
+        </button>
+      </Link>
     </form>
   );
 }
