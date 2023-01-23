@@ -19,7 +19,7 @@ const SaleSchema = (sequelize, DataTypes) => {
       { foreignKey: 'userId', as: 'user' });
 
     SaleTable.belongsTo(models.User,
-      { foreignKey: 'sellerId', as: 'user' });
+      { foreignKey: 'sellerId', as: 'seller' });
   };
 
   return SaleTable;
