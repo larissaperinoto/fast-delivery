@@ -8,7 +8,7 @@ services:
     platform: linux/x86_64
     working_dir: /app-frontend
     volumes:
-      - ./front-end/src:/app-frontend/src
+      - ./front-end:/app-frontend
     depends_on:
       backend:
         condition: service_healthy
@@ -24,7 +24,7 @@ services:
     platform: linux/x86_64
     working_dir: /app-backend
     volumes: 
-      - ./back-end/src:/app-backend/src
+      - ./back-end:/app-backend
     depends_on:
       db:
         condition: service_healthy
@@ -34,8 +34,7 @@ services:
       - MYSQL_HOST=db
       - MYSQL_PORT=3306
       - MYSQL_USER=root
-      - MYSQL_PASSWORD=senhaDoDB
-      - MYSQL_DB_NAME=delivery-app
+      - MYSQL_PASSWORD=password
       - EVAL_ALWAYS_RESTORE_DEV_DB=true
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
@@ -48,7 +47,7 @@ services:
     ports:
       - 3306:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=senhaDoDB
+      - MYSQL_ROOT_PASSWORD=password
     restart: 'always'
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
