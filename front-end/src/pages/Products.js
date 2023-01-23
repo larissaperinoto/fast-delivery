@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import requestProducts from '../services/requests';
 
 export default function Products() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const productsRequest = async () => {
+      const productsList = await requestProducts();
+      setProducts(productsList);
+    };
+    productsRequest();
+  }, []);
+
+  console.log(products);
+
   return (
     <div>
       <nav>
