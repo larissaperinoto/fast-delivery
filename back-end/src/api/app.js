@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const productsRoutes = require('../routes/products.routes');
+
 const route = require('./routes');
 
 const app = express();
@@ -13,7 +13,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use('/products', productsRoutes);
 app.use(route);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
