@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { postLogin } from '../services/requests';
 
 export default function Login() {
   const [invalidEmail, setInvalidEmail] = useState(false);
@@ -8,23 +9,19 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
 
-  const validateLogin = () => {
-    console.log(email);
-    const body = { email, password };
-    fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => {
-        setInvalidEmail(!invalidEmail);
-        setErrorMessage('Email não encontrado');
-        console.log(JSON.parse(error));
-      });
+  const history = useNavigate();
+
+  const validateLogin = async () => {
+    const userData = await postLogin(email, password);
+
+    if (userData !== 'Not found') {
+      history('/customer/products');
+      localStorage.setItem('userData', JSON.stringify(userData));
+    } else {
+      setInvalidEmail(!invalidEmail);
+      setErrorMessage('Email não encontrado');
+      console.log(JSON.parse(error));
+    }
   };
 
   const checkPassword = () => {
