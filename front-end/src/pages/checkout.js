@@ -120,6 +120,7 @@ export default function Checkout() {
           Finalizar Pedido
 
         </button>
+        {/* reenviando commit */}
       </div>
     </div>
   );
