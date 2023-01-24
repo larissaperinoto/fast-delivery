@@ -49,9 +49,14 @@ export default function Login() {
       >
         Login
       </button>
-      <button type="button" data-testid="common_login__button-register">
-        Ainda não tenho conta
-      </button>
+      <Link to="/register">
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+        >
+          Ainda não tenho conta
+        </button>
+      </Link>
     </form>
   );
 }
