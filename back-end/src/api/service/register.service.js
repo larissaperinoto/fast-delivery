@@ -1,16 +1,30 @@
-const { User } = require('../../database/models');
+const { Op } = require('sequelize');
+const md5 = require('md5');
 
-const register = async ({ name, email, password }) => {
-  const userRegister = await User.create({
-    name,
-    email,
-    password,
+const { User } = require('../../database/models');
+const statusCode = require('../shared/statusCode');
+
+const verificatedUser = async (name, email) => {
+  const userVerificated = await User.findOne({
+    where: {
+      [Op.or]: [{ name }, { email }],
+    },
   });
 
-  console.log('userRegister', userRegister.dataValues);
+  return userVerificated;
+};
 
-  return null;
-}
+const register = async ({ name, email, password }) => {
+  const verificated = await verificatedUser(name, email);
+  
+  if (verificated) {
+    return { status: statusCode.Conflit, message: 'Conflict' };
+  }
+  
+  await User.create({ name, email, password: md5(password) });
+  
+  return { status: statusCode.Create, message: 'Created' };
+};
 
 module.exports = {
   register,
