@@ -14,18 +14,18 @@ export default function Login() {
     fetch('/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
     })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => {
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => {
         setInvalidEmail(!invalidEmail);
         setErrorMessage('Email não encontrado');
         console.log(JSON.parse(error));
       });
-  }
+  };
   
   const checkPassword = () => {
     const minPasswordCharacters = 6;
@@ -45,7 +45,7 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} >
+    <form onSubmit={ (e) => e.preventDefault() } >
       <label htmlFor="common_login__input-email">
         <input
           value={ email }
@@ -55,7 +55,13 @@ export default function Login() {
           data-testid="common_login__input-email"
         />
       </label>
-      { invalidEmail && <p data-testid="common_login__element-invalid-email">{ errorMessage }</p> }
+      { 
+        invalidEmail && (
+          <p data-testid="common_login__element-invalid-email">
+            { errorMessage }
+          </p>
+        )
+      }
       <label htmlFor="common_login__input-password">
         <input
           value={ password }
