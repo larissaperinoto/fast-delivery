@@ -1,10 +1,22 @@
-import axios from 'axios';
+// const { token } = JSON.parse(localStorage.getItem('userData'));
 
-const api = axios.create({
-  baseURL: `http://localhost:${process.env.API_PORT || '3001'}`,
-});
+export async function requestProducts() {
+  const response = await fetch('http://localhost:3004/products', {
+    method: 'GET',
+  });
+  const products = await response.json();
+  console.log(products);
+  return products;
+}
 
-export default async function requestProducts() {
-  const { data } = await api.get('products');
-  return data;
+export async function postLogin(email, password) {
+  const response = await fetch(`http://localhost:${process.env.API_PORT || '3001'}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  const userData = await response.json();
+  return userData;
 }

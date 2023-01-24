@@ -1,9 +1,16 @@
 const express = require('express');
-const productsRoutes = require('./routes/products.routes');
+const cors = require('cors');
 const route = require('./routes');
 
 const app = express();
 app.use(express.json());
+
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use('/products', productsRoutes);
 app.use(route);
