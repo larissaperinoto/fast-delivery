@@ -2,9 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
-  const [password, setPassword] = useState('');
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+
+  const validateLogin = () => {
+    console.log(email);
+    const body = { email, password };
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => {
+        setInvalidEmail(!invalidEmail);
+        setErrorMessage('Email não encontrado');
+        console.log(JSON.parse(error));
+      });
+  };
 
   const checkPassword = () => {
     const minPasswordCharacters = 6;
@@ -24,7 +45,7 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <form>
+    <form onSubmit={ (e) => e.preventDefault() }>
       <label htmlFor="common_login__input-email">
         <input
           value={ email }
@@ -34,6 +55,13 @@ export default function Login() {
           data-testid="common_login__input-email"
         />
       </label>
+      {
+        invalidEmail && (
+          <p data-testid="common_login__element-invalid-email">
+            { errorMessage }
+          </p>
+        )
+      }
       <label htmlFor="common_login__input-password">
         <input
           value={ password }
@@ -46,6 +74,7 @@ export default function Login() {
       <button
         type="submit"
         data-testid="common_login__button-login"
+        onClick={ () => validateLogin() }
         disabled={ disabled }
       >
         Login

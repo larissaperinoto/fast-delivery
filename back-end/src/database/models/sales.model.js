@@ -1,4 +1,4 @@
-const SaleSchema = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const SaleTable = sequelize.define('Sale', {
     id: { type: DataTypes.INTEGER, primaryKey: true },
     userId: DataTypes.INTEGER,
@@ -16,13 +16,11 @@ const SaleSchema = (sequelize, DataTypes) => {
 
   SaleTable.associate = (models) => {
     SaleTable.belongsTo(models.User,
-      { foreignKey: 'userId', as: 'user' });
+      { foreignKey: 'userId', as: 'id_user' });
 
     SaleTable.belongsTo(models.User,
-      { foreignKey: 'sellerId', as: 'user' });
+      { foreignKey: 'sellerId', as: 'id_seller' });
   };
 
   return SaleTable;
 };
-
-module.exports = SaleSchema;
