@@ -15,7 +15,8 @@ const validateLogin = (req, res, next) => {
   const validateEmail = regExp.test(email);
 
   if (!validateEmail) {
-    return res.status(StatusCode.BadRequest).json({ message: 'O email deve ter o formato "email@email.com"' })
+    return res.status(StatusCode.BadRequest)
+      .json({ message: 'O email deve ter o formato "email@email.com"' });
   } 
 
   if (password.length < 6) {
