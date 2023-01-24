@@ -21,6 +21,7 @@ export default function Checkout() {
 
   return (
     <div>
+      barra de naveçacao da pagina de produtos
       <table>
         <thead>
           <tr>
