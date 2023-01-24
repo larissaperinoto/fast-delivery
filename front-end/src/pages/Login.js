@@ -26,7 +26,7 @@ export default function Login() {
         console.log(JSON.parse(error));
       });
   };
-  
+
   const checkPassword = () => {
     const minPasswordCharacters = 6;
     return password.length >= minPasswordCharacters;
@@ -45,7 +45,7 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <form onSubmit={ (e) => e.preventDefault() } >
+    <form onSubmit={ (e) => e.preventDefault() }>
       <label htmlFor="common_login__input-email">
         <input
           value={ email }
@@ -55,7 +55,7 @@ export default function Login() {
           data-testid="common_login__input-email"
         />
       </label>
-      { 
+      {
         invalidEmail && (
           <p data-testid="common_login__element-invalid-email">
             { errorMessage }
