@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import requestProducts from '../services/requests';
+import { requestProducts } from '../services/requests';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -7,6 +7,7 @@ export default function Products() {
   useEffect(() => {
     const productsRequest = async () => {
       const productsList = await requestProducts();
+      console.log('oi', productsList);
       setProducts(productsList);
     };
     productsRequest();
