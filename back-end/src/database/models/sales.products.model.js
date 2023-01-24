@@ -1,10 +1,10 @@
-const SalesProductsSchema = (sequelize, DataTypes) => {
-  const SalesProductsTable = sequelize.define('SaleProduct', {
+module.exports = (sequelize, DataTypes) => {
+  const SalesProductsTable = sequelize.define('SalesProduct', {
     saleId: { type: DataTypes.INTEGER, primaryKey: true },
     productId: { type: DataTypes.INTEGER, primaryKey: true },
     quantity: DataTypes.INTEGER,
   }, {
-    tableName: 'saleProducts',
+    tableName: 'salesproducts',
     underscored: true,
     timestamps: false
   });
@@ -12,13 +12,13 @@ const SalesProductsSchema = (sequelize, DataTypes) => {
   SalesProductsTable.associate = (models) => {
     models.Sale.belongsToMany(models.Product, {
       through: SalesProductsTable,
-      as: 'sales_products',
+      as: 'sales',
       foreignKey: 'saleId',
       otherKey: 'productId',
     });
     models.Product.belongsToMany(models.Sale, {
       through: SalesProductsTable,
-      as: 'products_sales',
+      as: 'products',
       foreignKey: 'productId',
       otherKey: 'saleId',
     });
@@ -27,4 +27,3 @@ const SalesProductsSchema = (sequelize, DataTypes) => {
   return SalesProductsTable;
 };
 
-module.exports = SalesProductsSchema;

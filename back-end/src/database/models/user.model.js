@@ -1,4 +1,4 @@
-const UserSchema = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const UserTable = sequelize.define('User', {
     id: { type: DataTypes.INTEGER, primaryKey: true },
     name: DataTypes.STRING,
@@ -27,4 +27,3 @@ const UserSchema = (sequelize, DataTypes) => {
   return UserTable;
 };
 
-module.exports = UserSchema;

@@ -1,4 +1,4 @@
-const ProductsSchema = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const ProductsTable = sequelize.define('Product', {
     id: { type: DataTypes.INTEGER, primaryKey: true },
     name: DataTypes.STRING,
@@ -11,5 +11,3 @@ const ProductsSchema = (sequelize, DataTypes) => {
   });
   return ProductsTable;
 };
-
-module.exports = ProductsSchema;
