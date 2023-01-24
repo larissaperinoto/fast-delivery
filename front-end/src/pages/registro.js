@@ -7,16 +7,18 @@ export default function Register() {
   const [disabled, setDisabled] = useState(true);
 
   const checkFormat = () => {
-    const validName = name.length > 11;
+    const ELEVEN = 11;
+    const FIVE = 5;
+    const validName = name.length > ELEVEN;
     const validEmail = (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).test(email);
-    const validPassword = password.length > 5;
+    const validPassword = password.length > FIVE;
     if (validName && validEmail && validPassword) return setDisabled(false);
-    setDisabled(true)
+    setDisabled(true);
   };
 
   useEffect(() => {
-    checkFormat()
-  }, [name, email, password])
+    checkFormat();
+  }, [name, email, password]);
 
   return (
     <form>
@@ -26,7 +28,7 @@ export default function Register() {
           type="name"
           placeholder="Seu nome"
           data-testid="common_register__input-name"
-          onChange={ ({target}) => setName(target.value) }
+          onChange={ ({ target }) => setName(target.value) }
           value={ name }
         />
       </label>
@@ -36,7 +38,7 @@ export default function Register() {
           type="email"
           placeholder="seuemail@exemplo.com"
           data-testid="common_register__input-email"
-          onChange={ ({target}) => setEmail(target.value) }
+          onChange={ ({ target }) => setEmail(target.value) }
           value={ email }
         />
       </label>
@@ -46,7 +48,7 @@ export default function Register() {
           type="password"
           placeholder="********"
           data-testid="common_register__input-password"
-          onChange={ ({target}) => setPassword(target.value) }
+          onChange={ ({ target }) => setPassword(target.value) }
           value={ password }
         />
       </label>
