@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { postRegistration } from '../services/requests';
+import { useNavigate } from 'react-router-dom';
+import { postLogin, postRegistration } from '../services/requests';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -7,6 +8,8 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [serverMessage, setServerMessage] = useState('');
+
+  const history = useNavigate();
 
   const checkFormat = () => {
     const ELEVEN = 11;
@@ -24,8 +27,15 @@ export default function Register() {
 
   const registerNewUser = async (e, body) => {
     e.preventDefault();
-    const response = await postRegistration(body);
-    setServerMessage(response.message);
+    const { message } = await postRegistration(body);
+    if (message === 'Created') {
+      const userData = await postLogin({ email, password });
+      localStorage.setItem('userData', JSON.stringify(userData));
+      history('/customer/products');
+    } else {
+      setServerMessage(message);
+      localStorage.clear();
+    }
   };
 
   return (

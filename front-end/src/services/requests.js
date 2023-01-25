@@ -29,6 +29,5 @@ export async function postRegistration(body) {
     body: JSON.stringify(body),
   });
   const message = await response.json();
-  console.log('message', message);
   return message;
 }

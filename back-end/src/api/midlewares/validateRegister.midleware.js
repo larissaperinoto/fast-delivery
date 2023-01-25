@@ -2,9 +2,9 @@ const StatusCode = require('../shared/statusCode');
 
 const validateRegister = (req, res, next) => {
   const { name, email, password } = req.body;
-  const regExp = /^\w+@\D+\.\D+$/;
+  const regExp = /^\w+@\D+\.\D+$/ ;
 
-  if (name.length > 12) {
+  if (name.length < 12) {
     return res.status(StatusCode.BadRequest).json({ message: 'name invalid' });
   }
 
@@ -13,7 +13,7 @@ const validateRegister = (req, res, next) => {
   if (!validateEmail) {
     return res.status(StatusCode.BadRequest)
       .json({ message: 'O email deve ter o formato "email@email.com"' });
-  } 
+  }
 
   if (password.length < 6) {
     return res.status(StatusCode.BadRequest)
