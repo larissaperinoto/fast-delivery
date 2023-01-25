@@ -21,7 +21,7 @@ export default function Checkout() {
 
   return (
     <div>
-      <p>nav bar</p>
+
       <table>
         <thead>
           <tr>
@@ -72,15 +72,23 @@ export default function Checkout() {
               <td
                 data-testid={ `customer_checkout__element-order-table-remove-${i}` }
               >
+
                 <button
                   type="button"
                 >
                   Remover item
                 </button>
-
               </td>
             </tr>
           ))}
+
+          <p
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            R$: 0.00
+
+          </p>
+
         </tbody>
       </table>
 
