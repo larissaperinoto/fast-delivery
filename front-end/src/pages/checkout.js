@@ -21,18 +21,7 @@ export default function Checkout() {
 
   return (
     <div>
-      <div>
-        <nav>
-          <div data-testid="customer_products__element-navbar-link-products" />
-          products
-          <div data-testid="customer_products__element-navbar-link-orders" />
-          meus pedidos
-          <div data-testid="customer_products__element-navbar-user-full-name" />
-          nome
-          <div data-testid="customer_products__element-navbar-link-logout" />
-          sair
-        </nav>
-      </div>
+      <p>nav bar</p>
       <table>
         <thead>
           <tr>
