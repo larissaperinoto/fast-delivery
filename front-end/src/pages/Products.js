@@ -20,13 +20,13 @@ function Products() {
     <div>
       <Navbar />
       <section>
-        {products.map(({ id, image, name, price }) => (
+        {products.map(({ id, urlImage, name, price }) => (
           <ProductsCard
             key={ id }
             id={ id }
-            imageUrl={ image }
+            urlImage={ urlImage }
             name={ name }
-            price={ price }
+            price={ price.replace('.', ',') }
           />
         ))}
       </section>
