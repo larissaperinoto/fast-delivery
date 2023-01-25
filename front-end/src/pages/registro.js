@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { postLogin, postRegistration } from '../services/requests';
 
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [serverMessage, setServerMessage] = useState('');
+
+  const history = useNavigate();
 
   const checkFormat = () => {
     const ELEVEN = 11;
@@ -19,6 +24,19 @@ export default function Register() {
   useEffect(() => {
     checkFormat();
   }, [name, email, password]);
+
+  const registerNewUser = async (e, body) => {
+    e.preventDefault();
+    const { message } = await postRegistration(body);
+    if (message === 'Created') {
+      const userData = await postLogin({ email, password });
+      localStorage.setItem('userData', JSON.stringify(userData));
+      history('/customer/products');
+    } else {
+      setServerMessage(message);
+      localStorage.clear();
+    }
+  };
 
   return (
     <form>
@@ -56,6 +74,7 @@ export default function Register() {
         type="submit"
         data-testid="common_register__button-register"
         disabled={ disabled }
+        onClick={ (e) => registerNewUser(e, { name, email, password, role: 'customer' }) }
       >
         Cadastrar
       </button>
@@ -63,8 +82,7 @@ export default function Register() {
       <p
         data-testid="common_register__element-invalid_register"
       >
-        suposta mensagem de erro
-
+        {serverMessage}
       </p>
     </form>
   );
