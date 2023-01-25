@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../components/navbar';
 
 export default function Checkout() {
   const exempleProducts = [
@@ -21,7 +22,7 @@ export default function Checkout() {
 
   return (
     <div>
-
+      <Navbar />
       <table>
         <thead>
           <tr>
