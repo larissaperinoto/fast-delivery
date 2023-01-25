@@ -85,8 +85,9 @@ export default function Checkout() {
           <p
             data-testid="customer_checkout__element-order-total-price"
           >
-            R$: 0.00
-
+            R$:
+            {exempleProducts
+              .reduce((acc, cur) => (cur.quantity * cur.unitPrice) + acc, 0).toFixed(2)}
           </p>
 
         </tbody>
