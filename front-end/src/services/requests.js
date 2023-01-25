@@ -1,16 +1,15 @@
 // const { token } = JSON.parse(localStorage.getItem('userData'));
 
 export async function requestProducts() {
-  const response = await fetch('http://localhost:3001/products', {
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/products`, {
     method: 'GET',
   });
   const products = await response.json();
-  console.log(products);
   return products;
 }
 
 export async function postLogin(email, password) {
-  const response = await fetch(`http://localhost:${process.env.API_PORT || '3001'}/login`, {
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,4 +18,17 @@ export async function postLogin(email, password) {
   });
   const userData = await response.json();
   return userData;
+}
+
+export async function postRegistration(body) {
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  });
+  const message = await response.json();
+  console.log('message', message);
+  return message;
 }

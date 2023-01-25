@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { postRegistration } from '../services/requests';
 
 export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [serverMessage, setServerMessage] = useState('');
 
   const checkFormat = () => {
     const ELEVEN = 11;
@@ -19,6 +21,12 @@ export default function Register() {
   useEffect(() => {
     checkFormat();
   }, [name, email, password]);
+
+  const registerNewUser = async (e, body) => {
+    e.preventDefault();
+    const response = await postRegistration(body);
+    setServerMessage(response.message);
+  };
 
   return (
     <form>
@@ -56,6 +64,7 @@ export default function Register() {
         type="submit"
         data-testid="common_register__button-register"
         disabled={ disabled }
+        onClick={ (e) => registerNewUser(e, { name, email, password, role: 'customer' }) }
       >
         Cadastrar
       </button>
@@ -63,8 +72,7 @@ export default function Register() {
       <p
         data-testid="common_register__element-invalid_register"
       >
-        suposta mensagem de erro
-
+        {serverMessage}
       </p>
     </form>
   );

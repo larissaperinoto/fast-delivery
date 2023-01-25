@@ -14,15 +14,15 @@ const verificatedUser = async (name, email) => {
   return userVerificated;
 };
 
-const register = async ({ name, email, password }) => {
+const register = async ({ name, email, password, role }) => {
   const verificated = await verificatedUser(name, email);
-  
+
   if (verificated) {
     return { status: statusCode.Conflit, message: 'Conflict' };
   }
-  
-  await User.create({ name, email, password: md5(password) });
-  
+
+  await User.create({ name, email, password: md5(password), role });
+
   return { status: statusCode.Create, message: 'Created' };
 };
 
