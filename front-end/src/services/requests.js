@@ -1,7 +1,7 @@
 // const { token } = JSON.parse(localStorage.getItem('userData'));
 
 export async function requestProducts() {
-  const response = await fetch('http://localhost:3004/products', {
+  const response = await fetch('http://localhost:3001/products', {
     method: 'GET',
   });
   const products = await response.json();
