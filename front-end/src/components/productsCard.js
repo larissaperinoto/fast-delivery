@@ -1,13 +1,14 @@
 import { string, number } from 'prop-types';
 
-function ProductsCard({ id, name, image, price }) {
+function ProductsCard({ id, name, urlImage, price }) {
   console.log(id);
+  console.log(urlImage);
   return (
     <section>
       <span data-testid={ `customer_products__element-card-title-${id}` }>{name}</span>
       <img
         data-testid={ `customer_products__img-card-bg-image-${id}` }
-        src={ image }
+        src={ urlImage }
         alt=""
       />
       <span data-testid={ `customer_products__element-card-price-${id}` }>{price}</span>
@@ -22,7 +23,8 @@ function ProductsCard({ id, name, image, price }) {
 
         <input
           data-testid={ `customer_products__input-card-quantity-${id}` }
-          type="text"
+          type="number"
+          defaultValue="0"
         />
 
         <button
@@ -39,7 +41,7 @@ function ProductsCard({ id, name, image, price }) {
 ProductsCard.propTypes = {
   id: number.isRequired,
   name: string.isRequired,
-  image: string.isRequired,
+  urlImage: string.isRequired,
   price: string.isRequired,
 };
 
