@@ -20,7 +20,6 @@ export default function Login() {
     } else {
       setInvalidEmail(!invalidEmail);
       setErrorMessage('Email não encontrado');
-      console.log(JSON.parse(error));
     }
   };
 
