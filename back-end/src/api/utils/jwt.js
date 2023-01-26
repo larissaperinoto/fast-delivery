@@ -1,9 +1,11 @@
 require('dotenv/config');
 
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 const createToken = (data) => {
-  const token = jwt.sign({ data }, process.env.JWT_SECRET || 'mySecret', {
+  const key = fs.readFileSync('./jwt.evaluation.key');
+  const token = jwt.sign({ data }, key, {
     expiresIn: '1d',
     algorithm: 'HS256',
   });
