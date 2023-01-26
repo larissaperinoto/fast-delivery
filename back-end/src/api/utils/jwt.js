@@ -8,7 +8,6 @@ const createToken = (data) => {
     algorithm: 'HS256',
   });
 
-  console.log(token);
   return token;
 };
 

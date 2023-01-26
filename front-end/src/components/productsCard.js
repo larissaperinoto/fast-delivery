@@ -1,8 +1,6 @@
 import { string, number } from 'prop-types';
 
 function ProductsCard({ id, name, urlImage, price }) {
-  console.log(id);
-  console.log(urlImage);
   return (
     <section>
       <span data-testid={ `customer_products__element-card-title-${id}` }>{name}</span>

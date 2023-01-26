@@ -9,13 +9,11 @@ function Products() {
   useEffect(() => {
     const productsRequest = async () => {
       const productsList = await requestProducts();
-      console.log('oi', productsList);
       setProducts(productsList);
     };
     productsRequest();
   }, []);
 
-  console.log(products);
   return (
     <div>
       <Navbar />
