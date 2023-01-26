@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import MyContext from './Context';
+import Context from './Context';
 
 export default function Provider({ children }) {
   const [orders, setOrders] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const value = {
+  const value = React.useMemo(() => ({
     orders,
     setOrders,
     totalQuantity,
     setTotalQuantity,
     totalPrice,
     setTotalPrice,
-  };
+  }), [
+    orders,
+    setOrders,
+    totalQuantity,
+    setTotalQuantity,
+    totalPrice,
+    setTotalPrice,
+  ]);
 
   return (
-    <MyContext.Provider
+    <Context.Provider
       value={ value }
     >
       {children}
-    </MyContext.Provider>
+    </Context.Provider>
   );
 }
 

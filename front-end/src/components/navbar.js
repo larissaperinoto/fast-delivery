@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import Context from '../context/Context';
-
 import { useNavigate } from 'react-router-dom';
+import Context from '../context/Context';
 
 export default function Navbar() {
   const { totalQuantity } = useContext(Context);
