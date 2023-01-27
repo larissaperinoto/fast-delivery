@@ -11,7 +11,7 @@ const getSale = async (req, res) => {
   console.log(id);
   const result = await saleService.getSales(id);
   return res.status(statusCode.OK).json(result);
-}
+};
 
 module.exports = {
   create,

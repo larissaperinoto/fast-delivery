@@ -41,11 +41,11 @@ const getSales = async (id) => {
   const sale = await Sale.findOne({ where: { id } });
 
   if (!sale) {
-    return { status: StatusCode.NotFound, message: 'Not found' }
+    return { status: StatusCode.NotFound, message: 'Not found' };
   }
 
   return sale;
-}
+};
 
 module.exports = {
   createSale,
