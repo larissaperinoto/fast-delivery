@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     productId: { type: DataTypes.INTEGER, primaryKey: true },
     quantity: DataTypes.INTEGER,
   }, {
-    tableName: 'salesproducts',
+    tableName: 'salesProducts',
     underscored: true,
     timestamps: false
   });

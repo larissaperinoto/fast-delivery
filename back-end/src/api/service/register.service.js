@@ -26,6 +26,12 @@ const register = async ({ name, email, password, role }) => {
   return { status: statusCode.Create, message: 'Created' };
 };
 
+const userSellerId = async (seller) => {
+  const userSeller = await User.findOne({ where: { name: seller } });
+  return userSeller.dataValues.id;
+};
+
 module.exports = {
   register,
+  userSellerId,
 };

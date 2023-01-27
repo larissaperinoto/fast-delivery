@@ -1,0 +1,11 @@
+const saleService = require('../service/sales.service');
+const statusCode = require('../shared/statusCode');
+
+const create = async (req, res) => {
+  const result = await saleService.createSale(req.body);
+  return res.status(statusCode.Create).json(result);
+};
+
+module.exports = {
+  create,
+};
