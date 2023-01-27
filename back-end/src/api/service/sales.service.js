@@ -1,6 +1,7 @@
 const moment = require('moment');
 
 const { Sale, SalesProduct } = require('../../database/models');
+const StatusCode = require('../shared/statusCode');
 const userService = require('./register.service');
 
 moment.locale('pt-br');
@@ -36,6 +37,17 @@ const createSale = async (sale) => {
   return saleRegister;
 };
 
+const getSales = async (id) => {
+  const sale = await Sale.findOne({ where: { id } });
+
+  if (!sale) {
+    return { status: StatusCode.NotFound, message: 'Not found' }
+  }
+
+  return sale;
+}
+
 module.exports = {
   createSale,
+  getSales,
 };
