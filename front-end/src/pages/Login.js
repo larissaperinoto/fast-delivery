@@ -15,14 +15,17 @@ export default function Login() {
     const userData = await postLogin(email, password);
 
     if (userData !== 'Not found') {
+      localStorage.setItem('user', JSON.stringify(userData));
       history('/customer/products');
-      localStorage.setItem('userData', JSON.stringify(userData));
     } else {
       setInvalidEmail(!invalidEmail);
       setErrorMessage('Email não encontrado');
-      console.log(JSON.parse(error));
     }
   };
+
+  useEffect(() => {
+    localStorage.removeItem('user');
+  }, []);
 
   const checkPassword = () => {
     const minPasswordCharacters = 6;

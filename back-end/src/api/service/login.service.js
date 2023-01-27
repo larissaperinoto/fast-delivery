@@ -22,7 +22,6 @@ const modelViewUser = (user) => {
 
 const login = async (email, password) => {
   const passwordEncript = verificatedPassword(password);
-  console.log(passwordEncript);
 
   const user = await User.findOne({
     where: { [Op.and]: [
