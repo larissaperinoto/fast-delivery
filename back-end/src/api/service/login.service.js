@@ -31,6 +31,8 @@ const login = async (email, password) => {
     },
   });
 
+  console.log(user);
+
   if (!user) {
     return { status: StatusCode.NotFound, message: 'Not found' };
   }
