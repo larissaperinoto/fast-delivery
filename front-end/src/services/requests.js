@@ -31,3 +31,11 @@ export async function postRegistration(body) {
   const message = await response.json();
   return message;
 }
+
+export async function sellerProducts() {
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders/<id>`, {
+    method: 'GET',
+  });
+  const sellerProduct = await response.json();
+  return sellerProduct;
+}
