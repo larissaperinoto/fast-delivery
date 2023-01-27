@@ -38,7 +38,7 @@ export default function Checkout() {
           { exempleProducts.map((item, i) => (
             <tr key={ item.description }>
               <td
-                data-testid={ `customer_checkout__element-order-table-item-number${i}` }
+                data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
 
               >
                 index
