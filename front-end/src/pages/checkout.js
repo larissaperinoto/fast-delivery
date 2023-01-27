@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Navbar from '../components/navbar';
+import Context from '../context/Context';
 
 export default function Checkout() {
-  const exempleProducts = [
-    {
-      description: 'Cerveja stella 250ml',
-      quantity: 3,
-      unitPrice: 3.50,
-    },
-    {
-      description: 'Cerveja skol latao 450ml',
-      quantity: 4,
-      unitPrice: 4.10,
-    },
-    {
-      description: 'salgadinho torcida churrasco',
-      quantity: 1,
-      unitPrice: 1.56,
-    },
-  ];
+  const { orders, totalPrice, ordersCheckout, setOrdersCheckout } = useContext(Context);
+
+  const ordersArray = orders.map(({ id }) => orders.filter((e) => e.id === id))
+    .filter((item, index, self) => index === self.findIndex((t) => (t[0].id === item[0]
+      .id && t[0].name === item[0].name && t[0].urlImage === item[0].urlImage
+    )));
+
+  useEffect(
+    () => setOrdersCheckout([
+      ...ordersCheckout,
+      ...ordersArray.map((item, i) => ({
+        item: i,
+        descricao: item[0].name,
+        quantidade: item.length,
+        valor: Number(item[0].price.replace(/,/, '.')),
+        subTotal: Number(item[0].price.replace(/,/, '.')) * item.length,
+      }))]),
+    [],
+  );
 
   return (
     <div>
@@ -35,46 +38,48 @@ export default function Checkout() {
           </tr>
         </thead>
         <tbody>
-          { exempleProducts.map((item, i) => (
-            <tr key={ item.description }>
+          { ordersArray.map((item, i) => (
+            <tr key={ item[0].name }>
               <td
-                data-testid={ `customer_checkout__element-order-table-item-number${i}` }
+                data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
 
               >
-                index
+                {i + 1}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-name-${i}` }
 
               >
-                {item.description}
+                {item[0].name}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
               >
-                {item.quantity}
+                {item.length}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
 
               >
-                {item.unitPrice}
+                {item[0].price}
 
               </td>
               <td
                 data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
               >
-                {item.unitPrice * item.quantity}
+                {(Number(item[0].price
+                  .replace(/,/, '.')) * item.length)
+                  .toFixed(2).toString()
+                  .replace(/\./, ',')}
 
               </td>
-              <td
-                data-testid={ `customer_checkout__element-order-table-remove-${i}` }
-              >
+              <td>
 
                 <button
+                  data-testid={ `customer_checkout__element-order-table-remove-${i}` }
                   type="button"
                 >
                   Remover item
@@ -87,8 +92,7 @@ export default function Checkout() {
             data-testid="customer_checkout__element-order-total-price"
           >
             R$:
-            {exempleProducts
-              .reduce((acc, cur) => (cur.quantity * cur.unitPrice) + acc, 0).toFixed(2)}
+            {totalPrice}
           </p>
 
         </tbody>

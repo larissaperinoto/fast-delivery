@@ -6,6 +6,7 @@ export default function Provider({ children }) {
   const [orders, setOrders] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [ordersCheckout, setOrdersCheckout] = useState([]);
 
   const value = React.useMemo(() => ({
     orders,
@@ -14,6 +15,8 @@ export default function Provider({ children }) {
     setTotalQuantity,
     totalPrice,
     setTotalPrice,
+    ordersCheckout,
+    setOrdersCheckout,
   }), [
     orders,
     setOrders,
@@ -21,6 +24,8 @@ export default function Provider({ children }) {
     setTotalQuantity,
     totalPrice,
     setTotalPrice,
+    ordersCheckout,
+    setOrdersCheckout,
   ]);
 
   return (
