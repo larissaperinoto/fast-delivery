@@ -29,7 +29,6 @@ const StatusCode = require('../shared/statusCode');
 
 const validateRegister = (req, res, next) => {
   const message = validateRegisterFields(req.body);
-  console.log(message);
   if (message) return res.status(StatusCode.BadRequest).json({ message });
 
   next();
