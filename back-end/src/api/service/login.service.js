@@ -10,10 +10,10 @@ const verificatedPassword = (password) => {
   return encript;
 };
 
-const modelViewUser = (user) => {
-  const { id, name, email, role } = user.dataValues;
+const modelViewUser = async (user) => {
+  const { id, name, email, role } = user;
 
-  const token = createToken({ id, name, email, role });
+  const token = await createToken({ id, name, email, role });
 
   const modelView = { id, name, email, role, token };
 
@@ -31,13 +31,11 @@ const login = async (email, password) => {
     },
   });
 
-  console.log(user);
-
   if (!user) {
     return { status: StatusCode.NotFound, message: 'Not found' };
   }
 
-  const result = modelViewUser(user);
+  const result = await modelViewUser(user);
 
   return { status: StatusCode.OK, message: result };
 };
