@@ -1,11 +1,12 @@
 const sinon = require('sinon');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+
 chai.use(chaiHttp);
 
 const app = require('../../api/app');
 const { User } = require('../../database/models');
-const { userMock, tokenMock } = require('./mock');
+const { userMock } = require('./mock');
 
 const { expect } = chai;
 
