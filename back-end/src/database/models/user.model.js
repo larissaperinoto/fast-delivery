@@ -1,6 +1,11 @@
-const UserSchema = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const UserTable = sequelize.define('User', {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER
+    },
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -12,21 +17,18 @@ const UserSchema = (sequelize, DataTypes) => {
   });
 
   UserTable.associate = (models) => {
-    UserTable.hasMany(models.BlogPost, {
+    UserTable.hasMany(models.Sale, {
       as: 'costumer_sale',
-      foreignKey: 'userId'
-    })
-  };
+      foreignKey: 'userId',
+    });
 
-  UserTable.associate = (models) => {
-    UserTable.hasMany(models.BlogPost, {
+    UserTable.hasMany(models.Sale, {
       as: 'seller_sale',
       foreignKey: 'sellerId'
-    })
+    });
   };
 
 
   return UserTable;
 };
 
-module.exports = UserSchema;
