@@ -32,7 +32,7 @@ describe('Testa a rota /login', () => {
       expect(response.body).to.be.deep.equal({ ...userMock, token: tokenMock });
     });
 
-    it('Usuário não possuí credenciais válidas', async () => {
+    it('Usuário não possui credenciais válidas', async () => {
       sinon.stub(User, "findOne").resolves(undefined);
 
       const response = await chai
@@ -44,7 +44,7 @@ describe('Testa a rota /login', () => {
               });
 
       expect(response.status).to.be.equal(404);
-      expect(response.body).to.be.deep.equal('Not found');
+      expect(response.body).to.be.equal('Not found');
     });
 
     it('Usuário não preenche o campo email', async () => {
