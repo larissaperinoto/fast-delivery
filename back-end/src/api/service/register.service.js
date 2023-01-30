@@ -31,18 +31,13 @@ const userSellerId = async (seller) => {
   return userSeller.dataValues.id;
 };
 
-const getUserOrSeller = async (id) => {
-  const user = await User.findOne({
-    where: { id },
-  });
-
-  const { name } = user.dataValues;
-
-  return { status: statusCode.OK, message: name };
+const getAllUser = async () => {
+  const users = await User.findAll();
+  return { status: statusCode.OK, message: users };
 };
 
 module.exports = {
   register,
   userSellerId,
-  getUserOrSeller,
+  getAllUser,
 };
