@@ -30,7 +30,7 @@ export default function Register() {
     const { message } = await postRegistration(body);
     if (message === 'Created') {
       const userData = await postLogin({ email, password });
-      localStorage.setItem('userData', JSON.stringify(userData));
+      localStorage.setItem('user', JSON.stringify(userData));
       history('/customer/products');
     } else {
       setServerMessage(message);
