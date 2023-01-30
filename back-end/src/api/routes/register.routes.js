@@ -5,6 +5,6 @@ const registerController = require('../controllers/register.controller');
 const route = Router();
 
 route.post('/register', registerController.register);
-route.get('/user', registerController.getAllUser);
+route.get('/users', registerController.getAllUser);
 
 module.exports = route;

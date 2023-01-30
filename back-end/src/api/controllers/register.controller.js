@@ -6,8 +6,8 @@ const register = async (req, res) => {
 };
 
 const getAllUser = async (_req, res) => {
-  const { status, message } = await registerService.getAllUser;
-  return res.status(status).json({ message });
+  const { status, message } = await registerService.getAllUser();
+  return res.status(status).json(message);
 };
 
 module.exports = {
