@@ -8,7 +8,6 @@ const create = async (req, res) => {
 
 const getSale = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   const result = await saleService.getSales(id);
   return res.status(statusCode.OK).json(result);
 };
