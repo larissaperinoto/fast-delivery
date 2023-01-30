@@ -11,12 +11,28 @@ export default function Login() {
 
   const history = useNavigate();
 
+  const redirectTo = (role) => {
+    switch (role) {
+    case 'customer':
+      history('/customer/products');
+      break;
+    case 'administrator':
+      history('/admin/manage');
+      break;
+    case 'seller':
+      history('');
+      break;
+    default:
+      break;
+    }
+  };
+
   const validateLogin = async () => {
     const userData = await postLogin(email, password);
 
     if (userData !== 'Not found') {
       localStorage.setItem('user', JSON.stringify(userData));
-      history('/customer/products');
+      redirectTo(userData.role);
     } else {
       setInvalidEmail(!invalidEmail);
       setErrorMessage('Email não encontrado');
