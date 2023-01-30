@@ -31,7 +31,13 @@ const userSellerId = async (seller) => {
   return userSeller.dataValues.id;
 };
 
+const getAllUser = async () => {
+  const users = await User.findAll();
+  return { status: statusCode.OK, message: users };
+};
+
 module.exports = {
   register,
   userSellerId,
+  getAllUser,
 };

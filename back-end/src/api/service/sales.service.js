@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-const { Sale, SalesProduct } = require('../../database/models');
+const { Sale, SalesProduct, Product } = require('../../database/models');
 const StatusCode = require('../shared/statusCode');
 const userService = require('./register.service');
 
@@ -38,7 +38,14 @@ const createSale = async (sale) => {
 };
 
 const getSales = async (id) => {
-  const sale = await Sale.findOne({ where: { id } });
+  const sale = await Sale.findOne({
+    where: { id },
+    include: [
+      { model: Product,
+        as: 'sales_products',
+        attributes: { exclude: ['urlImage'] } },
+    ],
+  });
 
   if (!sale) {
     return { status: StatusCode.NotFound, message: 'Not found' };

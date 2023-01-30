@@ -5,6 +5,7 @@ import Context from '../context/Context';
 export default function Navbar() {
   const { totalQuantity } = useContext(Context);
   const userFullName = JSON.parse(localStorage.getItem('user'));
+  console.log(userFullName);
   const history = useNavigate();
 
   return (
