@@ -11,12 +11,12 @@ export default function Login() {
 
   const history = useNavigate();
 
-  /*   const redirectTo = (role) => {
+  const redirectTo = (role) => {
     switch (role) {
-    case 'costumer':
+    case 'customer':
       history('/customer/products');
       break;
-    case 'administrador':
+    case 'administrator':
       history('/admin/manage');
       break;
     case 'seller':
@@ -25,16 +25,14 @@ export default function Login() {
     default:
       break;
     }
-  }; */
+  };
 
   const validateLogin = async () => {
     const userData = await postLogin(email, password);
 
     if (userData !== 'Not found') {
       localStorage.setItem('user', JSON.stringify(userData));
-      // redirectTo(userData.role);
-      if (userData.role === 'customer') history('/customer/products');
-      if (userData.role === 'administrator') history('/admin/manage');
+      redirectTo(userData.role);
     } else {
       setInvalidEmail(!invalidEmail);
       setErrorMessage('Email não encontrado');
