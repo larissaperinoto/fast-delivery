@@ -28,8 +28,9 @@ export default function Register() {
   const registerNewUser = async (e, body) => {
     e.preventDefault();
     const { message } = await postRegistration(body);
+    console.log(message);
     if (message === 'Created') {
-      const user = await postLogin({ email, password });
+      const user = await postLogin(email, password);
       localStorage.setItem('user', JSON.stringify(user));
       history('/customer/products');
     } else {
