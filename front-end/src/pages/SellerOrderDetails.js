@@ -1,9 +1,9 @@
-import NavBarSellerDetails from '../components/navBarSellerDetails';
+import Navbar from '../components/navbar';
 
 function SellerOrderDetails() {
   return (
     <>
-      <NavBarSellerDetails />
+      <Navbar />
       <p>Detalhe do pedido</p>
       <p
         data-testid="seller_order_details__element-order-details-label-order-id"
