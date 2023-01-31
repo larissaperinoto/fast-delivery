@@ -20,11 +20,12 @@ export async function postLogin(email, password) {
   return userData;
 }
 
-export async function postRegistration(body) {
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register`, {
+export async function postRegistration(body, token = '', url = '') {
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: token,
     },
     body: JSON.stringify(body),
   });

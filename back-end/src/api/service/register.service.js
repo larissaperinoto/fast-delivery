@@ -21,6 +21,8 @@ const register = async ({ name, email, password, role }) => {
     return { status: statusCode.Conflit, message: 'Conflict' };
   }
 
+  console.log(md5(password))
+
   await User.create({ name, email, password: md5(password), role });
 
   return { status: statusCode.Create, message: 'Created' };
