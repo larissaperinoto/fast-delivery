@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import NavBar from '../components/navbar';
 import SellerOrdersCard from '../components/SellerOrdersCard';
-import { sellerProducts } from '../services/requests';
+import { sellerOrders } from '../services/requests';
 
 export default function SellerOrders() {
   const [salesOrdersSeller, setSalesOrdersSeller] = useState([]);
 
   useEffect(() => {
     const sales = async () => {
-      const salesSeller = await sellerProducts();
+      const { id } = JSON.parse(localStorage.getItem('user'));
+      const salesSeller = await sellerOrders(id);
       setSalesOrdersSeller(salesSeller);
     };
     sales();

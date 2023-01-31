@@ -158,7 +158,6 @@ export default function Checkout() {
               data-testid="customer_checkout__select-seller"
             >
               pessoa
-
             </option>
           </select>
 

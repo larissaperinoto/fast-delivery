@@ -7,11 +7,13 @@ import Register from './pages/registro';
 import Checkout from './pages/checkout';
 import SellerOrder from './pages/sellerOrder';
 import AdminManage from './pages/AdminManage';
+import CustomerOrders from './pages/CustomerOrders';
 
 function App() {
   return (
     <Routes>
       <Route path="/admin/manage" element={ <AdminManage /> } />
+      <Route path="/customer/orders" element={ <CustomerOrders /> } />
       <Route path="/customer/products" element={ <Products /> } />
       <Route path="/login" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
