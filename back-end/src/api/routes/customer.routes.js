@@ -1,6 +1,6 @@
 const { Router } = require('express');
 
-const saleController = require('../controllers/sales.controller');
+const saleController = require('../controllers/customer.controller');
 const authorizationUser = require('../midlewares/validateTokenUser.midleware');
 
 const route = Router();

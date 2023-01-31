@@ -1,14 +1,14 @@
-const saleService = require('../service/sales.service');
+const customerService = require('../service/customer.service');
 const statusCode = require('../shared/statusCode');
 
 const create = async (req, res) => {
-  const result = await saleService.createSale(req.body);
+  const result = await customerService.createSale(req.body);
   return res.status(statusCode.Create).json(result);
 };
 
 const getSale = async (req, res) => {
   const { id } = req.params;
-  const result = await saleService.getSales(id);
+  const result = await customerService.getSales(id);
   return res.status(statusCode.OK).json(result);
 };
 
