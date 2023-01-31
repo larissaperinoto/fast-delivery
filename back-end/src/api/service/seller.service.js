@@ -30,13 +30,13 @@ const updateStatus = async (id, { status }) => {
   await Sale.update({ status }, {
     where: { id },
   });
-  
+
   return { status: StatusCode.OK, message: 'Updated' };
 };
 
 module.exports = {
   getAllSalesSeller,
-  getSaleSellerId,
   getAllSellers,
   updateStatus,
+  getSaleSellerById,
 };

@@ -2,7 +2,7 @@ const moment = require('moment');
 
 const { Sale, SalesProduct, Product } = require('../../database/models');
 const StatusCode = require('../shared/statusCode');
-const userService = require('./register.service');
+// const userService = require('./register.service');
 
 moment.locale('pt-br');
 
@@ -14,7 +14,6 @@ const salveSalesProduct = async ({ products }, saleId) => {
 };
 
 const createSale = async (sale) => {
-  console.log(sale)
   const { user: { id } } = sale;
   const { seller, totalPrice, deliveryAddress, deliveryNumber } = sale;
 
