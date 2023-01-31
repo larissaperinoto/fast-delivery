@@ -1,8 +1,6 @@
 import Navbar from '../components/navbar';
 
 function SellerOrderDetails() {
-  const [order, setOrder] = useState({});
-
   return (
     <>
       <Navbar />
