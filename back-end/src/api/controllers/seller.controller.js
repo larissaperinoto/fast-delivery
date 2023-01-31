@@ -7,7 +7,13 @@ const getSales = async (req, res) => {
 
 const getSalesId = async (req, res) => {
   const { id } = req.params;
-  const { status, message } = await sellerService.getSaleSellerId(id);
+  const { status, message } = await sellerService.getSaleSellerById(id);
+  return res.status(status).json(message);
+};
+
+const updateSale = async (req, res) => {
+  const { id } = req.params;
+  const { status, message } = await sellerService.updateStatus(id, req.body);
   return res.status(status).json(message);
 };
 
@@ -20,4 +26,5 @@ module.exports = {
   getSales,
   getSalesId,
   getAllSellers,
+  updateSale,
 };
