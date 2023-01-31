@@ -32,8 +32,8 @@ export async function postRegistration(body) {
   return message;
 }
 
-export async function sellerProducts() {
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders/<id>`, {
+export async function sellerOrders(sellerId) {
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${sellerId}`, {
     method: 'GET',
   });
   const sellerProduct = await response.json();
