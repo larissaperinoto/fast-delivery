@@ -7,6 +7,7 @@ import Register from './pages/registro';
 import Checkout from './pages/checkout';
 import SellerOrder from './pages/sellerOrder';
 import AdminManage from './pages/AdminManage';
+import SellerOrderDetails from './pages/SellerOrderDetails';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/" element={ <Navigate to="/login" /> } />
       <Route path="/customer/checkout" element={ <Checkout /> } />
       <Route path="/seller/orders" element={ <SellerOrder /> } />
+      <Route path="/seller/orders/:id" component={ SellerOrderDetails } />
     </Routes>
   );
 }
