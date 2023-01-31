@@ -33,13 +33,13 @@ export async function postRegistration(body, token = '', url = '') {
   return message;
 }
 
-export async function customerOrders(token) {
+export async function customerOrders(token) { // Retorna todos os pedidos que um usuário já fez
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders`, {
     method: 'GET',
     Authorization: token,
   });
-  const sellerProduct = await response.json();
-  return sellerProduct;
+  const orders = await response.json();
+  return orders;
 }
 
 export async function sellerOrders(sellerId) {
@@ -48,4 +48,12 @@ export async function sellerOrders(sellerId) {
   });
   const sellerProduct = await response.json();
   return sellerProduct;
+}
+
+export async function getAllSellers() { // Retorna tas as pessoas que são vendedoras
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/sellers`, {
+    method: 'GET',
+  });
+  const sellers = await response.json();
+  return sellers;
 }

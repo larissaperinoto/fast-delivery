@@ -1,11 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../components/navbar';
 import Context from '../context/Context';
+import { getAllSellers } from '../services/requests';
 
 export default function Checkout() {
   const { orders, setOrders, totalPrice, setTotalPrice, ordersCheckout,
     setOrdersCheckout, setTotalQuantity, totalQuantity, beforeRender,
     setBeforeRender } = useContext(Context);
+
+  const [sellers, setSellers] = useState([]);
+
+  useEffect(() => {
+    const requestSellers = async () => {
+      const sellersList = await getAllSellers();
+      setSellers(sellersList);
+    };
+    requestSellers();
+  });
 
   // Esta variável tira a repetição de orders
   const ordersArray = orders.map(({ id }) => orders.filter((e) => e.id === id))
@@ -154,6 +165,10 @@ export default function Checkout() {
         <label htmlFor="select-seller">
           Pessoa responsável:
           <select>
+            { sellers.map(({ name, id }) => (
+              <option key={ id }>
+                { name }
+              </option>))}
             <option
               data-testid="customer_checkout__select-seller"
             >

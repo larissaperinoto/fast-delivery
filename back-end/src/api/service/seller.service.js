@@ -1,4 +1,4 @@
-const { Sale, Product } = require('../../database/models');
+const { Sale, Product, User } = require('../../database/models');
 const StatusCode = require('../shared/statusCode');
 
 const getAllSalesSeller = async (seller) => {
@@ -19,7 +19,15 @@ const getSaleSellerId = async (id) => {
   return { status: StatusCode.OK, message: sales };
 };
 
+const getAllSellers = async () => {
+  const sellers = await User.findAll({
+    where: { role: 'seller' },
+  });
+  return { status: StatusCode.OK, message: sellers };
+};
+
 module.exports = {
   getAllSalesSeller,
   getSaleSellerId,
+  getAllSellers,
 };

@@ -13,7 +13,7 @@ const getSale = async (req, res) => {
 };
 
 const getSalesByCustomerId = async (req, res) => {
-  const result = await saleService.getSalesByCustomerId(req.body.user.id);
+  const result = await customerService.getSalesByCustomerId(req.body.user.id);
   return res.status(statusCode.OK).json(result);
 };
 
