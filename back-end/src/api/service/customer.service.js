@@ -14,15 +14,16 @@ const salveSalesProduct = async ({ products }, saleId) => {
 };
 
 const createSale = async (sale) => {
+  console.log(sale)
   const { user: { id } } = sale;
   const { seller, totalPrice, deliveryAddress, deliveryNumber } = sale;
 
-  const idSeller = await userService.userSellerId(seller);
+  // const idSeller = await userService.userSellerId(seller);
   const DataAtual = moment().format('L');
 
   const saleRegister = await Sale.create({
       userId: id,
-      sellerId: idSeller,
+      sellerId: seller,
       totalPrice,
       deliveryAddress,
       deliveryNumber,

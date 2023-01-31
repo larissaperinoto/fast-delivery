@@ -8,10 +8,12 @@ import Checkout from './pages/checkout';
 import SellerOrder from './pages/sellerOrder';
 import AdminManage from './pages/AdminManage';
 import CustomerOrders from './pages/CustomerOrders';
+import CustomerOrderDetails from './pages/CustomerOrderDetails';
 
 function App() {
   return (
     <Routes>
+      <Route path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
       <Route path="/admin/manage" element={ <AdminManage /> } />
       <Route path="/customer/orders" element={ <CustomerOrders /> } />
       <Route path="/customer/products" element={ <Products /> } />
