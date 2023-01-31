@@ -5,7 +5,7 @@ export default function AdminManage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('seller');
   const [disabled, setDisabled] = useState(true);
   const [messageFromDB, setMessageFromDB] = useState('');
 
@@ -25,7 +25,9 @@ export default function AdminManage() {
 
   const registerNewSeller = async (e) => {
     e.preventDefault();
-    const { message } = await postRegistration({ name, email, password, role });
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const body = { name, email, password, role };
+    const { message } = await postRegistration(body, token, '/seller');
     setMessageFromDB(message);
   };
 
@@ -58,7 +60,9 @@ export default function AdminManage() {
           data-testid="admin_manage__select-role"
           onChange={ (e) => setRole(e.target.value) }
         >
-          <option value="Vendedor" defaultValue>Vendedor</option>
+          <option value="seller" defaultValue>Vendedor</option>
+          <option value="customer">Cliente</option>
+
         </select>
         <button
           type="submit"
@@ -70,7 +74,10 @@ export default function AdminManage() {
         </button>
       </form>
       <div>
-        { messageFromDB && <p>{ messageFromDB }</p>}
+        {
+          messageFromDB
+          && <p data-testid="admin_manage__element-invalid-register">{ messageFromDB }</p>
+        }
       </div>
     </>
   );
