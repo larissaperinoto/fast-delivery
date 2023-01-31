@@ -5,6 +5,7 @@ const authorizationUser = require('../midlewares/validateTokenUser.midleware');
 
 const route = Router();
 
-route.get('/seller/orders/:id', sallerController.getSales);
+route.get('/seller/orders/:id', authorizationUser, sallerController.getSalesId);
+route.get('/seller/orders', authorizationUser, sallerController.getSales);
 
 module.exports = route;
