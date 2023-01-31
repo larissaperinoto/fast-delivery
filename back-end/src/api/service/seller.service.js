@@ -7,7 +7,7 @@ const getAllSalesSeller = async (seller) => {
   return { status: StatusCode.OK, message: sales };
 };
 
-const getSaleSellerId = async (id) => {
+const getSaleSellerById = async (id) => {
   const sales = await Sale.findAll({
     where: { id },
     include: [
@@ -19,7 +19,16 @@ const getSaleSellerId = async (id) => {
   return { status: StatusCode.OK, message: sales };
 };
 
+const updateStatus = async (id, { status }) => {
+  await Sale.update({ status }, {
+    where: { id },
+  });
+  
+  return { status: StatusCode.OK, message: 'Updated' };
+};
+
 module.exports = {
   getAllSalesSeller,
-  getSaleSellerId,
+  getSaleSellerById,
+  updateStatus,
 };
