@@ -11,10 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: DataTypes.DECIMAL(9,2),
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
-    saleDate: { 
-      type: DataTypes.DATE,
-      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP(3) AT TIME ZONE \'America/Sao_Paulo\''),
-    },
+    saleDate: DataTypes.DATE,
     status: DataTypes.STRING
   }, {
     tableName: 'sales',

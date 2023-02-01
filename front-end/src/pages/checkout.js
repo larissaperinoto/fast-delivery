@@ -12,7 +12,7 @@ export default function Checkout() {
   const [sellers, setSellers] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
-  const [seller, setSeller] = useState('3');
+  const [seller, setSeller] = useState('2');
   const history = useNavigate();
 
   useEffect(() => {
