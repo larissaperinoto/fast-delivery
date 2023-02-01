@@ -1,26 +1,41 @@
-import React, { useContext } from 'react';
-import CustomerOrdersCard from '../components/CustomerOrdersCard';
+import React, { useEffect, useState } from 'react';
+import CustomerSaleDetailsCard from '../components/CustomerSaleDetailsCard';
 import Navbar from '../components/navbar';
-import Context from '../context/Context';
+import { getSaleById } from '../services/requests';
 
 export default function CustomerOrderDetails() {
-  const { returnPostNewSale } = useContext(Context);
-  console.log(returnPostNewSale);
+  const [sale, setSale] = useState('');
+
+  useEffect(() => {
+    const requestSaleId = async () => {
+      const saleId = window.location.pathname.split('/')[3];
+      const saleObject = await getSaleById(saleId);
+      console.log(saleObject, 'sale');
+      setSale(saleObject);
+    };
+    requestSaleId();
+  }, []);
+
+  const formatDate = (date) => {
+    const year = date.split('-')[0];
+    const month = date.split('-')[1];
+    const day = date.split('-')[2].split('T')[0];
+    return `${day}/${month}/${year}`;
+  };
+
+  console.log('sale', sale.totalPrice);
+
   return (
     <>
       <Navbar />
-      {
-        returnPostNewSale.map(({ id, totalPrice, deliveryNumber, salesDate, status }) => (
-          <CustomerOrdersCard
-            key={ id }
-            id={ id }
-            totalPrice={ totalPrice }
-            deliveryNumber={ deliveryNumber }
-            salesDate={ salesDate }
-            status={ status }
-          />
-        ))
-      }
+      { sale && <CustomerSaleDetailsCard
+        saleId={ sale.id }
+        seller={ sale.sellerInfos.name }
+        saleDate={ formatDate(sale.saleDate) }
+        status={ sale.status }
+        products={ sale.sales_products }
+        totalPrice={ sale.totalPrice.replace('.', ',') }
+      />}
     </>
   );
 }
