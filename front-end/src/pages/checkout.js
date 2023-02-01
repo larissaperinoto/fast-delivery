@@ -121,7 +121,10 @@ export default function Checkout() {
         </thead>
         <tbody>
           { ordersCheckout.map((order, i) => (
-            <tr key={ order.item }>
+            <tr
+              key={ order.item }
+              data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
+            >
               <td
                 data-testid={ `customer_checkout
                   __element-order-table-item-number-${i}` }

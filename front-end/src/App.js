@@ -14,7 +14,6 @@ import SellerOrderDetails from './pages/SellerOrderDetails';
 function App() {
   return (
     <Routes>
-      <Route path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
       <Route path="/admin/manage" element={ <AdminManage /> } />
       <Route path="/customer/orders" element={ <CustomerOrders /> } />
       <Route path="/customer/products" element={ <Products /> } />
@@ -23,6 +22,7 @@ function App() {
       <Route path="/" element={ <Navigate to="/login" /> } />
       <Route path="/customer/checkout" element={ <Checkout /> } />
       <Route path="/seller/orders" element={ <SellerOrder /> } />
+      <Route path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
       <Route path="/seller/orders/:id" component={ SellerOrderDetails } />
     </Routes>
   );

@@ -20,8 +20,7 @@ export async function postLogin(email, password) { // Login para clientes, vende
   return userData;
 }
 
-export async function postRegistration(body, url = '') { // Registra um novo usuário como cliente
-  const { token } = JSON.parse(localStorage.getItem('user'));
+export async function postRegistration(body, token = '', url = '') { // Registra um novo usuário como cliente
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register${url}`, {
     method: 'POST',
     headers: {
