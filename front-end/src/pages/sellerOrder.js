@@ -8,10 +8,9 @@ export default function SellerOrders() {
 
   useEffect(() => {
     const sales = async () => {
-      const { id, token } = JSON.parse(localStorage.getItem('user'));
-      const salesSeller = await sellerOrders(id, token);
+      const { token } = JSON.parse(localStorage.getItem('user'));
+      const salesSeller = await sellerOrders(token);
       console.log(salesSeller);
-      console.log(salesSeller[0].totalPrice);
       setSalesOrdersSeller(salesSeller);
     };
     sales();
