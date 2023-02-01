@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 export default function CustomerOrdersCard({
   id,
   totalPrice,
-  deliveryNumber,
-  saleDate,  
+  saleDate,
   status,
 }) {
   const history = useNavigate();
