@@ -20,7 +20,7 @@ export default function Login() {
       history('/admin/manage');
       break;
     case 'seller':
-      history('');
+      history('/seller/orders');
       break;
     default:
       break;

@@ -45,9 +45,13 @@ export async function customerOrders(token) { // Retorna todos os pedidos que um
   return orders;
 }
 
-export async function sellerOrders(sellerId) {
+export async function sellerOrders(sellerId, token) {
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${sellerId}`, {
     method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      Authorization: token,
+    },
   });
   const sellerProduct = await response.json();
   return sellerProduct;

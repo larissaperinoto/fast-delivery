@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 export default function SellerOrdersCard({
   id,
@@ -15,6 +16,9 @@ export default function SellerOrdersCard({
   const handleClick = () => {
     navigate(`/seller/orders/${id}`);
   };
+
+  console.log(totalPrice);
+  console.log(salesDate);
 
   return (
     <button
@@ -34,12 +38,12 @@ export default function SellerOrdersCard({
       <div
         data-testid={ `seller_orders__element-order-date-${id}` }
       >
-        { salesDate }
+        { moment(salesDate).format('DD/MM/YYYY') }
       </div>
       <div
         data-testid={ `seller_orders__element-card-price-${id}` }
       >
-        {` R$ ${totalPrice.replace('.', ',')}` }
+        {` R$ ${totalPrice && totalPrice.replace('.', ',')}` }
       </div>
       <div
         data-testid={ `seller_orders__element-card-address-${id}` }
