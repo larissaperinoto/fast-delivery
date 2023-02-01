@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Navbar from '../components/navbar';
 
-export default class CustomerOrderDetails extends Component {
-  render() {
-    return (
+export default function CustomerOrderDetails() {
+  return (
+    <>
+      <Navbar />
       <div>CostumerOrderDetails</div>
-    );
-  }
+    </>
+  );
 }

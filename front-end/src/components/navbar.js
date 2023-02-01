@@ -20,6 +20,11 @@ export default function Navbar() {
     }
   };
 
+  const logout = () => {
+    localStorage.clear();
+    history('/login');
+  };
+
   return (
     <div>
       <nav>
@@ -42,7 +47,7 @@ export default function Navbar() {
           <button
             data-testid="customer_products__element-navbar-link-logout"
             type="button"
-            onClick={ () => history('/login') }
+            onClick={ () => logout() }
             to="/login"
           >
             Sair
