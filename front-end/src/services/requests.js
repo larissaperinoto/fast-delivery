@@ -33,11 +33,13 @@ export async function postRegistration(body, token = '', url = '') { // Registra
   return message;
 }
 
-export async function customerOrders() { // Retorna todos os pedidos que um usuário já fez
-  const { token } = JSON.parse(localStorage.getItem('user'));
+export async function customerOrders(token) { // Retorna todos os pedidos que um usuário já fez
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders`, {
     method: 'GET',
-    Authorization: token,
+    headers: {
+      'Content-Type': contentType,
+      Authorization: token,
+    },
   });
   const orders = await response.json();
   return orders;

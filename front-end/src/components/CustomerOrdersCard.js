@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 export default function CustomerOrdersCard({
   id,
   totalPrice,
-  deliveryNumber,
-  salesDate,
+  saleDate,
   status,
-
 }) {
   const history = useNavigate();
 
@@ -20,7 +18,7 @@ export default function CustomerOrdersCard({
       <div
         data-testid={ `customer_orders__element-order-id-${id}` }
       >
-        { deliveryNumber }
+        { `00${id}` }
       </div>
       <div
         data-testid={ `customer_orders__element-delivery-status-${id}` }
@@ -30,7 +28,7 @@ export default function CustomerOrdersCard({
       <div
         data-testid={ `customer_orders__element-order-date-${id}` }
       >
-        { salesDate }
+        { saleDate }
       </div>
       <div
         data-testid={ `customer_orders__element-card-price-${id}` }
