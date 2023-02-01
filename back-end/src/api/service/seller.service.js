@@ -16,7 +16,7 @@ const getSaleSellerById = async (id) => {
         as: 'sales_products',
         attributes: { exclude: ['urlImage'] } },
       { model: User,
-        as: 'sellerInfos'},
+        as: 'sellerInfos' },
     ],
   });
   return { status: StatusCode.OK, message: sales };

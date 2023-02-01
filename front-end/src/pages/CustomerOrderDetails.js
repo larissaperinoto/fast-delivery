@@ -10,7 +10,6 @@ export default function CustomerOrderDetails() {
     const requestSaleId = async () => {
       const saleId = window.location.pathname.split('/')[3];
       const saleObject = await getSaleById(saleId);
-      console.log(saleObject, 'sale');
       setSale(saleObject);
     };
     requestSaleId();
@@ -22,8 +21,6 @@ export default function CustomerOrderDetails() {
     const day = date.split('-')[2].split('T')[0];
     return `${day}/${month}/${year}`;
   };
-
-  console.log('sale', sale.totalPrice);
 
   return (
     <>
