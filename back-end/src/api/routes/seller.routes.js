@@ -8,5 +8,6 @@ const route = Router();
 route.get('/seller/orders/:id', authorizationUser, sallerController.getSalesId);
 route.put('/seller/orders/:id', authorizationUser, sallerController.updateSale);
 route.get('/seller/orders', authorizationUser, sallerController.getSales);
+route.get('/sellers', sallerController.getAllSellers); // Retorna todos os usuários vendedores
 
 module.exports = route;

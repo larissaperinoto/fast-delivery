@@ -40,7 +40,11 @@ export default function Login() {
   };
 
   useEffect(() => {
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      redirectTo(user.role);
+    }
   }, []);
 
   const checkPassword = () => {

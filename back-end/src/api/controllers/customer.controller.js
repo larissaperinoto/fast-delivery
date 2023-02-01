@@ -12,7 +12,13 @@ const getSale = async (req, res) => {
   return res.status(statusCode.OK).json(result);
 };
 
+const getSalesByCustomerId = async (req, res) => {
+  const result = await customerService.getSalesByCustomerId(req.body.user.id);
+  return res.status(statusCode.OK).json(result);
+};
+
 module.exports = {
   create,
   getSale,
+  getSalesByCustomerId,
 };

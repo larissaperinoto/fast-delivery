@@ -1,11 +1,38 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/navbar';
 import Context from '../context/Context';
+import { getAllSellers, postNewSale } from '../services/requests';
 
 export default function Checkout() {
   const { orders, setOrders, totalPrice, setTotalPrice, ordersCheckout,
     setOrdersCheckout, setTotalQuantity, totalQuantity, beforeRender,
     setBeforeRender } = useContext(Context);
+
+  const [sellers, setSellers] = useState([]);
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryNumber, setDeliveryNumber] = useState('');
+  const [seller, setSeller] = useState('3');
+  const history = useNavigate();
+
+  useEffect(() => {
+    const requestSellers = async () => {
+      const sellersList = await getAllSellers();
+      setSellers(sellersList);
+    };
+    requestSellers();
+  });
+
+  const registerSale = async () => {
+    const products = ordersCheckout.map(({ productId, quantidade }) => {
+      const result = { productId, quantity: quantidade };
+      return result;
+    });
+    const formatPrice = totalPrice.replace(',', '.');
+    const { id: saleId } = await postNewSale({
+      seller, deliveryAddress, deliveryNumber, totalPrice: formatPrice, products });
+    history(`/customer/orders/${saleId}`);
+  };
 
   // Esta variável tira a repetição de orders
   const ordersArray = orders.map(({ id }) => orders.filter((e) => e.id === id))
@@ -22,6 +49,7 @@ export default function Checkout() {
   // para quem precisar das informações de checkout
   const organizationOrders = [...ordersArray.map((item, i) => ({
     item: i + 1,
+    productId: item[0].id,
     descricao: item[0].name,
     quantidade: item.length,
     valor: Number(item[0].price.replace(/,/, '.')),
@@ -93,9 +121,13 @@ export default function Checkout() {
         </thead>
         <tbody>
           { ordersCheckout.map((order, i) => (
-            <tr key={ order.item }>
+            <tr
+              key={ order.item }
+              data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
+            >
               <td
-                data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
+                data-testid={ `customer_checkout
+                  __element-order-table-item-number-${i}` }
 
               >
                 {order.item}
@@ -153,13 +185,15 @@ export default function Checkout() {
       <div>
         <label htmlFor="select-seller">
           Pessoa responsável:
-          <select>
-            <option
-              data-testid="customer_checkout__select-seller"
-            >
-              pessoa
-
-            </option>
+          <select
+            data-testid="customer_checkout__select-seller"
+            onChange={ (e) => setSeller(e.target.value) }
+            value={ seller }
+          >
+            { sellers.map(({ name, id }) => (
+              <option key={ id } value={ id }>
+                { name }
+              </option>))}
           </select>
 
         </label>
@@ -169,6 +203,8 @@ export default function Checkout() {
             type="text"
             placeholder="Rua dos Guajajaras, Centro, Belo Horizonte "
             data-testid="customer_checkout__input-address"
+            value={ deliveryAddress }
+            onChange={ (e) => setDeliveryAddress(e.target.value) }
           />
         </label>
         <label htmlFor="input-address">
@@ -177,11 +213,14 @@ export default function Checkout() {
             type="text"
             placeholder="40 "
             data-testid="customer_checkout__input-address-number"
+            value={ deliveryNumber }
+            onChange={ (e) => setDeliveryNumber(e.target.value) }
           />
         </label>
         <button
           type="submit"
           data-testid="customer_checkout__button-submit-order"
+          onClick={ () => registerSale() }
         >
           Finalizar Pedido
 

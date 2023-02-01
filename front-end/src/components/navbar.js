@@ -4,8 +4,26 @@ import Context from '../context/Context';
 
 export default function Navbar() {
   const { totalQuantity } = useContext(Context);
-  const userFullName = JSON.parse(localStorage.getItem('user'));
+  const { name, role } = JSON.parse(localStorage.getItem('user'));
   const history = useNavigate();
+
+  const redirectTo = (userRole) => {
+    switch (userRole) {
+    case 'customer':
+      history('/customer/orders');
+      break;
+    case 'seller':
+      history('/seller/orders');
+      break;
+    default:
+      break;
+    }
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    history('/login');
+  };
 
   return (
     <div>
@@ -13,15 +31,23 @@ export default function Navbar() {
         <span data-testid="customer_products__element-navbar-link-products">
           { `Produtos ${totalQuantity}` }
         </span>
-        <div data-testid="customer_products__element-navbar-link-orders" />
+        <div>
+          <button
+            type="button"
+            data-testid="customer_products__element-navbar-link-orders"
+            onClick={ () => redirectTo(role) }
+          >
+            Meus Pedidos
+          </button>
+        </div>
         <div data-testid="customer_products__element-navbar-user-full-name">
-          <p>{userFullName.name}</p>
+          <p>{ name }</p>
         </div>
         <div>
           <button
             data-testid="customer_products__element-navbar-link-logout"
             type="button"
-            onClick={ () => history('/login') }
+            onClick={ () => logout() }
             to="/login"
           >
             Sair
