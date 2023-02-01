@@ -18,7 +18,7 @@ const createSale = async (sale) => {
   const { seller, totalPrice, deliveryAddress, deliveryNumber } = sale;
 
   // const idSeller = await userService.userSellerId(seller);
-  const DataAtual = moment().format('L');
+  const DataAtual = new Date().toISOString();
 
   const saleRegister = await Sale.create({
       userId: id,

@@ -8,6 +8,7 @@ export default function Provider({ children }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [beforeRender, setBeforeRender] = useState(0);
   const [ordersCheckout, setOrdersCheckout] = useState([]);
+  const [returnPostNewSale, setReturnPostNewSale] = useState([]);
 
   const ONE_NEGATIVE = -1;
   // Esta variável determina quais itens vão renderizar
@@ -32,6 +33,8 @@ export default function Provider({ children }) {
     beforeRender,
     setBeforeRender,
     setRemoveItem,
+    returnPostNewSale,
+    setReturnPostNewSale,
   }), [
     orders,
     setOrders,
@@ -44,6 +47,8 @@ export default function Provider({ children }) {
     beforeRender,
     setBeforeRender,
     setRemoveItem,
+    returnPostNewSale,
+    setReturnPostNewSale,
   ]);
 
   return (

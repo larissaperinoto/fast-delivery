@@ -33,7 +33,7 @@ export default function CustomerOrdersCard({
       <div
         data-testid={ `customer_orders__element-card-price-${id}` }
       >
-        { totalPrice }
+        { totalPrice.toString().replace(/\./, ',') }
       </div>
     </button>
   );
