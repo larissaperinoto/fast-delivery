@@ -64,7 +64,7 @@ const getSalesByCustomerId = async (id) => {
     ],
   });
 
-  return sale ? sale : [];
+  return sale;
 };
 
 module.exports = {
