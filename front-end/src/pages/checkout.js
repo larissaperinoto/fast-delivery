@@ -7,7 +7,7 @@ import { getAllSellers, postNewSale } from '../services/requests';
 export default function Checkout() {
   const { orders, setOrders, totalPrice, setTotalPrice, ordersCheckout,
     setOrdersCheckout, setTotalQuantity, totalQuantity, beforeRender,
-    setBeforeRender } = useContext(Context);
+    setBeforeRender, setReturnPostNewSale } = useContext(Context);
 
   const [sellers, setSellers] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState('');
@@ -29,9 +29,10 @@ export default function Checkout() {
       return result;
     });
     const formatPrice = totalPrice.replace(',', '.');
-    const { id: saleId } = await postNewSale({
+    const result = await postNewSale({
       seller, deliveryAddress, deliveryNumber, totalPrice: formatPrice, products });
-    history(`/customer/orders/${saleId}`);
+    setReturnPostNewSale((curr) => [...curr, result]);
+    history(`/customer/orders/${result.id}`);
   };
 
   // Esta variável tira a repetição de orders

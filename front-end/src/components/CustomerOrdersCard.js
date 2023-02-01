@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default function CustomerOrdersCard({
   id,
   totalPrice,
-  deliveryNumber,
+  // deliveryNumber,
   salesDate,
   status,
 
@@ -20,7 +20,8 @@ export default function CustomerOrdersCard({
       <div
         data-testid={ `customer_orders__element-order-id-${id}` }
       >
-        { deliveryNumber }
+        <p>Pedido</p>
+        <p>{ id }</p>
       </div>
       <div
         data-testid={ `customer_orders__element-delivery-status-${id}` }
@@ -35,7 +36,7 @@ export default function CustomerOrdersCard({
       <div
         data-testid={ `customer_orders__element-card-price-${id}` }
       >
-        { totalPrice }
+        { totalPrice.toString().replace(/\./, ',') }
       </div>
     </button>
   );
