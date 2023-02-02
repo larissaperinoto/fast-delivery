@@ -91,16 +91,3 @@ export async function postNewSale(sale) { // Registra uma nova venda
   const message = await response.json();
   return message;
 }
-
-export async function getSaleById(saleId) {
-  const { token } = JSON.parse(localStorage.getItem('user'));
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${saleId}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
-  });
-  const sale = await response.json();
-  return sale;
-}
