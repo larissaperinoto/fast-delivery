@@ -45,12 +45,29 @@ export async function customerOrders(token) { // Retorna todos os pedidos que um
   return orders;
 }
 
-export async function sellerOrders(sellerId) {
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${sellerId}`, {
+export async function sellerOrders(token) {
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders`, {
     method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      Authorization: token,
+    },
   });
   const sellerProduct = await response.json();
   return sellerProduct;
+}
+
+export async function getSaleById(saleId) {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${saleId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      Authorization: token,
+    },
+  });
+  const sale = await response.json();
+  return sale;
 }
 
 export async function getAllSellers() { // Retorna todas as pessoas que são vendedoras
