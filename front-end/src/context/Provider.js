@@ -9,6 +9,7 @@ export default function Provider({ children }) {
   const [beforeRender, setBeforeRender] = useState(0);
   const [ordersCheckout, setOrdersCheckout] = useState([]);
   const [returnPostNewSale, setReturnPostNewSale] = useState([]);
+  const [disabledButton, setDisableButon] = useState('Pendente');
 
   const ONE_NEGATIVE = -1;
   // Esta variável determina quais itens vão renderizar
@@ -35,6 +36,8 @@ export default function Provider({ children }) {
     setRemoveItem,
     returnPostNewSale,
     setReturnPostNewSale,
+    disabledButton,
+    setDisableButon,
   }), [
     orders,
     setOrders,
@@ -49,6 +52,8 @@ export default function Provider({ children }) {
     setRemoveItem,
     returnPostNewSale,
     setReturnPostNewSale,
+    disabledButton,
+    setDisableButon,
   ]);
 
   return (
