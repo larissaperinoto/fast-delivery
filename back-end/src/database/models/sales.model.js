@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
 
     SaleTable.belongsTo(models.User,
       { foreignKey: 'sellerId', as: 'sellerInfos' });
-  }
+  };
 
   return SaleTable;
 };

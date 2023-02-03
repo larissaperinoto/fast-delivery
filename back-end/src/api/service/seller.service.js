@@ -8,7 +8,6 @@ const getAllSalesSeller = async (seller) => {
 };
 
 const getSaleSellerById = async (id) => {
-  console.log(id);
   const sales = await Sale.findAll({
     where: { id },
     include: [

@@ -29,10 +29,10 @@ export default function Checkout() {
       return result;
     });
     const formatPrice = totalPrice.replace(',', '.');
-    const result = await postNewSale({
+    const sale = await postNewSale({
       seller, deliveryAddress, deliveryNumber, totalPrice: formatPrice, products });
-    setReturnPostNewSale((curr) => [...curr, result]);
-    history(`/customer/orders/${result.id}`);
+    setReturnPostNewSale((curr) => [...curr, sale]);
+    history(`/customer/orders/${sale.id}`);
   };
 
   // Esta variável tira a repetição de orders
