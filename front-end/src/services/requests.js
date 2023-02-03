@@ -91,3 +91,17 @@ export async function postNewSale(sale) { // Registra uma nova venda
   const message = await response.json();
   return message;
 }
+
+export async function putSaleStatus(id, status) { // Atualiza uma venda pelo ID
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': contentType,
+      Authorization: token,
+    },
+    body: JSON.stringify({ status }),
+  });
+  const message = await response.json();
+  return message;
+}
