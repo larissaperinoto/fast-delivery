@@ -10,7 +10,7 @@ export default function CustomerOrderDetails() {
     const requestSaleId = async () => {
       const saleId = window.location.pathname.split('/')[3];
       const saleObject = await getSaleById(saleId);
-      setSale(saleObject);
+      setSale(saleObject[0]);
     };
     requestSaleId();
   }, []);
