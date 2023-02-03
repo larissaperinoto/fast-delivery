@@ -13,7 +13,6 @@ function Products() {
   useEffect(() => {
     const productsRequest = async () => {
       const productsList = await requestProducts();
-      console.log(productsList);
       setProducts(productsList);
     };
     productsRequest();
