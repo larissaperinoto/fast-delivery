@@ -8,14 +8,19 @@ const getAllSalesSeller = async (seller) => {
 };
 
 const getSaleSellerById = async (id) => {
+  console.log(id);
   const sales = await Sale.findAll({
     where: { id },
     include: [
       { model: Product,
         as: 'sales_products',
         attributes: { exclude: ['urlImage'] } },
+      { model: User,
+        as: 'sellerInfos' },
     ],
   });
+
+  console.log(sales);
   return { status: StatusCode.OK, message: sales };
 };
 

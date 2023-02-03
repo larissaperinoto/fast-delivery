@@ -15,7 +15,6 @@ function SellerOrderDetails() {
 
   useEffect(() => {
     const request = async () => {
-      console.log(id);
       const result = await getSaleById((id));
       console.log(result);
       setSalesOrdersDetails(result);
