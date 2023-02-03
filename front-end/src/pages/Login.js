@@ -11,12 +11,28 @@ export default function Login() {
 
   const history = useNavigate();
 
+  const redirectTo = (role) => {
+    switch (role) {
+    case 'customer':
+      history('/customer/products');
+      break;
+    case 'administrator':
+      history('/admin/manage');
+      break;
+    case 'seller':
+      history('/seller/orders');
+      break;
+    default:
+      break;
+    }
+  };
+
   const validateLogin = async () => {
     const userData = await postLogin(email, password);
 
     if (userData !== 'Not found') {
       localStorage.setItem('user', JSON.stringify(userData));
-      history('/customer/products');
+      redirectTo(userData.role);
     } else {
       setInvalidEmail(!invalidEmail);
       setErrorMessage('Email não encontrado');
@@ -24,7 +40,11 @@ export default function Login() {
   };
 
   useEffect(() => {
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      redirectTo(user.role);
+    }
   }, []);
 
   const checkPassword = () => {

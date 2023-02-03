@@ -22,9 +22,17 @@ module.exports = {
           password: '1c37466c159755ce1fa181bd247cb925',
           role: 'customer',
         },
+        {
+          id: 4,
+          name: 'Cliente tal e tal',
+          email: 'email@email.com',
+          password: 'fcea920f7412b5da7be0cf42b8c93759',
+          // 1234567
+          role: 'administrator'
+        }
         ], { timestamps: false });
     },
-  
+
     down: async (queryInterface, _Sequelize) => {
       await queryInterface.bulkDelete('users', null, {});
     },

@@ -26,7 +26,7 @@ module.exports = {
         },
       },
       total_price: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(9,2)
       },
       delivery_address: {
         type: Sequelize.STRING
@@ -35,7 +35,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       sale_date: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE
       },
       status: {
         type: Sequelize.STRING

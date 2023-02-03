@@ -1,6 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 export default function SellerOrdersCard({
   id,
@@ -11,41 +12,53 @@ export default function SellerOrdersCard({
   status,
 
 }) {
-  const history = useNavigate();
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/seller/orders/${id}`);
+  };
+
+  console.log(totalPrice);
+  console.log(salesDate);
 
   return (
     <button
+      onClick={ () => handleClick() }
       type="button"
-      onClick={ () => history(`/seller/orders/${id}`) }
     >
       <div
         data-testid={ `seller_orders__element-order-id-${id}` }
-      />
-      { deliveryNumber }
+      >
+        { id }
+      </div>
       <div
         data-testid={ `seller_orders__element-delivery-status-${id}` }
-      />
-      { status }
+      >
+        { status}
+      </div>
       <div
         data-testid={ `seller_orders__element-order-date-${id}` }
-      />
-      { salesDate }
+      >
+        { moment(salesDate).format('DD/MM/YYYY') }
+      </div>
       <div
         data-testid={ `seller_orders__element-card-price-${id}` }
-      />
-      { totalPrice }
+      >
+        {` R$ ${totalPrice && totalPrice.replace('.', ',')}` }
+      </div>
       <div
         data-testid={ `seller_orders__element-card-address-${id}` }
-      />
-      { deliveryAddress }
+      >
+        { `${deliveryAddress}, ${deliveryNumber}` }
+      </div>
     </button>
+
   );
 }
 
 SellerOrdersCard.propTypes = {
-  deliveryNumber: PropTypes.number.isRequired,
+  deliveryNumber: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  totalPrice: PropTypes.number.isRequired,
+  totalPrice: PropTypes.string.isRequired,
   deliveryAddress: PropTypes.string.isRequired,
   salesDate: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
