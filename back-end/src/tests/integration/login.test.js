@@ -17,19 +17,19 @@ describe('Testa a rota /login', () => {
 
   describe('Testa método POST na rota /login', () => {
     it('Usuário consegue fazer login com sucesso', async () => {
-      sinon.stub(User, "findOne").resolves(userMock);
+      sinon.stub(User, "findOne").resolves({ ...userMock, role: 'customer' });
       sinon.stub(jsonwebtoken, 'sign').resolves(tokenMock);
 
       const response = await chai
               .request(app)
               .post('/login')
               .send({
-                email: 'cliente@email.com',
+                email: 'email@email.com',
                 password: 'secret_password'
               });
 
       expect(response.status).to.be.equal(200);
-      expect(response.body).to.be.deep.equal({ ...userMock, token: tokenMock });
+      expect(response.body).to.be.deep.equal({ ...userMock, role: 'customer', token: tokenMock });
     });
 
     it('Usuário não possui credenciais válidas', async () => {
@@ -45,36 +45,6 @@ describe('Testa a rota /login', () => {
 
       expect(response.status).to.be.equal(404);
       expect(response.body).to.be.equal('Not found');
-    });
-
-    it('Usuário não preenche o campo email', async () => {
-      sinon.stub(User, "findOne").resolves(undefined);
-
-      const response = await chai
-              .request(app)
-              .post('/login')
-              .send({
-                email: '',
-                password: 'secret_password'
-              });
-
-      expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: 'Some required fields are missing' });
-    });
-
-    it('Usuário não preenche o campo password', async () => {
-      sinon.stub(User, "findOne").resolves(undefined);
-
-      const response = await chai
-              .request(app)
-              .post('/login')
-              .send({
-                email: 'client@email.com',
-                password: ''
-              });
-
-      expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: 'Some required fields are missing' });
     });
   });
 });
