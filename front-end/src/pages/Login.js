@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button, TextField, FormControl, Stack, Container } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { postLogin } from '../services/requests';
 
@@ -65,48 +66,52 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <form onSubmit={ (e) => e.preventDefault() }>
-      <label htmlFor="common_login__input-email">
-        <input
-          value={ email }
-          onChange={ ({ target }) => setEmail(target.value) }
-          type="email"
-          placeholder="Email"
-          data-testid="common_login__input-email"
-        />
-      </label>
-      {
-        invalidEmail && (
-          <p data-testid="common_login__element-invalid-email">
-            { errorMessage }
-          </p>
-        )
-      }
-      <label htmlFor="common_login__input-password">
-        <input
-          value={ password }
-          onChange={ ({ target }) => setPassword(target.value) }
-          type="password"
-          placeholder="Password"
-          data-testid="common_login__input-password"
-        />
-      </label>
-      <button
-        type="submit"
-        data-testid="common_login__button-login"
-        onClick={ () => validateLogin() }
-        disabled={ disabled }
-      >
-        Login
-      </button>
-      <Link to="/register">
-        <button
-          type="button"
-          data-testid="common_login__button-register"
-        >
-          Ainda não tenho conta
-        </button>
-      </Link>
-    </form>
+    <Container maxWidth="md" sx={ { mt: 20 } }>
+      <FormControl onSubmit={ (e) => e.preventDefault() }>
+        <Stack direction="column" spacing={ 2 }>
+          <TextField
+            value={ email }
+            onChange={ ({ target }) => setEmail(target.value) }
+            htmlFor="common_login__input-email"
+            type="email"
+            placeholder="Email"
+            data-testid="common_login__input-email"
+          />
+          {
+            invalidEmail && (
+              <p data-testid="common_login__element-invalid-email">
+                { errorMessage }
+              </p>
+            )
+          }
+          <TextField
+            value={ password }
+            onChange={ ({ target }) => setPassword(target.value) }
+            htmlFor="common_login__input-password"
+            type="password"
+            placeholder="Senha"
+            data-testid="common_login__input-password"
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            data-testid="common_login__button-login"
+            onClick={ () => validateLogin() }
+            disabled={ disabled }
+          >
+            Login
+          </Button>
+          <Link to="/register">
+            <Button
+              variant="text"
+              type="button"
+              data-testid="common_login__button-register"
+            >
+              Ainda não tenho conta
+            </Button>
+          </Link>
+        </Stack>
+      </FormControl>
+    </Container>
   );
 }

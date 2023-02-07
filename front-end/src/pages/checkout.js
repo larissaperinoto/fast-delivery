@@ -1,3 +1,16 @@
+import {
+  Container,
+  TableHead,
+  Table,
+  TableRow,
+  TableCell,
+  TableBody,
+  Button,
+  Typography,
+  TextField,
+  Stack,
+  MenuItem,
+  Select } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/navbar';
@@ -107,127 +120,129 @@ export default function Checkout() {
   useEffect(() => setTotalQuantity(orders.length), [ordersCheckout]);
 
   return (
-    <div>
+    <Container maxWidth="md" sx={ { mt: 5 } }>
       <Navbar />
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor unitário</th>
-            <th>Sub-total</th>
-            <th>Remover item</th>
-          </tr>
-        </thead>
-        <tbody>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Item</TableCell>
+            <TableCell>Descrição</TableCell>
+            <TableCell>Quantidade</TableCell>
+            <TableCell>Valor unitário</TableCell>
+            <TableCell>Sub-total</TableCell>
+            <TableCell>Remover item</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
           { ordersCheckout.map((order, i) => (
-            <tr
+            <TableRow
               key={ order.item }
               data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
             >
-              <td
+              <TableCell
                 data-testid={ `customer_checkout
                   __element-order-table-item-number-${i}` }
 
               >
                 {order.item}
 
-              </td>
-              <td
+              </TableCell>
+              <TableCell
                 data-testid={ `customer_checkout__element-order-table-name-${i}` }
 
               >
                 {order.descricao}
 
-              </td>
-              <td
+              </TableCell>
+              <TableCell
                 data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
               >
                 {order.quantidade}
 
-              </td>
-              <td
+              </TableCell>
+              <TableCell
                 data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
 
               >
                 {order.valor.toFixed(2).toString().replace(/\./, ',')}
 
-              </td>
-              <td
+              </TableCell>
+              <TableCell
                 data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
               >
                 {order.subTotal.toFixed(2).toString().replace(/\./, ',')}
-              </td>
-              <td>
+              </TableCell>
+              <TableCell>
 
-                <button
+                <Button
                   data-testid={ `customer_checkout__element-order-table-remove-${i}` }
                   type="button"
                   onClick={ () => setRemoveItem(i, order.descricao) }
                 >
                   Remover item
-                </button>
-              </td>
-            </tr>
+                </Button>
+              </TableCell>
+            </TableRow>
           ))}
 
-          <p
-            data-testid="customer_checkout__element-order-total-price"
-          >
-            R$:
-            {totalPrice}
-          </p>
+        </TableBody>
+      </Table>
+      <Typography
+        data-testid="customer_checkout__element-order-total-price"
+        variant="h5"
+        sx={ { mt: 5, mb: 2 } }
+      >
+        {`R$ ${totalPrice}`}
+      </Typography>
 
-        </tbody>
-      </table>
-
-      <p> Detalhes e endereço para entrega </p>
-      <div>
-        <label htmlFor="select-seller">
-          Pessoa responsável:
-          <select
-            data-testid="customer_checkout__select-seller"
-            onChange={ (e) => setSeller(e.target.value) }
-            value={ seller }
-          >
-            { sellers.map(({ name, id }) => (
-              <option key={ id } value={ id }>
-                { name }
-              </option>))}
-          </select>
-
-        </label>
-        <label htmlFor="input-address">
-          Endereço
-          <input
-            type="text"
-            placeholder="Rua dos Guajajaras, Centro, Belo Horizonte "
-            data-testid="customer_checkout__input-address"
-            value={ deliveryAddress }
-            onChange={ (e) => setDeliveryAddress(e.target.value) }
-          />
-        </label>
-        <label htmlFor="input-address">
-          Número
-          <input
-            type="text"
-            placeholder="40 "
-            data-testid="customer_checkout__input-address-number"
-            value={ deliveryNumber }
-            onChange={ (e) => setDeliveryNumber(e.target.value) }
-          />
-        </label>
-        <button
+      <Typography
+        variant="h5"
+        sx={ { mt: 5, mb: 2 } }
+      >
+        Detalhes e endereço para entrega
+      </Typography>
+      <Stack direction="row" spacing={ 2 } alignItems="center">
+        <Select
+          data-testid="customer_checkout__select-seller"
+          onChange={ (e) => setSeller(e.target.value) }
+          value={ seller }
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          label="Selecione o vendedor"
+          size="small"
+        >
+          { sellers.map(({ name, id }) => (
+            <MenuItem key={ id } value={ id }>
+              { name }
+            </MenuItem>))}
+        </Select>
+        <TextField
+          type="text"
+          placeholder="Endereço"
+          size="small"
+          data-testid="customer_checkout__input-address"
+          value={ deliveryAddress }
+          onChange={ (e) => setDeliveryAddress(e.target.value) }
+        />
+        <TextField
+          type="text"
+          placeholder="Número"
+          size="small"
+          data-testid="customer_checkout__input-address-number"
+          value={ deliveryNumber }
+          onChange={ (e) => setDeliveryNumber(e.target.value) }
+        />
+        <Button
           type="submit"
+          variant="contained"
+          color="secondary"
           data-testid="customer_checkout__button-submit-order"
           onClick={ () => registerSale() }
         >
           Finalizar Pedido
 
-        </button>
-        {/* reenviando commit */}
-      </div>
-    </div>
+        </Button>
+      </Stack>
+    </Container>
   );
 }

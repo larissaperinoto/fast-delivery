@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Button, TextField, FormControl, Stack, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { postLogin, postRegistration } from '../services/requests';
 
@@ -39,51 +40,47 @@ export default function Register() {
   };
 
   return (
-    <form>
-      <label htmlFor="nome-de-registro">
-        Nome
-        <input
-          type="name"
-          placeholder="Seu nome"
-          data-testid="common_register__input-name"
-          onChange={ ({ target }) => setName(target.value) }
-          value={ name }
-        />
-      </label>
-      Email
-      <label htmlFor="email-de-registro">
-        <input
-          type="email"
-          placeholder="seuemail@exemplo.com"
-          data-testid="common_register__input-email"
-          onChange={ ({ target }) => setEmail(target.value) }
-          value={ email }
-        />
-      </label>
-      <label htmlFor="registro-password">
-        Senha
-        <input
-          type="password"
-          placeholder="********"
-          data-testid="common_register__input-password"
-          onChange={ ({ target }) => setPassword(target.value) }
-          value={ password }
-        />
-      </label>
-      <button
-        type="submit"
-        data-testid="common_register__button-register"
-        disabled={ disabled }
-        onClick={ (e) => registerNewUser(e, { name, email, password, role: 'customer' }) }
-      >
-        Cadastrar
-      </button>
+    <Container maxWidth="md" sx={ { mt: 20 } }>
+      <FormControl>
+        <Stack direction="column" spacing={ 2 }>
+          <TextField
+            type="name"
+            placeholder="Nome"
+            data-testid="common_register__input-name"
+            onChange={ ({ target }) => setName(target.value) }
+            value={ name }
+          />
+          <TextField
+            type="email"
+            placeholder="Email"
+            data-testid="common_register__input-email"
+            onChange={ ({ target }) => setEmail(target.value) }
+            value={ email }
+          />
+          <TextField
+            type="password"
+            placeholder="Senha"
+            data-testid="common_register__input-password"
+            onChange={ ({ target }) => setPassword(target.value) }
+            value={ password }
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            data-testid="common_register__button-register"
+            disabled={ disabled }
+            onClick={ (e) => registerNewUser(e, { name, email, password, role: 'customer' }) }
+          >
+            Cadastrar
+          </Button>
 
-      <p
-        data-testid="common_register__element-invalid_register"
-      >
-        {serverMessage}
-      </p>
-    </form>
+          <p
+            data-testid="common_register__element-invalid_register"
+          >
+            {serverMessage}
+          </p>
+        </Stack>
+      </FormControl>
+    </Container>
   );
 }

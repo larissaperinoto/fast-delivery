@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Button, Container, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { requestProducts } from '../services/requests';
 import Navbar from '../components/navbar';
@@ -29,18 +30,15 @@ function Products() {
   };
 
   return (
-    <div>
+    <Container maxWidth="md" sx={ { mt: 5 } }>
       <Navbar />
-      <button
-        disabled={ !orders.length }
-        type="button"
-        data-testid="customer_products__button-cart"
-        onClick={ () => checkout() }
+      <Grid
+        container
+        spacing={ 1 }
+        alignItems="center"
+        justifyContent="center"
+        sx={ { mt: 5 } }
       >
-        Ver carrinho
-        <span data-testid="customer_products__checkout-bottom-value">{totalPrice}</span>
-      </button>
-      <section>
         {products.map(({ id, urlImage, name, price }) => (
           <ProductsCard
             key={ id }
@@ -50,8 +48,24 @@ function Products() {
             price={ price.replace('.', ',') }
           />
         ))}
-      </section>
-    </div>
+      </Grid>
+      <Button
+        disabled={ !orders.length }
+        type="button"
+        variant="contained"
+        data-testid="customer_products__button-cart"
+        onClick={ () => checkout() }
+        sx={ { m: 2 } }
+      >
+        Ver carrinho
+        {' '}
+        <span
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          { `R$ ${totalPrice}`}
+        </span>
+      </Button>
+    </Container>
   );
 }
 

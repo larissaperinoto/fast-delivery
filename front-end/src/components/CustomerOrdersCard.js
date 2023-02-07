@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -11,8 +12,11 @@ export default function CustomerOrdersCard({
   const history = useNavigate();
 
   return (
-    <button
+    <Stack
       type="button"
+      direction="row"
+      justifyContent="space-around"
+      sx={ { border: 1, cursor: 'pointer', padding: 2, m: 1 } }
       onClick={ () => history(`/customer/orders/${id}`) }
     >
       <div
@@ -33,9 +37,9 @@ export default function CustomerOrdersCard({
       <div
         data-testid={ `customer_orders__element-card-price-${id}` }
       >
-        { totalPrice.toString().replace(/\./, ',') }
+        { `R$ ${totalPrice.toString().replace(/\./, ',')}` }
       </div>
-    </button>
+    </Stack>
   );
 }
 
