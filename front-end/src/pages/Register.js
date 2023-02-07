@@ -65,11 +65,11 @@ export default function Register() {
             value={ password }
           />
           <Button
-            type="submit"
+            type="button"
             variant="contained"
             data-testid="common_register__button-register"
             disabled={ disabled }
-            onClick={ (e) => registerNewUser(e, { name, email, password, role: 'customer' }) }
+            onClick={ () => registerNewUser({ name, email, password, role: 'customer' }) }
           >
             Cadastrar
           </Button>

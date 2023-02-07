@@ -3,7 +3,7 @@ import { Button, Container, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { requestProducts } from '../services/requests';
 import Navbar from '../components/Navbar';
-import ProductsCard from '../components/ProductCard';
+import ProductCard from '../components/ProductCard';
 import Context from '../context/Context';
 
 function Products() {
@@ -40,7 +40,7 @@ function Products() {
         sx={ { mt: 5 } }
       >
         {products.map(({ id, urlImage, name, price }) => (
-          <ProductsCard
+          <ProductCard
             key={ id }
             id={ id }
             urlImage={ urlImage }

@@ -112,4 +112,4 @@ ProductCard.propTypes = {
   price: string,
 }.isRequired;
 
-export default ProductsCard;
+export default ProductCard;
