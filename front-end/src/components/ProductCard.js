@@ -1,3 +1,5 @@
+import { Button, Typography, TextField } from '@mui/material';
+import { Stack } from '@mui/system';
 import { string, number } from 'prop-types';
 import { useEffect, useContext, useState } from 'react';
 import Context from '../context/Context';
@@ -41,41 +43,65 @@ function ProductCard({
   };
 
   return (
-    <section>
-      <span data-testid={ `customer_products__element-card-title-${id}` }>{name}</span>
+    <Stack
+      direction="column"
+      spacing={ 2 }
+      alignItems="center"
+      justifyContent="center"
+      sx={ { padding: 2 } }
+    >
+      <Typography
+        data-testid={ `customer_products__element-card-title-${id}` }
+        variant="h6"
+      >
+        {name}
+      </Typography>
       <img
         data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ urlImage }
         alt={ name }
+        width="100px"
       />
-      <span data-testid={ `customer_products__element-card-price-${id}` }>{price}</span>
+      <Typography
+        data-testid={ `customer_products__element-card-price-${id}` }
+        variant="body1"
+      >
+        { `R$ ${price}`}
+      </Typography>
 
-      <div>
-        <button
+      <Stack direction="row" alignItems="center">
+        <Button
           data-testid={ `customer_products__button-card-rm-item-${id}` }
           type="button"
+          variant="text"
+          color="secondary"
+          size="small"
           onClick={ () => removeFromOrder(id) }
         >
           -
-        </button>
+        </Button>
 
-        <input
+        <TextField
           data-testid={ `customer_products__input-card-quantity-${id}` }
           type="text"
           min="0"
+          size="small"
           value={ quantity }
           onChange={ (e) => a(e) }
         />
 
-        <button
+        <Button
           data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
+          variant="text"
+          color="secondary"
+          size="small"
           onClick={ () => addToOrder({ id, name, urlImage, price }) }
         >
           +
-        </button>
-      </div>
-    </section>
+        </Button>
+      </Stack>
+    </Stack>
   );
 }
 

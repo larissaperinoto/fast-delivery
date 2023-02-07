@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container } from '@mui/material';
 import CustomerOrdersCard from '../components/CustomerOrdersCard';
 import Navbar from '../components/Navbar';
 import { customerOrders } from '../services/requests';
@@ -31,7 +32,7 @@ export default function CustomerOrders() {
   return (
     <>
       <Navbar />
-      <div>
+      <Container maxWidth="md" sx={ { mt: 5 } }>
         { orders.map((order, index) => (
           <CustomerOrdersCard
             key={ index }
@@ -41,7 +42,7 @@ export default function CustomerOrders() {
             saleDate={ order.saleDate }
             index={ index }
           />))}
-      </div>
+      </Container>
     </>
   );
 }
