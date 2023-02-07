@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CustomerSaleDetailsCard from '../components/CustomerSaleDetailsCard';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 import { getSaleById } from '../services/requests';
 
 export default function CustomerOrderDetails() {

@@ -2,7 +2,7 @@ import { string, number } from 'prop-types';
 import { useEffect, useContext, useState } from 'react';
 import Context from '../context/Context';
 
-function ProductsCard({
+function ProductCard({
   id,
   name,
   urlImage,
@@ -79,7 +79,7 @@ function ProductsCard({
   );
 }
 
-ProductsCard.propTypes = {
+ProductCard.propTypes = {
   id: number,
   name: string,
   urlImage: string,

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 import Context from '../context/Context';
 import { getAllSellers, postNewSale } from '../services/requests';
 

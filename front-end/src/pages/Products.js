@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { requestProducts } from '../services/requests';
-import Navbar from '../components/navbar';
-import ProductsCard from '../components/productsCard';
+import Navbar from '../components/Navbar';
+import ProductsCard from '../components/ProductCard';
 import Context from '../context/Context';
 
 function Products() {

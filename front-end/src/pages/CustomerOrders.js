@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CustomerOrdersCard from '../components/CustomerOrdersCard';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 import { customerOrders } from '../services/requests';
 
 export default function CustomerOrders() {
