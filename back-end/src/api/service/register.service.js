@@ -18,7 +18,7 @@ const register = async ({ name, email, password, role }) => {
   const verificated = await verificatedUser(name, email);
 
   if (verificated) {
-    return { status: statusCode.Conflit, message: 'Conflict' };
+    return { status: statusCode.Conflict, message: 'Conflict' };
   }
 
   await User.create({ name, email, password: md5(password), role });

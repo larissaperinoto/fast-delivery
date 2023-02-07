@@ -4,7 +4,7 @@ const StatusCode = {
   BadRequest: 400,
   Unauthorized: 401,
   NotFound: 404,
-  Conflit: 409,
+  Conflict: 409,
   UnprocessableEntity: 422,
 };
 
