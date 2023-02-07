@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, TextField, FormControl, Stack, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { postLogin, postRegistration } from '../services/requests';
+import { methodPost, postRegistration } from '../services/requests';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -30,7 +30,7 @@ export default function Register() {
     e.preventDefault();
     const { message } = await postRegistration(body);
     if (message === 'Created') {
-      const user = await postLogin(email, password);
+      const user = await methodPost({ email, password }, '/login');
       localStorage.setItem('user', JSON.stringify(user));
       history('/customer/products');
     } else {

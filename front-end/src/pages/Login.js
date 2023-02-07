@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField, FormControl, Stack, Container } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
-import { postLogin } from '../services/requests';
+import {
+  Button,
+  TextField,
+  FormControl,
+  Stack,
+  Container,
+  Typography,
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { methodPost } from '../services/requests';
 
 export default function Login() {
-  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [invalidLogin, setInvalidLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,36 +36,27 @@ export default function Login() {
   };
 
   const validateLogin = async () => {
-    const userData = await postLogin(email, password);
+    const userData = await methodPost({ email, password }, '/login');
 
     if (userData !== 'Not found') {
       localStorage.setItem('user', JSON.stringify(userData));
       redirectTo(userData.role);
     } else {
-      setInvalidEmail(!invalidEmail);
-      setErrorMessage('Email não encontrado');
+      setInvalidLogin(!invalidLogin);
+      setErrorMessage('Email ou senha inválidos');
     }
   };
 
   useEffect(() => {
-    // localStorage.removeItem('user');
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      redirectTo(user.role);
-    }
+    if (user) redirectTo(user.role);
   }, []);
 
-  const checkPassword = () => {
-    const minPasswordCharacters = 6;
-    return password.length >= minPasswordCharacters;
-  };
-  const checkEmail = () => {
-    const validEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-    return email.match(validEmail);
-  };
-
   useEffect(() => {
-    if (checkEmail() && checkPassword()) {
+    const minPasswordCharacters = 6;
+    const validEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+
+    if (password.length >= minPasswordCharacters && email.match(validEmail)) {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -66,52 +64,52 @@ export default function Login() {
   }, [email, password]);
 
   return (
-    <Container maxWidth="md" sx={ { mt: 20 } }>
-      <FormControl onSubmit={ (e) => e.preventDefault() }>
-        <Stack direction="column" spacing={ 2 }>
-          <TextField
-            value={ email }
-            onChange={ ({ target }) => setEmail(target.value) }
-            htmlFor="common_login__input-email"
-            type="email"
-            placeholder="Email"
-            data-testid="common_login__input-email"
-          />
-          {
-            invalidEmail && (
-              <p data-testid="common_login__element-invalid-email">
-                { errorMessage }
-              </p>
-            )
-          }
-          <TextField
-            value={ password }
-            onChange={ ({ target }) => setPassword(target.value) }
-            htmlFor="common_login__input-password"
-            type="password"
-            placeholder="Senha"
-            data-testid="common_login__input-password"
-          />
-          <Button
-            variant="contained"
-            type="submit"
-            data-testid="common_login__button-login"
-            onClick={ () => validateLogin() }
-            disabled={ disabled }
-          >
-            Login
-          </Button>
-          <Link to="/register">
+    <Container
+      maxWidth="xs"
+      sx={ { mt: 20 } }
+    >
+      <Stack direction="column" spacing={ 2 } alignItems="center">
+        <Typography
+          variant="h1"
+          sx={ { fontSize: 40 } }
+        >
+          Delivery App
+        </Typography>
+        <FormControl>
+          <Stack direction="column" spacing={ 2 }>
+            <TextField
+              value={ email }
+              onChange={ ({ target }) => setEmail(target.value) }
+              type="email"
+              placeholder="Email"
+            />
+            <TextField
+              value={ password }
+              onChange={ ({ target }) => setPassword(target.value) }
+              type="password"
+              placeholder="Senha"
+            />
             <Button
-              variant="text"
+              variant="contained"
+              type="submit"
+              onClick={ () => validateLogin() }
+              disabled={ disabled }
+            >
+              Login
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
               type="button"
-              data-testid="common_login__button-register"
+              onClick={ () => history('/register') }
             >
               Ainda não tenho conta
             </Button>
-          </Link>
-        </Stack>
-      </FormControl>
+          </Stack>
+        </FormControl>
+        { invalidLogin
+        && <Typography align="center">{ errorMessage }</Typography> }
+      </Stack>
     </Container>
   );
 }

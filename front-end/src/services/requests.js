@@ -1,4 +1,6 @@
 const contentType = 'application/json';
+const token = JSON.parse(localStorage.getItem('user')) || '';
+const baseURL = `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}`;
 
 export async function requestProducts() { // Retorna todos os produtos do banco
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/products`, {
@@ -8,19 +10,20 @@ export async function requestProducts() { // Retorna todos os produtos do banco
   return products;
 }
 
-export async function postLogin(email, password) { // Login para clientes, vendedores e admin
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/login`, {
+export async function methodPost(body, route) {
+  const response = await fetch(`${baseURL}${route}`, {
     method: 'POST',
     headers: {
       'Content-Type': contentType,
+      Authorization: token,
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(body),
   });
-  const userData = await response.json();
-  return userData;
+  const data = await response.json();
+  return data;
 }
 
-export async function postRegistration(body, token = '', url = '') { // Registra um novo usuário como cliente
+export async function postRegistration(body, url = '') { // Registra um novo usuário como cliente
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register${url}`, {
     method: 'POST',
     headers: {
@@ -33,7 +36,7 @@ export async function postRegistration(body, token = '', url = '') { // Registra
   return message;
 }
 
-export async function customerOrders(token) { // Retorna todos os pedidos que um usuário já fez
+export async function customerOrders() { // Retorna todos os pedidos que um usuário já fez
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders`, {
     method: 'GET',
     headers: {
@@ -45,7 +48,7 @@ export async function customerOrders(token) { // Retorna todos os pedidos que um
   return orders;
 }
 
-export async function sellerOrders(token) {
+export async function sellerOrders() {
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders`, {
     method: 'GET',
     headers: {
@@ -58,7 +61,6 @@ export async function sellerOrders(token) {
 }
 
 export async function getSaleById(saleId) {
-  const { token } = JSON.parse(localStorage.getItem('user'));
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${saleId}`, {
     method: 'GET',
     headers: {
@@ -79,7 +81,6 @@ export async function getAllSellers() { // Retorna todas as pessoas que são ven
 }
 
 export async function postNewSale(sale) { // Registra uma nova venda
-  const { token } = JSON.parse(localStorage.getItem('user'));
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders`, {
     method: 'POST',
     headers: {
@@ -93,7 +94,6 @@ export async function postNewSale(sale) { // Registra uma nova venda
 }
 
 export async function putSaleStatus(id, status) { // Atualiza uma venda pelo ID
-  const { token } = JSON.parse(localStorage.getItem('user'));
   const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${id}`, {
     method: 'PUT',
     headers: {
