@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import Context from '../context/Context';
 
-function Products() {
+export default function Products() {
   const [products, setProducts] = useState([]);
   const { totalPrice, setTotalPrice, orders } = useContext(Context);
   const history = useNavigate();
@@ -26,8 +26,19 @@ function Products() {
   }, [orders]);
 
   return (
-    <Container maxWidth="md" sx={ { mt: 5 } }>
+    <Container maxWidth="xl" sx={ { mt: 8 } }>
       <Navbar />
+      <Button
+        disabled={ !orders.length }
+        type="button"
+        variant="contained"
+        onClick={ () => history('/customer/checkout') }
+        sx={ { m: 2 } }
+      >
+        Ver carrinho
+        {' '}
+        <Typography>{ ` R$ ${totalPrice}` }</Typography>
+      </Button>
       <Grid
         container
         spacing={ 1 }
@@ -45,19 +56,6 @@ function Products() {
           />
         ))}
       </Grid>
-      <Button
-        disabled={ !orders.length }
-        type="button"
-        variant="contained"
-        onClick={ () => history('/customer/checkout') }
-        sx={ { m: 2 } }
-      >
-        Ver carrinho
-        {' '}
-        <Typography>{ `R$ ${totalPrice}` }</Typography>
-      </Button>
     </Container>
   );
 }
-
-export default Products;
