@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { postRegistration } from '../services/requests';
+import { methodPost } from '../services/requests';
 
 export default function AdminManage() {
   const [name, setName] = useState('');
@@ -25,9 +25,8 @@ export default function AdminManage() {
 
   const registerNewSeller = async (e) => {
     e.preventDefault();
-    const { token } = JSON.parse(localStorage.getItem('user'));
     const body = { name, email, password, role };
-    const { message } = await postRegistration(body, token, '/seller');
+    const { message } = await methodPost(body, '/seller');
     setMessageFromDB(message);
   };
 

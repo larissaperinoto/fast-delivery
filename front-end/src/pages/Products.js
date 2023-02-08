@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Container, Grid } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { requestProducts } from '../services/requests';
+import { methodGet } from '../services/requests';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import Context from '../context/Context';
@@ -13,7 +13,7 @@ function Products() {
 
   useEffect(() => {
     const productsRequest = async () => {
-      const productsList = await requestProducts();
+      const productsList = await methodGet('/products');
       setProducts(productsList);
     };
     productsRequest();
@@ -24,10 +24,6 @@ function Products() {
       .reduce((acc, curr) => acc + parseFloat(curr.price.replace(',', '.')), 0);
     setTotalPrice(total.toFixed(2).replace('.', ','));
   }, [orders]);
-
-  const checkout = () => {
-    history('/customer/checkout');
-  };
 
   return (
     <Container maxWidth="md" sx={ { mt: 5 } }>
@@ -53,17 +49,12 @@ function Products() {
         disabled={ !orders.length }
         type="button"
         variant="contained"
-        data-testid="customer_products__button-cart"
-        onClick={ () => checkout() }
+        onClick={ () => history('/customer/checkout') }
         sx={ { m: 2 } }
       >
         Ver carrinho
         {' '}
-        <span
-          data-testid="customer_products__checkout-bottom-value"
-        >
-          { `R$ ${totalPrice}`}
-        </span>
+        <Typography>{ `R$ ${totalPrice}` }</Typography>
       </Button>
     </Container>
   );

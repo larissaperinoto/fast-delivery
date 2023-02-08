@@ -2,16 +2,19 @@ const contentType = 'application/json';
 const token = JSON.parse(localStorage.getItem('user')) || '';
 const baseURL = `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}`;
 
-export async function requestProducts() { // Retorna todos os produtos do banco
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/products`, {
+export async function methodGet(route) {
+  const response = await fetch(`${baseURL}${route}`, {
     method: 'GET',
+    headers: {
+      'Content-Type': contentType,
+      Authorization: token,
+    },
   });
-  const products = await response.json();
-  return products;
+  const data = await response.json();
+  return data;
 }
 
 export async function methodPost(body, route) {
-  console.log(body, `${baseURL}${route}`);
   const response = await fetch(`${baseURL}${route}`, {
     method: 'POST',
     headers: {
