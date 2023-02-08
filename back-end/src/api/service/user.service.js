@@ -4,6 +4,7 @@ const md5 = require('md5');
 const createToken = require('../utils/jwt');
 const statusCode = require('../shared/statusCode');
 const { User } = require('../../database/models');
+const StatusCode = require('../shared/statusCode');
 
 
 const login = async ({ email, password }) => {
@@ -34,20 +35,14 @@ const findAll = async () => {
   return { status: statusCode.OK, message: users };
 };
 
-const findById = async (seller) => {
-  const user = await User.findOne({ where: { name: seller } });
-  return user;
-};
-
 const findByRole = async ({ role }) => {
   const users = await User.findAll({ where: { role } });
-  return users;
+  return { status: StatusCode.OK, message: users };
 }
 
 module.exports = {
   login,
   create,
   findAll,
-  findById,
   findByRole,
 };

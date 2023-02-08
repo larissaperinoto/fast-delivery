@@ -15,20 +15,13 @@ export default function CustomerOrderDetails() {
     requestSaleId();
   }, []);
 
-  const formatDate = (date) => {
-    const year = date.split('-')[0];
-    const month = date.split('-')[1];
-    const day = date.split('-')[2].split('T')[0];
-    return `${day}/${month}/${year}`;
-  };
-
   return (
     <>
       <Navbar />
       { sale && <CustomerSaleDetailsCard
         saleId={ sale.id }
         seller={ sale.sellerInfos.name }
-        saleDate={ formatDate(sale.saleDate) }
+        saleDate={ sale.saleDate }
         status={ sale.status }
         products={ sale.sales_products }
         totalPrice={ sale.totalPrice.replace('.', ',') }

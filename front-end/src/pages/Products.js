@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Container, Grid, Typography } from '@mui/material';
+import { Button, Container, Grid, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { methodGet } from '../services/requests';
 import Navbar from '../components/Navbar';
@@ -8,7 +8,7 @@ import Context from '../context/Context';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
-  const { totalPrice, setTotalPrice, orders } = useContext(Context);
+  const { totalPrice, setTotalPrice, orders, totalQuantity } = useContext(Context);
   const history = useNavigate();
 
   useEffect(() => {
@@ -28,17 +28,22 @@ export default function Products() {
   return (
     <Container maxWidth="xl" sx={ { mt: 8 } }>
       <Navbar />
-      <Button
-        disabled={ !orders.length }
-        type="button"
-        variant="contained"
-        onClick={ () => history('/customer/checkout') }
-        sx={ { m: 2 } }
-      >
-        Ver carrinho
-        {' '}
-        <Typography>{ ` R$ ${totalPrice}` }</Typography>
-      </Button>
+      <Stack direction="column" justifyContent="center" alignItems="flex-end">
+        <Typography variant="subtitle1" sx={ { mr: 4 } }>
+          { `Produtos selecionados: ${totalQuantity}` }
+        </Typography>
+        <Button
+          disabled={ !orders.length }
+          type="button"
+          variant="contained"
+          onClick={ () => history('/customer/checkout') }
+          sx={ { m: 2 } }
+        >
+          Ver carrinho
+          {' '}
+          <Typography>{ ` R$ ${totalPrice}` }</Typography>
+        </Button>
+      </Stack>
       <Grid
         container
         spacing={ 1 }

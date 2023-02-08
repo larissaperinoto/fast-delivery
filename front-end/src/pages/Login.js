@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { methodPost } from '../services/requests';
 import Context from '../context/Context';
 import { checkEmail, checkPassword } from '../services/validations';
+import redirectTo from '../services/helpers';
 
 export default function Login() {
   const {
@@ -24,22 +25,6 @@ export default function Login() {
     setDisabled } = useContext(Context);
 
   const history = useNavigate();
-
-  const redirectTo = (role) => {
-    switch (role) {
-    case 'customer':
-      history('/customer/products');
-      break;
-    case 'administrator':
-      history('/admin/manage');
-      break;
-    case 'seller':
-      history('/seller/orders');
-      break;
-    default:
-      break;
-    }
-  };
 
   const validateLogin = async () => {
     const userData = await methodPost({ email, password }, '/login');

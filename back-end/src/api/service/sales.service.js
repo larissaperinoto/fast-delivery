@@ -63,9 +63,27 @@ const findAllByUserId = async ({ userId }) => {
   return { status: StatusCode.OK, message: sales };
 };
 
+const findAllBySellerId = async ({ sellerId }) => {
+  const sales = await Sale.findAll({
+    where: { sellerId },
+    include: [
+      { model: Product,
+        as: 'sales_products',
+        attributes: { exclude: ['urlImage'] } },
+    ],
+  });
+
+  if (!sales) {
+    return { status: StatusCode.NotFound, message: 'Not found' };
+  }
+
+  return { status: StatusCode.OK, message: sales };
+};
+
 module.exports = {
   updateStatus,
   findSaleById,
   findAllByUserId,
   create,
+  findAllBySellerId,
 };

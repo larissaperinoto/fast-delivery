@@ -21,9 +21,15 @@ const findAllByUserId = async (req, res) => {
   return res.status(status).json(message);
 };
 
+const findAllBySellerId = async (req, res) => {
+  const { status, message } = await salesService.findAllBySellerId(req.params);
+  return res.status(status).json(message);
+};
+
 module.exports = {
   updateSale,
   findSaleById,
   create,
   findAllByUserId,
+  findAllBySellerId,
 };

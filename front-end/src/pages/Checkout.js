@@ -34,7 +34,7 @@ export default function Checkout() {
       setSellers(sellersList);
     };
     requestSellers();
-  });
+  }, []);
 
   const registerSale = async () => {
     const products = ordersCheckout.map(({ productId, quantidade }) => {

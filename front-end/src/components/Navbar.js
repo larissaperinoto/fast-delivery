@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { Button, Stack, Typography } from '@mui/material';
+import React from 'react';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Context from '../context/Context';
 
 export default function Navbar() {
-  const { totalQuantity } = useContext(Context);
   const { name, role } = JSON.parse(localStorage.getItem('user'));
   const history = useNavigate();
 
@@ -27,13 +25,13 @@ export default function Navbar() {
   };
 
   return (
-    <>
+    <Container maxWidth="lg" sx={ { mt: 5, mb: 5 } }>
       <Stack
         direction="row"
         spacing={ 15 }
         alignItems="center"
         justifyContent="flex-end"
-        sx={ { mt: 2 } }
+        sx={ { mb: 2 } }
       >
         <Button
           type="button"
@@ -52,9 +50,6 @@ export default function Navbar() {
         </Button>
       </Stack>
       <Typography variant="h5">{ `Olá, ${name}` }</Typography>
-      <Typography variant="body1">
-        { `Produtos selecionados ${totalQuantity}` }
-      </Typography>
-    </>
+    </Container>
   );
 }
