@@ -1,5 +1,5 @@
 const contentType = 'application/json';
-const token = JSON.parse(localStorage.getItem('user')) || '';
+const { token } = JSON.parse(localStorage.getItem('user')) || '';
 const baseURL = `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}`;
 
 export async function methodGet(route) {
@@ -51,8 +51,8 @@ export async function sellerOrders() {
   return sellerProduct;
 }
 
-export async function getSaleById(saleId) {
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${saleId}`, {
+export async function methodGetById(route, id) {
+  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}${route}/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': contentType,
@@ -69,19 +69,6 @@ export async function getAllSellers() { // Retorna todas as pessoas que são ven
   });
   const sellers = await response.json();
   return sellers;
-}
-
-export async function postNewSale(sale) { // Registra uma nova venda
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
-    body: JSON.stringify(sale),
-  });
-  const message = await response.json();
-  return message;
 }
 
 export async function putSaleStatus(id, status) { // Atualiza uma venda pelo ID

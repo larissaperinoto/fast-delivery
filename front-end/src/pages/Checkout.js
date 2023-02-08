@@ -15,7 +15,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Context from '../context/Context';
-import { getAllSellers, postNewSale } from '../services/requests';
+import { methodGet, methodPost } from '../services/requests';
 
 export default function Checkout() {
   const { orders, setOrders, totalPrice, setTotalPrice, ordersCheckout,
@@ -30,7 +30,7 @@ export default function Checkout() {
 
   useEffect(() => {
     const requestSellers = async () => {
-      const sellersList = await getAllSellers();
+      const sellersList = await methodGet('/users/seller');
       setSellers(sellersList);
     };
     requestSellers();
@@ -41,9 +41,12 @@ export default function Checkout() {
       const result = { productId, quantity: quantidade };
       return result;
     });
-    const formatPrice = totalPrice.replace(',', '.');
-    const sale = await postNewSale({
-      seller, deliveryAddress, deliveryNumber, totalPrice: formatPrice, products });
+    const sale = await methodPost({
+      seller,
+      deliveryAddress,
+      deliveryNumber,
+      totalPrice: totalPrice.replace(',', '.'),
+      products }, '/sales');
     setReturnPostNewSale((curr) => [...curr, sale]);
     history(`/customer/orders/${sale.id}`);
   };
@@ -137,45 +140,16 @@ export default function Checkout() {
           { ordersCheckout.map((order, i) => (
             <TableRow
               key={ order.item }
-              data-testid={ `customer_checkout__element-order-table-item-number-${i}` }
             >
-              <TableCell
-                data-testid={ `customer_checkout
-                  __element-order-table-item-number-${i}` }
-
-              >
-                {order.item}
-
-              </TableCell>
-              <TableCell
-                data-testid={ `customer_checkout__element-order-table-name-${i}` }
-
-              >
-                {order.descricao}
-
-              </TableCell>
-              <TableCell
-                data-testid={ `customer_checkout__element-order-table-quantity-${i}` }
-              >
-                {order.quantidade}
-
-              </TableCell>
-              <TableCell
-                data-testid={ `customer_checkout__element-order-table-unit-price-${i}` }
-
-              >
-                {order.valor.toFixed(2).toString().replace(/\./, ',')}
-
-              </TableCell>
-              <TableCell
-                data-testid={ `customer_checkout__element-order-table-sub-total-${i}` }
-              >
-                {order.subTotal.toFixed(2).toString().replace(/\./, ',')}
+              <TableCell>{order.item}</TableCell>
+              <TableCell>{order.descricao}</TableCell>
+              <TableCell>{order.quantidade}</TableCell>
+              <TableCell>{order.valor.toFixed(2).toString().replace('.', ',')}</TableCell>
+              <TableCell>
+                {order.subTotal.toFixed(2).toString().replace('.', ',')}
               </TableCell>
               <TableCell>
-
                 <Button
-                  data-testid={ `customer_checkout__element-order-table-remove-${i}` }
                   type="button"
                   onClick={ () => setRemoveItem(i, order.descricao) }
                 >
@@ -188,7 +162,6 @@ export default function Checkout() {
         </TableBody>
       </Table>
       <Typography
-        data-testid="customer_checkout__element-order-total-price"
         variant="h5"
         sx={ { mt: 5, mb: 2 } }
       >
@@ -203,7 +176,6 @@ export default function Checkout() {
       </Typography>
       <Stack direction="row" spacing={ 2 } alignItems="center">
         <Select
-          data-testid="customer_checkout__select-seller"
           onChange={ (e) => setSeller(e.target.value) }
           value={ seller }
           labelId="demo-simple-select-label"
@@ -220,7 +192,6 @@ export default function Checkout() {
           type="text"
           placeholder="Endereço"
           size="small"
-          data-testid="customer_checkout__input-address"
           value={ deliveryAddress }
           onChange={ (e) => setDeliveryAddress(e.target.value) }
         />
@@ -228,7 +199,6 @@ export default function Checkout() {
           type="text"
           placeholder="Número"
           size="small"
-          data-testid="customer_checkout__input-address-number"
           value={ deliveryNumber }
           onChange={ (e) => setDeliveryNumber(e.target.value) }
         />
@@ -236,11 +206,9 @@ export default function Checkout() {
           type="submit"
           variant="contained"
           color="secondary"
-          data-testid="customer_checkout__button-submit-order"
           onClick={ () => registerSale() }
         >
           Finalizar Pedido
-
         </Button>
       </Stack>
     </Container>

@@ -17,9 +17,6 @@ export default function SellerOrdersCard({
     navigate(`/seller/orders/${id}`);
   };
 
-  console.log(totalPrice);
-  console.log(salesDate);
-
   return (
     <button
       onClick={ () => handleClick() }

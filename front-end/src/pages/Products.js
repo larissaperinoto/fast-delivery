@@ -46,7 +46,7 @@ export default function Products() {
         justifyContent="center"
         sx={ { mt: 5 } }
       >
-        {products.map(({ id, urlImage, name, price }) => (
+        { products && products.map(({ id, urlImage, name, price }) => (
           <ProductCard
             key={ id }
             id={ id }

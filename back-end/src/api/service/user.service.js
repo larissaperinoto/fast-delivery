@@ -34,14 +34,20 @@ const findAll = async () => {
   return { status: statusCode.OK, message: users };
 };
 
-const getUserById = async (seller) => {
+const findById = async (seller) => {
   const user = await User.findOne({ where: { name: seller } });
   return user;
 };
+
+const findByRole = async ({ role }) => {
+  const users = await User.findAll({ where: { role } });
+  return users;
+}
 
 module.exports = {
   login,
   create,
   findAll,
-  getUserById,
+  findById,
+  findByRole,
 };

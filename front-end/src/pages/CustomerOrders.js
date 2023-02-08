@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
 import CustomerOrdersCard from '../components/CustomerOrdersCard';
 import Navbar from '../components/Navbar';
-import { customerOrders } from '../services/requests';
+import { methodGet } from '../services/requests';
 
 export default function CustomerOrders() {
   const [orders, setOrders] = useState([]);
@@ -21,8 +21,8 @@ export default function CustomerOrders() {
 
   useEffect(() => {
     const requestOrders = async () => {
-      const { token } = JSON.parse(localStorage.getItem('user'));
-      const ordersList = await customerOrders(token);
+      const { id: userId } = JSON.parse(localStorage.getItem('user'));
+      const ordersList = await methodGet(`/sales/user/${userId}`);
       const ordersListFormated = formatOrder(ordersList);
       setOrders(ordersListFormated);
     };

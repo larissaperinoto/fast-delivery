@@ -15,8 +15,14 @@ const findAll = async (_req, res) => {
   return res.status(status).json(message);
 };
 
+const findByRole = async (req, res) => {
+  const { status, message } = await userService.findByRole(req.params);
+  return res.status(status).json(message);
+};
+
 module.exports = {
   login,
   create,
   findAll,
+  findByRole,
 };

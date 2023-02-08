@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import Navbar from '../components/Navbar';
-import { getSaleById, putSaleStatus } from '../services/requests';
+import { methodGet, putSaleStatus } from '../services/requests';
 import Context from '../context/Context';
 
 function SellerOrderDetails() {
@@ -15,8 +15,7 @@ function SellerOrderDetails() {
 
   useEffect(() => {
     const request = async () => {
-      const result = await getSaleById((id));
-      console.log(result);
+      const result = await methodGet(`/sales/${id}`);
       setSalesOrdersDetails(result);
     };
     request();
@@ -38,15 +37,12 @@ function SellerOrderDetails() {
     }
   }, [salesOrderDetails]);
 
-  // console.log(salesOrderDetails[0].status);
-
   useEffect(() => {
     setTotal(salesOrderDetails
       .map((order) => order[salesProducts]
         .map((product) => Number(product.price) * product.SalesProduct.quantity))[0]);
   }, [salesOrderDetails]);
 
-  // console.log(salesOrderDetails.map((order) => order.status)[0]);
   const dataStatus = 'seller_order_details__element-order-details-label-delivery-status';
 
   return (

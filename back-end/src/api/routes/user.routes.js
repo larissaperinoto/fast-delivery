@@ -6,6 +6,8 @@ const route = Router();
 
 route.post('/login', userController.login);
 route.post('/users', userController.create);
-route.get('/users', authorizationUser, userController.findAll);
+route.use(authorizationUser);
+route.get('/users', userController.findAll);
+route.get('/users/:role', userController.findByRole);
 
 module.exports = route;

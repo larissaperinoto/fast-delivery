@@ -10,7 +10,6 @@ export default function SellerOrders() {
     const sales = async () => {
       const { token } = JSON.parse(localStorage.getItem('user'));
       const salesSeller = await sellerOrders(token);
-      console.log(salesSeller);
       setSalesOrdersSeller(salesSeller);
     };
     sales();

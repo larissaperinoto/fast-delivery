@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomerSaleDetailsCard from '../components/CustomerSaleDetailsCard';
 import Navbar from '../components/Navbar';
-import { getSaleById } from '../services/requests';
+import { methodGet } from '../services/requests';
 
 export default function CustomerOrderDetails() {
   const [sale, setSale] = useState('');
@@ -9,8 +9,8 @@ export default function CustomerOrderDetails() {
   useEffect(() => {
     const requestSaleId = async () => {
       const saleId = window.location.pathname.split('/')[3];
-      const saleObject = await getSaleById(saleId);
-      setSale(saleObject[0]);
+      const saleObject = await methodGet(`/sales/${saleId}`);
+      setSale(saleObject);
     };
     requestSaleId();
   }, []);
