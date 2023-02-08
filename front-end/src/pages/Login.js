@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Button,
   TextField,
@@ -9,13 +9,19 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { methodPost } from '../services/requests';
+import Context from '../context/Context';
+import { checkEmail, checkPassword } from '../services/validations';
 
 export default function Login() {
-  const [invalidLogin, setInvalidLogin] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [disabled, setDisabled] = useState(true);
+  const {
+    email,
+    password,
+    setEmail,
+    setPassword,
+    errorMessage,
+    setErrorMessage,
+    disabled,
+    setDisabled } = useContext(Context);
 
   const history = useNavigate();
 
@@ -42,7 +48,6 @@ export default function Login() {
       localStorage.setItem('user', JSON.stringify(userData));
       redirectTo(userData.role);
     } else {
-      setInvalidLogin(!invalidLogin);
       setErrorMessage('Email ou senha inválidos');
     }
   };
@@ -53,10 +58,7 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-    const minPasswordCharacters = 6;
-    const validEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-
-    if (password.length >= minPasswordCharacters && email.match(validEmail)) {
+    if (checkEmail(email) && checkPassword(password)) {
       setDisabled(false);
     } else {
       setDisabled(true);
@@ -107,8 +109,7 @@ export default function Login() {
             </Button>
           </Stack>
         </FormControl>
-        { invalidLogin
-        && <Typography align="center">{ errorMessage }</Typography> }
+        { errorMessage && <Typography align="center">{ errorMessage }</Typography> }
       </Stack>
     </Container>
   );

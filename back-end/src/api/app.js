@@ -4,7 +4,9 @@ const cors = require('cors');
 const route = require('./routes');
 
 const app = express();
+
 app.use(express.json());
+
 app.use(express.static('public'));
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -14,7 +16,5 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(route);
-
-app.get('/coffee', (_req, res) => res.status(418).end());
 
 module.exports = app;

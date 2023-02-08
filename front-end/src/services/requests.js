@@ -11,6 +11,7 @@ export async function requestProducts() { // Retorna todos os produtos do banco
 }
 
 export async function methodPost(body, route) {
+  console.log(body, `${baseURL}${route}`);
   const response = await fetch(`${baseURL}${route}`, {
     method: 'POST',
     headers: {
@@ -21,19 +22,6 @@ export async function methodPost(body, route) {
   });
   const data = await response.json();
   return data;
-}
-
-export async function postRegistration(body, url = '') { // Registra um novo usuário como cliente
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register${url}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
-    body: JSON.stringify(body),
-  });
-  const message = await response.json();
-  return message;
 }
 
 export async function customerOrders() { // Retorna todos os pedidos que um usuário já fez
