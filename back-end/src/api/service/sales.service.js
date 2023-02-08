@@ -16,7 +16,7 @@ const findSaleById = async ({ id }) => {
     where: { id },
     include: [
       { model: Product,
-        as: 'sales_products',
+        as: 'products',
         attributes: { exclude: ['urlImage'] } },
       { model: User, as: 'sellerInfos'},
     ],
@@ -51,7 +51,7 @@ const findAllByUserId = async ({ userId }) => {
     where: { userId },
     include: [
       { model: Product,
-        as: 'sales_products',
+        as: 'products',
         attributes: { exclude: ['urlImage'] } },
     ],
   });
@@ -68,7 +68,7 @@ const findAllBySellerId = async ({ sellerId }) => {
     where: { sellerId },
     include: [
       { model: Product,
-        as: 'sales_products',
+        as: 'products',
         attributes: { exclude: ['urlImage'] } },
     ],
   });

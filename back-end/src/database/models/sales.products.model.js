@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
   SalesProductsTable.associate = (models) => {
     models.Sale.belongsToMany(models.Product, {
       through: SalesProductsTable,
-      as: 'sales_products',
+      as: 'products',
       foreignKey: 'saleId',
       otherKey: 'productId',
     });
     models.Product.belongsToMany(models.Sale, {
       through: SalesProductsTable,
-      as: 'products_sales',
+      as: 'sales',
       foreignKey: 'productId',
       otherKey: 'saleId',
     });

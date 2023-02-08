@@ -16,7 +16,7 @@ function SellerOrderDetails() {
   useEffect(() => {
     const request = async () => {
       const result = await methodGet(`/sales/${id}`);
-      setSalesOrdersDetails(result);
+      setSalesOrdersDetails([result]);
     };
     request();
   }, []);
