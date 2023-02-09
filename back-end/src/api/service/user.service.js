@@ -31,7 +31,10 @@ const create = async ({ name, email, password, role }) => {
 };
 
 const findAll = async () => {
-  const users = await User.findAll();
+  const users = await User.findAll({ where: {[Op.or]: [
+    { role: 'seller' },
+    { role: 'customer' }
+  ]}});
   return { status: statusCode.OK, message: users };
 };
 

@@ -9,7 +9,7 @@ import Context from '../context/Context';
 import { checkEmail, checkName, checkPassword } from '../services/validations';
 import SelectRole from './SelectRole';
 
-export default function RegisterForm({ handleRegister }) {
+export default function RegisterForm({ handleRegister, direction }) {
   const route = window.location.pathname;
 
   const {
@@ -33,7 +33,7 @@ export default function RegisterForm({ handleRegister }) {
 
   return (
     <FormControl>
-      <Stack direction="column" spacing={ 2 }>
+      <Stack direction={ direction } spacing={ 2 }>
         <TextField
           type="text"
           placeholder="Nome"
@@ -67,5 +67,6 @@ export default function RegisterForm({ handleRegister }) {
 }
 
 RegisterForm.propTypes = {
+  direction: PropTypes.string,
   handleRegister: PropTypes.Function,
 }.isRequired;
