@@ -8,6 +8,7 @@ export default function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [role, setRole] = useState('');
 
   const [orders, setOrders] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
@@ -37,6 +38,8 @@ export default function Provider({ children }) {
     setPassword,
     name,
     setName,
+    role,
+    setRole,
     disabled,
     setDisabled,
     orders,
@@ -63,6 +66,8 @@ export default function Provider({ children }) {
     setPassword,
     name,
     setName,
+    role,
+    setRole,
     disabled,
     setDisabled,
     orders,

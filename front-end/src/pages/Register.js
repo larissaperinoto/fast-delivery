@@ -1,43 +1,18 @@
-import React, { useEffect, useContext } from 'react';
-import {
-  Button,
-  TextField,
-  FormControl,
-  Stack,
-  Container,
-  Typography } from '@mui/material';
+import React, { useContext } from 'react';
+import { Stack, Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { methodPost } from '../services/requests';
 import Context from '../context/Context';
-import { checkEmail, checkName, checkPassword } from '../services/validations';
+import RegisterForm from '../components/RegisterForm';
 
 export default function Register() {
-  const {
-    email,
-    password,
-    setEmail,
-    setPassword,
-    name,
-    setName,
-    errorMessage,
-    setErrorMessage,
-    disabled,
-    setDisabled } = useContext(Context);
+  const { errorMessage, setErrorMessage } = useContext(Context);
 
   const history = useNavigate();
 
-  useEffect(() => {
-    if (checkEmail(email) && checkPassword(password) && checkName(name)) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }, [email, password, name]);
-
-  const registerNewUser = async () => {
-    const role = 'customer';
-    const user = await methodPost({ email, password, name, role }, '/users');
-    if (user) {
+  const registerNewUser = async ({ name, email, password, role }) => {
+    const message = await methodPost({ email, password, name, role }, '/users');
+    if (message.token) {
       localStorage.setItem('user', JSON.stringify(user));
       history('/customer/products');
     } else {
@@ -49,37 +24,9 @@ export default function Register() {
   return (
     <Container maxWidth="xs" sx={ { mt: 20 } }>
       <Stack direction="column" spacing={ 2 } alignItems="center">
-        <FormControl>
-          <Stack direction="column" spacing={ 2 }>
-            <TextField
-              type="text"
-              placeholder="Nome"
-              onChange={ ({ target }) => setName(target.value) }
-              value={ name }
-            />
-            <TextField
-              type="email"
-              placeholder="Email"
-              onChange={ ({ target }) => setEmail(target.value) }
-              value={ email }
-            />
-            <TextField
-              type="password"
-              placeholder="Senha"
-              onChange={ ({ target }) => setPassword(target.value) }
-              value={ password }
-            />
-            <Button
-              type="button"
-              variant="contained"
-              disabled={ disabled }
-              onClick={ () => registerNewUser() }
-            >
-              Cadastrar
-            </Button>
-            { errorMessage && <Typography>{ errorMessage }</Typography>}
-          </Stack>
-        </FormControl>
+        <Typography variant="h4">Cadastra-se</Typography>
+        <RegisterForm handleRegister={ registerNewUser } />
+        { errorMessage && <Typography>{ errorMessage }</Typography>}
       </Stack>
     </Container>
   );
