@@ -19,7 +19,7 @@ export default function AdminManage() {
   const registerNewSeller = async ({ name, email, password, role }) => {
     const message = await methodPost({ name, email, password, role }, '/seller');
     setErrorMessage(message);
-  };UserDetailsCard
+  };
 
   useEffect(() => {
     const requestSellers = async () => {
