@@ -10,10 +10,11 @@ export default function Register() {
 
   const history = useNavigate();
 
-  const registerNewUser = async ({ name, email, password, role = 'customer' }) => {
-    const message = await methodPost({ email, password, name, role }, '/users');
+  const registerNewUser = async ({ name, email, password }) => {
+    const message = await methodPost({
+      email, password, name, role: 'customer' }, '/users');
     if (message.token) {
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(message));
       history('/customer/products');
     } else {
       setErrorMessage(message);
