@@ -36,7 +36,10 @@ const findAll = async () => {
 };
 
 const findByRole = async ({ role }) => {
-  const users = await User.findAll({ where: { role } });
+  const users = await User.findAll({
+    where: { role },
+    attributes: { exclude: ['password'] }
+  });
   return { status: StatusCode.OK, message: users };
 }
 
