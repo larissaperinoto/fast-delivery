@@ -1,6 +1,9 @@
 const { token } = JSON.parse(localStorage.getItem('user')) || '';
 
-const baseURL = `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}`;
+const HOST = process.env.REACT_APP_API_HOST || 'localhost';
+const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || 'http';
+
+const baseURL = `${PROTOCOL}://${HOST}`;
 
 const contentType = 'application/json';
 
