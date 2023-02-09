@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use(express.static('public'));
 const corsOptions = {
-  origin: 'http://localhost:3000' || 'https://previous-brass-production.up.railway.app/',
+  origin: 'https://previous-brass-production.up.railway.app',
   credentials: true,
 };
 
