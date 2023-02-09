@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { methodPost } from '../services/requests';
 import Context from '../context/Context';
 import RegisterForm from '../components/RegisterForm';
+import ErrorMessage from '../components/ErrorMessage';
 
 export default function Register() {
-  const { errorMessage, setErrorMessage } = useContext(Context);
+  const { setErrorMessage } = useContext(Context);
 
   const history = useNavigate();
 
@@ -26,8 +27,8 @@ export default function Register() {
       <Stack direction="column" spacing={ 2 } alignItems="center">
         <Typography variant="h4">Cadastra-se</Typography>
         <RegisterForm handleRegister={ registerNewUser } />
-        { errorMessage && <Typography>{ errorMessage }</Typography>}
       </Stack>
+      <ErrorMessage />
     </Container>
   );
 }

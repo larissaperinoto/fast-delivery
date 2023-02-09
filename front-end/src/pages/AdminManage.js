@@ -4,13 +4,14 @@ import { methodPost } from '../services/requests';
 import Context from '../context/Context';
 import RegisterForm from '../components/RegisterForm';
 import Navbar from '../components/Navbar';
+import ErrorMessage from '../components/ErrorMessage';
 
 export default function AdminManage() {
-  const { messageFromDB, setMessageFromDB } = useContext(Context);
+  const { setErrorMessage } = useContext(Context);
 
   const registerNewSeller = async ({ name, email, password, role }) => {
     const message = await methodPost({ name, email, password, role }, '/seller');
-    setMessageFromDB(message);
+    setErrorMessage(message);
   };
 
   return (
@@ -19,8 +20,8 @@ export default function AdminManage() {
       <Container sx={ { mt: 5 } }>
         <Typography variant="h5" sx={ { mb: 2 } }>Cadastrar novo usuário</Typography>
         <RegisterForm handleRegister={ registerNewSeller } />
-        { messageFromDB && <Typography>{ messageFromDB }</Typography> }
       </Container>
+      <ErrorMessage />
     </>
   );
 }
