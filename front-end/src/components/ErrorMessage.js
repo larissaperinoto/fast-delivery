@@ -6,7 +6,7 @@ export default function ErrorMessage() {
   const { errorMessage } = useContext(Context);
   return (
     <Container>
-      { errorMessage && <Typography>{ errorMessage }</Typography> }
+      { errorMessage && <Typography align="center">{ errorMessage }</Typography> }
     </Container>
   );
 }

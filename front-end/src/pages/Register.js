@@ -3,8 +3,7 @@ import { Stack, Container, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { methodPost } from '../services/requests';
 import Context from '../context/Context';
-import RegisterForm from '../components/RegisterForm';
-import ErrorMessage from '../components/ErrorMessage';
+import { RegisterForm, ErrorMessage } from '../components';
 
 export default function Register() {
   const { setErrorMessage } = useContext(Context);

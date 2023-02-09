@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
-import Navbar from '../components/Navbar';
-import { methodGet, putSaleStatus } from '../services/requests';
+import { Navbar } from '../components';
+import { methodGet } from '../services/requests';
 import Context from '../context/Context';
 
 function SellerOrderDetails() {
