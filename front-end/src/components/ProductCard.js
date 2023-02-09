@@ -4,7 +4,7 @@ import { string, number } from 'prop-types';
 import { useEffect, useContext, useState } from 'react';
 import Context from '../context/Context';
 
-function ProductCard({
+export default function ProductCard({
   id,
   name,
   urlImage,
@@ -19,10 +19,6 @@ function ProductCard({
     setTotalQuantity(orders.length);
   }, [orders, id]);
 
-  const addToOrder = (product) => {
-    setOrders([...orders, product]);
-  };
-
   const removeFromOrder = (productId) => {
     const withTheProduct = orders.filter((order) => order.id === productId);
     withTheProduct.pop();
@@ -30,7 +26,7 @@ function ProductCard({
     setOrders([...withoutProduct, ...withTheProduct]);
   };
 
-  const a = ({ target: { value } }) => {
+  const addToOrderByInput = ({ target: { value } }) => {
     setQuantity(value);
     if (value > 0) {
       const withoutProduct = orders.filter((orderId) => orderId !== id);
@@ -48,55 +44,40 @@ function ProductCard({
       spacing={ 2 }
       alignItems="center"
       justifyContent="center"
-      sx={ { padding: 2 } }
+      sx={ { padding: 2, mt: 2 } }
     >
-      <Typography
-        data-testid={ `customer_products__element-card-title-${id}` }
-        variant="h6"
-      >
-        {name}
-      </Typography>
+      <Typography variant="h6">{name}</Typography>
       <img
-        data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ urlImage }
         alt={ name }
-        width="100px"
+        height="100px"
       />
-      <Typography
-        data-testid={ `customer_products__element-card-price-${id}` }
-        variant="body1"
-      >
-        { `R$ ${price}`}
-      </Typography>
+      <Typography variant="body1">{ `R$ ${price}` }</Typography>
 
-      <Stack direction="row" alignItems="center">
+      <Stack direction="row" alignItems="center" spacing={ 2 }>
         <Button
-          data-testid={ `customer_products__button-card-rm-item-${id}` }
           type="button"
-          variant="text"
+          variant="contained"
           color="secondary"
           size="small"
           onClick={ () => removeFromOrder(id) }
         >
           -
         </Button>
-
         <TextField
-          data-testid={ `customer_products__input-card-quantity-${id}` }
           type="text"
           min="0"
           size="small"
           value={ quantity }
-          onChange={ (e) => a(e) }
+          onChange={ (e) => addToOrderByInput(e) }
         />
 
         <Button
-          data-testid={ `customer_products__button-card-add-item-${id}` }
           type="button"
-          variant="text"
+          variant="contained"
           color="secondary"
           size="small"
-          onClick={ () => addToOrder({ id, name, urlImage, price }) }
+          onClick={ () => setOrders([...orders, { id, name, urlImage, price }]) }
         >
           +
         </Button>
@@ -111,5 +92,3 @@ ProductCard.propTypes = {
   urlImage: string,
   price: string,
 }.isRequired;
-
-export default ProductCard;

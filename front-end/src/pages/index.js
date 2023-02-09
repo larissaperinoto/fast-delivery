@@ -2,10 +2,8 @@ import Login from './Login';
 import Register from './Register';
 import Products from './Products';
 import Checkout from './Checkout';
-import SellerOrders from './SellerOrders';
-import SellerOrderDetails from './SellerOrderDetails';
-import CustomerOrderDetails from './CustomerOrderDetails';
-import CustomerOrders from './CustomerOrders';
+import OrdersOrSales from './OrdersOrSales';
+import OrderOrSaleDetails from './OrderOrSaleDetails';
 import AdminManage from './AdminManage';
 
 export {
@@ -13,9 +11,7 @@ export {
   Register,
   Products,
   Checkout,
-  SellerOrders,
-  SellerOrderDetails,
-  CustomerOrderDetails,
-  CustomerOrders,
+  OrderOrSaleDetails,
+  OrdersOrSales,
   AdminManage,
 };

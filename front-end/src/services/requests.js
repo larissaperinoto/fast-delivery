@@ -1,107 +1,39 @@
+const { token } = JSON.parse(localStorage.getItem('user')) || '';
+
+const baseURL = `http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}`;
+
 const contentType = 'application/json';
 
-export async function requestProducts() { // Retorna todos os produtos do banco
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/products`, {
+const headersParams = {
+  'Content-Type': contentType,
+  Authorization: token,
+};
+
+export async function methodGet(route) {
+  const response = await fetch(`${baseURL}${route}`, {
     method: 'GET',
+    headers: headersParams,
   });
-  const products = await response.json();
-  return products;
+  const data = await response.json();
+  return data;
 }
 
-export async function postLogin(email, password) { // Login para clientes, vendedores e admin
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/login`, {
+export async function methodPost(body, route) {
+  const response = await fetch(`${baseURL}${route}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': contentType,
-    },
-    body: JSON.stringify({ email, password }),
-  });
-  const userData = await response.json();
-  return userData;
-}
-
-export async function postRegistration(body, token = '', url = '') { // Registra um novo usuário como cliente
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/register${url}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
+    headers: headersParams,
     body: JSON.stringify(body),
   });
-  const message = await response.json();
-  return message;
+  const data = await response.json();
+  return data;
 }
 
-export async function customerOrders(token) { // Retorna todos os pedidos que um usuário já fez
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
-  });
-  const orders = await response.json();
-  return orders;
-}
-
-export async function sellerOrders(token) {
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
-  });
-  const sellerProduct = await response.json();
-  return sellerProduct;
-}
-
-export async function getSaleById(saleId) {
-  const { token } = JSON.parse(localStorage.getItem('user'));
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${saleId}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
-  });
-  const sale = await response.json();
-  return sale;
-}
-
-export async function getAllSellers() { // Retorna todas as pessoas que são vendedoras
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/sellers`, {
-    method: 'GET',
-  });
-  const sellers = await response.json();
-  return sellers;
-}
-
-export async function postNewSale(sale) { // Registra uma nova venda
-  const { token } = JSON.parse(localStorage.getItem('user'));
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/customer/orders`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
-    body: JSON.stringify(sale),
-  });
-  const message = await response.json();
-  return message;
-}
-
-export async function putSaleStatus(id, status) { // Atualiza uma venda pelo ID
-  const { token } = JSON.parse(localStorage.getItem('user'));
-  const response = await fetch(`http://localhost:${process.env.REACT_APP_BACKEND_PORT || '3001'}/seller/orders/${id}`, {
+export async function methodPut(body, route) {
+  const response = await fetch(`${baseURL}${route}`, {
     method: 'PUT',
-    headers: {
-      'Content-Type': contentType,
-      Authorization: token,
-    },
-    body: JSON.stringify({ status }),
+    headers: headersParams,
+    body: JSON.stringify(body),
   });
-  const message = await response.json();
-  return message;
+  const data = await response.json();
+  return data;
 }

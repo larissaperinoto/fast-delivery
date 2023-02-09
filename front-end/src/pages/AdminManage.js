@@ -1,84 +1,67 @@
-import React, { useEffect, useState } from 'react';
-import { postRegistration } from '../services/requests';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  Typography,
+  Container,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Stack } from '@mui/material';
+import { methodPost, methodGet } from '../services/requests';
+import Context from '../context/Context';
+import { RegisterForm, Navbar, ErrorMessage, UserDetailsCard } from '../components';
 
 export default function AdminManage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [role, setRole] = useState('seller');
-  const [disabled, setDisabled] = useState(true);
-  const [messageFromDB, setMessageFromDB] = useState('');
+  const { setErrorMessage } = useContext(Context);
+  const [users, setUsers] = useState([]);
 
-  const checkFormat = () => {
-    const ELEVEN = 11;
-    const FIVE = 5;
-    const validName = name.length > ELEVEN;
-    const validEmail = (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).test(email);
-    const validPassword = password.length > FIVE;
-    if (validName && validEmail && validPassword) return setDisabled(false);
-    setDisabled(true);
+  const registerNewSeller = async ({ name, email, password, role }) => {
+    const message = await methodPost({ name, email, password, role }, '/seller');
+    setErrorMessage(message);
   };
 
   useEffect(() => {
-    checkFormat();
-  }, [name, email, password]);
-
-  const registerNewSeller = async (e) => {
-    e.preventDefault();
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    const body = { name, email, password, role };
-    const { message } = await postRegistration(body, token, '/seller');
-    setMessageFromDB(message);
-  };
+    const requestSellers = async () => {
+      const message = await methodGet('/users');
+      setUsers(message);
+    };
+    requestSellers();
+  }, []);
 
   return (
     <>
-      <form>
-        <h1>Cadastrar novo usuário</h1>
-        <input
-          type="text"
-          placeholder="Nome"
-          data-testid="admin_manage__input-name"
-          value={ name }
-          onChange={ (e) => setName(e.target.value) }
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          data-testid="admin_manage__input-email"
-          value={ email }
-          onChange={ (e) => setEmail(e.target.value) }
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          data-testid="admin_manage__input-password"
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
-        />
-        <select
-          data-testid="admin_manage__select-role"
-          onChange={ (e) => setRole(e.target.value) }
-        >
-          <option value="seller" defaultValue>Vendedor</option>
-          <option value="customer">Cliente</option>
-
-        </select>
-        <button
-          type="submit"
-          data-testid="admin_manage__button-register"
-          disabled={ disabled }
-          onClick={ (e) => registerNewSeller(e) }
-        >
-          Cadastrar
-        </button>
-      </form>
-      <div>
-        {
-          messageFromDB
-          && <p data-testid="admin_manage__element-invalid-register">{ messageFromDB }</p>
-        }
-      </div>
+      <Navbar />
+      <Container>
+        <Container maxWidth="lg">
+          <Typography sx={ { mt: 3, mb: 3 } }>Cadastrar novo usuário</Typography>
+          <Stack alignItems="flex-start">
+            <RegisterForm handleRegister={ registerNewSeller } direction="row" />
+            <ErrorMessage />
+          </Stack>
+        </Container>
+        <Container>
+          <Typography sx={ { mt: 5, mb: 3 } }>Usuários cadastrados</Typography>
+          <Table maxWidth="sm">
+            <TableHead>
+              <TableRow>
+                <TableCell>Nome</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Tipo</TableCell>
+                <TableCell>Remover</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              { users && users.map(({ id, name, email, role }) => (<UserDetailsCard
+                key={ id }
+                name={ name }
+                email={ email }
+                role={ role }
+              />))}
+            </TableBody>
+          </Table>
+        </Container>
+      </Container>
     </>
   );
 }

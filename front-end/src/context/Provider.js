@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 
 export default function Provider({ children }) {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
+  const [disabled, setDisabled] = useState(true);
+
   const [orders, setOrders] = useState([]);
   const [totalQuantity, setTotalQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -23,6 +30,18 @@ export default function Provider({ children }) {
   };
 
   const value = React.useMemo(() => ({
+    errorMessage,
+    setErrorMessage,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    name,
+    setName,
+    role,
+    setRole,
+    disabled,
+    setDisabled,
     orders,
     setOrders,
     totalQuantity,
@@ -39,6 +58,18 @@ export default function Provider({ children }) {
     disabledButton,
     setDisableButon,
   }), [
+    errorMessage,
+    setErrorMessage,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    name,
+    setName,
+    role,
+    setRole,
+    disabled,
+    setDisabled,
     orders,
     setOrders,
     totalQuantity,

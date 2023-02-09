@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Container, Grid } from '@mui/material';
+import { Button, Container, Grid, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { requestProducts } from '../services/requests';
+import { methodGet } from '../services/requests';
 import Navbar from '../components/Navbar';
 import ProductCard from '../components/ProductCard';
 import Context from '../context/Context';
 
-function Products() {
+export default function Products() {
   const [products, setProducts] = useState([]);
-  const { totalPrice, setTotalPrice, orders } = useContext(Context);
+  const { totalPrice, setTotalPrice, orders, totalQuantity } = useContext(Context);
   const history = useNavigate();
 
   useEffect(() => {
     const productsRequest = async () => {
-      const productsList = await requestProducts();
+      const productsList = await methodGet('/products');
       setProducts(productsList);
     };
     productsRequest();
@@ -25,13 +25,25 @@ function Products() {
     setTotalPrice(total.toFixed(2).replace('.', ','));
   }, [orders]);
 
-  const checkout = () => {
-    history('/customer/checkout');
-  };
-
   return (
-    <Container maxWidth="md" sx={ { mt: 5 } }>
+    <Container maxWidth="xl" sx={ { mt: 8 } }>
       <Navbar />
+      <Stack direction="column" justifyContent="center" alignItems="flex-end">
+        <Typography variant="subtitle1" sx={ { mr: 4 } }>
+          { `Produtos selecionados: ${totalQuantity}` }
+        </Typography>
+        <Button
+          disabled={ !orders.length }
+          type="button"
+          variant="contained"
+          onClick={ () => history('/customer/checkout') }
+          sx={ { m: 2 } }
+        >
+          Ver carrinho
+          {' '}
+          <Typography>{ ` R$ ${totalPrice}` }</Typography>
+        </Button>
+      </Stack>
       <Grid
         container
         spacing={ 1 }
@@ -39,7 +51,7 @@ function Products() {
         justifyContent="center"
         sx={ { mt: 5 } }
       >
-        {products.map(({ id, urlImage, name, price }) => (
+        { products && products.map(({ id, urlImage, name, price }) => (
           <ProductCard
             key={ id }
             id={ id }
@@ -49,24 +61,6 @@ function Products() {
           />
         ))}
       </Grid>
-      <Button
-        disabled={ !orders.length }
-        type="button"
-        variant="contained"
-        data-testid="customer_products__button-cart"
-        onClick={ () => checkout() }
-        sx={ { m: 2 } }
-      >
-        Ver carrinho
-        {' '}
-        <span
-          data-testid="customer_products__checkout-bottom-value"
-        >
-          { `R$ ${totalPrice}`}
-        </span>
-      </Button>
     </Container>
   );
 }
-
-export default Products;

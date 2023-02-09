@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { Button, Stack, Typography } from '@mui/material';
+import React from 'react';
+import { Button, Container, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Context from '../context/Context';
 
 export default function Navbar() {
-  const { totalQuantity } = useContext(Context);
   const { name, role } = JSON.parse(localStorage.getItem('user'));
   const history = useNavigate();
 
@@ -27,42 +25,32 @@ export default function Navbar() {
   };
 
   return (
-    <Stack
-      direction="row"
-      spacing={ 15 }
-      alignItems="center"
-      justifyContent="center"
-      sx={ { mt: 2 } }
-    >
-      <Typography
-        data-testid="customer_products__element-navbar-user-full-name"
-        variant="h5"
+    <Container maxWidth="lg" sx={ { mt: 5, mb: 5 } }>
+      <Stack
+        direction="row"
+        spacing={ 15 }
+        alignItems="center"
+        justifyContent="flex-end"
+        sx={ { mb: 2 } }
       >
-        { name }
-      </Typography>
-      <Button
-        type="button"
-        variant="text"
-        data-testid="customer_products__element-navbar-link-orders"
-        onClick={ () => redirectTo(role) }
-      >
-        Meus Pedidos
-      </Button>
-      <Typography
-        data-testid="customer_products__element-navbar-link-products"
-        variant="h5"
-      >
-        { `Produtos ${totalQuantity}` }
-      </Typography>
-      <Button
-        data-testid="customer_products__element-navbar-link-logout"
-        type="button"
-        variant="text"
-        onClick={ () => logout() }
-        to="/login"
-      >
-        Sair
-      </Button>
-    </Stack>
+        { !window.location.pathname.includes('admin')
+          && <Button
+            type="button"
+            variant="text"
+            onClick={ () => redirectTo(role) }
+          >
+            Meus Pedidos
+          </Button> }
+        <Button
+          type="button"
+          variant="text"
+          onClick={ () => logout() }
+          to="/login"
+        >
+          Sair
+        </Button>
+      </Stack>
+      <Typography variant="h5">{ `Olá, ${name}` }</Typography>
+    </Container>
   );
 }
