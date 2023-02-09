@@ -3,6 +3,7 @@ import { Typography, Container } from '@mui/material';
 import { methodPost } from '../services/requests';
 import Context from '../context/Context';
 import RegisterForm from '../components/RegisterForm';
+import Navbar from '../components/Navbar';
 
 export default function AdminManage() {
   const { messageFromDB, setMessageFromDB } = useContext(Context);
@@ -13,10 +14,13 @@ export default function AdminManage() {
   };
 
   return (
-    <Container sx={ { mt: 5 } }>
-      <Typography variant="h5" sx={ { mb: 2 } }>Cadastrar novo usuário</Typography>
-      <RegisterForm handleRegister={ registerNewSeller } />
-      { messageFromDB && <Typography>{ messageFromDB }</Typography> }
-    </Container>
+    <>
+      <Navbar />
+      <Container sx={ { mt: 5 } }>
+        <Typography variant="h5" sx={ { mb: 2 } }>Cadastrar novo usuário</Typography>
+        <RegisterForm handleRegister={ registerNewSeller } />
+        { messageFromDB && <Typography>{ messageFromDB }</Typography> }
+      </Container>
+    </>
   );
 }

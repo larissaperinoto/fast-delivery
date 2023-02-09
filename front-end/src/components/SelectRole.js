@@ -8,6 +8,9 @@ export default function SelectRole() {
   return (
     <Select
       placeholder="Tipo"
+      labelId="demo-simple-select-label"
+      id="demo-simple-select"
+      label="Tipo"
       onChange={ ({ target: { value } }) => setRole(value) }
     >
       <MenuItem value="seller" defaultValue>Vendedor</MenuItem>

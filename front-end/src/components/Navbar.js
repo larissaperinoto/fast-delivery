@@ -33,13 +33,14 @@ export default function Navbar() {
         justifyContent="flex-end"
         sx={ { mb: 2 } }
       >
-        <Button
-          type="button"
-          variant="text"
-          onClick={ () => redirectTo(role) }
-        >
-          Meus Pedidos
-        </Button>
+        { !window.location.pathname.includes('admin')
+          && <Button
+            type="button"
+            variant="text"
+            onClick={ () => redirectTo(role) }
+          >
+            Meus Pedidos
+          </Button> }
         <Button
           type="button"
           variant="text"
