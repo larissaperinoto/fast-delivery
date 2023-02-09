@@ -12,6 +12,7 @@ import { methodPost } from '../services/requests';
 import Context from '../context/Context';
 import { checkEmail, checkPassword } from '../services/validations';
 import redirectTo from '../services/helpers';
+import { ErrorMessage } from '../components';
 
 export default function Login() {
   const {
@@ -19,7 +20,6 @@ export default function Login() {
     password,
     setEmail,
     setPassword,
-    errorMessage,
     setErrorMessage,
     disabled,
     setDisabled } = useContext(Context);
@@ -94,7 +94,7 @@ export default function Login() {
             </Button>
           </Stack>
         </FormControl>
-        { errorMessage && <Typography align="center">{ errorMessage }</Typography> }
+        <ErrorMessage />
       </Stack>
     </Container>
   );
