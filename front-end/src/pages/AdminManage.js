@@ -10,10 +10,7 @@ import {
   Stack } from '@mui/material';
 import { methodPost, methodGet } from '../services/requests';
 import Context from '../context/Context';
-import RegisterForm from '../components/RegisterForm';
-import Navbar from '../components/Navbar';
-import ErrorMessage from '../components/ErrorMessage';
-import UserDetailsCard from '../components/UserDetailsCard';
+import { RegisterForm, Navbar, ErrorMessage, UserDetailsCard } from '../components';
 
 export default function AdminManage() {
   const { setErrorMessage } = useContext(Context);
@@ -22,7 +19,7 @@ export default function AdminManage() {
   const registerNewSeller = async ({ name, email, password, role }) => {
     const message = await methodPost({ name, email, password, role }, '/seller');
     setErrorMessage(message);
-  };
+  };UserDetailsCard
 
   useEffect(() => {
     const requestSellers = async () => {
