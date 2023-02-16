@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   frontend:
-    container_name: frontend
+    container_name: delivery_app_frontend
     build: ./front-end
     ports:
       - 3000:3000
@@ -17,13 +17,13 @@ services:
       timeout: 10s
       retries: 5
   backend:
-    container_name: backend
+    container_name: delivery_app_backend
     build: ./back-end
     ports:
       - 3001:3001
     platform: linux/x86_64
     working_dir: /app-backend
-    volumes: 
+    volumes:
       - ./back-end:/app-backend
     depends_on:
       db:
@@ -42,7 +42,7 @@ services:
       retries: 5
   db:
     image: mysql:8.0.21
-    container_name: db
+    container_name: delivery_app_db
     platform: linux/x86_64
     ports:
       - 3306:3306
