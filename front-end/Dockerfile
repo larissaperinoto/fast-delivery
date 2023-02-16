@@ -3,4 +3,4 @@ WORKDIR /app-frontend
 COPY package* ./
 RUN npm install
 COPY . .
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "start" ]
