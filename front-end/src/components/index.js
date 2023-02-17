@@ -6,6 +6,7 @@ import ProductDetailsCard from './ProductDetailsCard';
 import RegisterForm from './RegisterForm';
 import SelectRole from './SelectRole';
 import UserDetailsCard from './UserDetailsCard';
+import TableHeadDetails from './TableHeadDetails';
 
 export {
   ErrorMessage,
@@ -16,4 +17,5 @@ export {
   RegisterForm,
   SelectRole,
   UserDetailsCard,
+  TableHeadDetails,
 };

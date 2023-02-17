@@ -6,14 +6,12 @@ import {
   Table,
   Container,
   TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
 } from '@mui/material';
 import moment from 'moment';
 import ProductDetailsCard from '../components/ProductDetailsCard';
 import Navbar from '../components/Navbar';
 import { methodGet } from '../services/requests';
+import { TableHeadDetails } from '../components';
 
 export default function OrderOrSaleDetails() {
   const [sale, setSale] = useState('');
@@ -33,7 +31,7 @@ export default function OrderOrSaleDetails() {
     <>
       <Navbar />
       { sale
-        && <Container maxWidth="md" sx={ { mt: 5 } }>
+        ? <Container maxWidth="md" sx={ { mt: 5 } }>
           <Stack
             direction="row"
             spacing={ 4 }
@@ -48,26 +46,9 @@ export default function OrderOrSaleDetails() {
               && <Typography>{ `P.Vendedora ${sale.sellerInfos.name}`}</Typography>}
             <Typography>{ moment(sale.saleDate).format('DD/MM/YYYY')}</Typography>
             <Typography>{ sale.status }</Typography>
-            <Button
-              type="button"
-              variant="contained"
-              color="secondary"
-              size="small"
-              disabled
-            >
-              Marcar como entregue
-            </Button>
           </Stack>
           <Table sx={ { mt: 3 } }>
-            <TableHead>
-              <TableRow>
-                <TableCell>Item</TableCell>
-                <TableCell>Descrição</TableCell>
-                <TableCell>Quantidade</TableCell>
-                <TableCell>Valor unitário</TableCell>
-                <TableCell>Sub-total</TableCell>
-              </TableRow>
-            </TableHead>
+            <TableHeadDetails />
             <TableBody>
               { sale.products.map((product) => (<ProductDetailsCard
                 key={ product.id }
@@ -78,10 +59,22 @@ export default function OrderOrSaleDetails() {
               />))}
             </TableBody>
           </Table>
-          <Typography variant="h5" sx={ { mt: 3 } }>
-            { `TOTAL R$ ${sale.totalPrice}` }
-          </Typography>
-        </Container>}
+          <Stack direction="row" sx={ { mt: 3 } } justifyContent="space-between">
+            <Typography variant="h6">
+              { `TOTAL R$ ${sale.totalPrice.replace('.', ',')}` }
+            </Typography>
+            <Button
+              type="button"
+              variant="contained"
+              color="secondary"
+              size="small"
+              disabled
+            >
+              Marcar como recebido
+            </Button>
+          </Stack>
+        </Container>
+        : <Typography>Carregando...</Typography>}
     </>
   );
 }

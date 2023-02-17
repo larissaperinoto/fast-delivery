@@ -1,6 +1,5 @@
 import {
   Container,
-  TableHead,
   Table,
   TableRow,
   TableCell,
@@ -13,6 +12,7 @@ import {
   Select } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { TableHeadDetails } from '../components';
 import Navbar from '../components/Navbar';
 import Context from '../context/Context';
 import { methodGet, methodPost } from '../services/requests';
@@ -126,16 +126,7 @@ export default function Checkout() {
     <Container maxWidth="md" sx={ { mt: 5 } }>
       <Navbar />
       <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Item</TableCell>
-            <TableCell>Descrição</TableCell>
-            <TableCell>Quantidade</TableCell>
-            <TableCell>Valor unitário</TableCell>
-            <TableCell>Sub-total</TableCell>
-            <TableCell>Remover item</TableCell>
-          </TableRow>
-        </TableHead>
+        <TableHeadDetails />
         <TableBody>
           { ordersCheckout.map((order, i) => (
             <TableRow
