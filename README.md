@@ -7,11 +7,11 @@ The project was developed with the following team: [Raissa Vasconcelos](https://
 
 ## Description
 
-Delivery App is a support app for a beer distributor. This app supports customers, sellers and the administrator person.
+Delivery App is a Full Stack application to support a beer distributor. This app supports customers, sellers and the administrator person.
 
 #### Costumer
 
-As a consumer you must login or register, if you do not have an account, then you will have access to a list of products that can be added to the cart. When choosing the products. When choosing the products, you will be redirected to the checkout screen to check your order and then you will be able to finalize it. You will also have access to your entire order history.
+As a consumer you must login or register, if you do not have an account, then you will have access to a list of products that can be added to the cart. When choosing the products, you will be redirected to the checkout screen to check your order and then you will be able to finalize it. You will also have access to your entire order history.
 
 
 #### Seller
@@ -94,9 +94,9 @@ Navigate to the root folder of the project
 
   Acess the containers logs:
 
-      frontend: docker logs --details sharenergy_frontend
-      backend: docker logs --details sharenergy_backend
-      bd: docker logs --details sharenergy_db
+      frontend: docker logs --details delivery_app_frontend
+      backend: docker logs --details delivery_app_backend
+      bd: docker logs --details delivery_app_db
 
 
 </details>
