@@ -23,10 +23,16 @@ export default function Register() {
   };
 
   return (
-    <Container maxWidth="xs" sx={ { mt: 20 } }>
+    <Container maxWidth="xs" sx={ { mt: 10, mb: 10 } }>
       <Stack direction="column" spacing={ 2 } alignItems="center">
         <Typography variant="h4">Cadastra-se</Typography>
         <RegisterForm handleRegister={ registerNewUser } />
+        <Stack direction="column" width="60%" spacing={ 1 } alignItems="flex-start">
+          <Typography variant="h6">Atenção ao se cadastrar</Typography>
+          <Typography>- O campo Nome deve possuir 12 ou mais caracteres</Typography>
+          <Typography>- Utilize um email no formato email@email.com</Typography>
+          <Typography>- Crie uma senha com 6 ou mais caracteres</Typography>
+        </Stack>
       </Stack>
       <ErrorMessage />
     </Container>
