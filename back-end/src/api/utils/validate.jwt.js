@@ -6,8 +6,8 @@ const fs = require('fs');
 const validadeToken = (token) => {
   try {
     const key = fs.readFileSync('./jwt.evaluation.key');
-    const { data } = jwt.verify(token, key);
-    return { type: null, message: data };
+    const userInfos = jwt.verify(token, key);
+    return { type: null, message: userInfos };
   } catch (error) {
     return { type: 'TOKEN NVALID', message: error };
   }

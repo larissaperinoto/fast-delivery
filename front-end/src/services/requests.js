@@ -1,4 +1,4 @@
-const { token } = JSON.parse(localStorage.getItem('user')) || '';
+const token = JSON.parse(localStorage.getItem('user')).token || '';
 
 const HOST = process.env.REACT_APP_API_HOST || 'localhost';
 const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || 'http';
@@ -13,7 +13,6 @@ const headersParams = {
 };
 
 export async function methodGet(route) {
-  console.log(`${baseURL}${route}`);
   const response = await fetch(`${baseURL}${route}`, {
     method: 'GET',
     headers: headersParams,

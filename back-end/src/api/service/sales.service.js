@@ -53,8 +53,8 @@ const findAllByUserId = async ({ userId }) => {
       { model: Product,
         as: 'products',
         attributes: { exclude: ['urlImage'] } },
-    ],
-  });
+      ],
+    });
 
   if (!sales) {
     return { status: StatusCode.NotFound, message: 'Not found' };
