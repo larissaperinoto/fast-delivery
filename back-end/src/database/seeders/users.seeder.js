@@ -3,33 +3,25 @@ module.exports = {
       await queryInterface.bulkInsert('users',
         [{
           id: 1,
-          name: 'Delivery App Admin',
-          email: 'adm@deliveryapp.com',
-          password: 'a4c86edecc5aee06eff8fdeda69e0d04',
+          name: 'Pesoa Administradora',
+          email: 'adm@email.com',
+          password: '1a27d614b89606d43c920311a7829245',
           role: 'administrator',
         },
         {
           id: 2,
-          name: 'Fulana Pereira',
-          email: 'fulana@deliveryapp.com',
-          password: '3c28d2b0881bf46457a853e0b07531c6',
+          name: 'Pessoa Vendedora Um',
+          email: 'seller@email.com',
+          password: '3074930355dc940a7fba837179edd25e',
           role: 'seller',
         },
         {
           id: 3,
-          name: 'Cliente Zé Birita',
-          email: 'zebirita@email.com',
+          name: 'Pessoa Cliente Um',
+          email: 'costumer@email.com',
           password: '1c37466c159755ce1fa181bd247cb925',
           role: 'customer',
         },
-        {
-          id: 4,
-          name: 'Cliente tal e tal',
-          email: 'email@email.com',
-          password: 'fcea920f7412b5da7be0cf42b8c93759',
-          // 1234567
-          role: 'administrator'
-        }
         ], { timestamps: false });
     },
 
