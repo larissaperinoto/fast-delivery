@@ -101,6 +101,25 @@ Navigate to the root folder of the project
 
 </details>
 
+## How to login
+
+##### Login as a customer
+
+ To log in as a user you must register again by clicking on "I don't have an account yet"
+ 
+##### Login as a seller
+
+  To log in as a seller, use the following credentials
+      
+      email: seller@email.com
+      passsword: secret_seller_password
+      
+#### Login as an administrator
+      
+  To log in as a seller, use the following credentials
+      
+      email: admin@email.com
+      passsword: secret_admin_password
 
 ---
 
