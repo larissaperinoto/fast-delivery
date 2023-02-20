@@ -1,23 +1,12 @@
 import React from 'react';
 import { Button, Container, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import AllOrdersButton from './AllOrdersButton';
 
 export default function Navbar() {
-  const { name, role } = JSON.parse(localStorage.getItem('user'));
+  const { name } = JSON.parse(localStorage.getItem('user'));
   const history = useNavigate();
-
-  const redirectTo = (userRole) => {
-    switch (userRole) {
-    case 'customer':
-      history('/customer/orders');
-      break;
-    case 'seller':
-      history('/seller/orders');
-      break;
-    default:
-      break;
-    }
-  };
+  const route = window.location.pathname;
 
   const logout = () => {
     localStorage.clear();
@@ -33,14 +22,7 @@ export default function Navbar() {
         justifyContent="flex-end"
         sx={ { mb: 2 } }
       >
-        { !window.location.pathname.includes('admin')
-          && <Button
-            type="button"
-            variant="text"
-            onClick={ () => redirectTo(role) }
-          >
-            Meus Pedidos
-          </Button> }
+        { !route.includes('costumer') && <AllOrdersButton /> }
         <Button
           type="button"
           variant="text"

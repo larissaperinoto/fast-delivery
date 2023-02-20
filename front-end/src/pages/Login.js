@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { methodPost } from '../services/requests';
 import Context from '../context/Context';
 import { checkEmail, checkPassword } from '../services/validations';
-import redirectTo from '../services/helpers';
+import { fromLoginRedirectTo } from '../services/helpers';
 import { ErrorMessage } from '../components';
 
 export default function Login() {
@@ -31,7 +31,7 @@ export default function Login() {
 
     if (userData !== 'Not found') {
       localStorage.setItem('user', JSON.stringify(userData));
-      redirectTo(userData.role);
+      fromLoginRedirectTo(userData.role);
     } else {
       setErrorMessage('Email ou senha inválidos');
     }
@@ -39,7 +39,7 @@ export default function Login() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
-    if (user) redirectTo(user.role);
+    if (user) fromLoginRedirectTo(user.role);
   }, []);
 
   useEffect(() => {
