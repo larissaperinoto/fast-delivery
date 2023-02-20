@@ -8,6 +8,7 @@ const StatusCode = require('../shared/statusCode');
 
 
 const login = async ({ email, password }) => {
+  console.log(md5(password))
   const user = await User.findOne({
     where: { email, password: md5(password) },
     attributes: { exclude: ['password'] },

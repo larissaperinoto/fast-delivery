@@ -17,7 +17,7 @@ export default function containedButton({ text, handleClick, disabled }) {
   );
 }
 
-containedButton.propType = {
+containedButton.propTypes = {
   text: string,
   handleClick: Function,
   disabled: bool,

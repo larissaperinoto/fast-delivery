@@ -29,6 +29,22 @@ export default function Navbar() {
     }
   };
 
+  const myOrdersButton = () => {
+    if (!route.includes('admin')) {
+      return (
+        <Button
+          type="button"
+          variant="text"
+          color="secondary"
+          size="small"
+          onClick={ () => fromNavBarRedirectTo(role) }
+        >
+          Meus Pedidos
+        </Button>
+      );
+    }
+  };
+
   return (
     <Container maxWidth="lg" sx={ { mt: 5, mb: 5 } }>
       <Stack
@@ -39,15 +55,7 @@ export default function Navbar() {
         sx={ { mb: 2 } }
       >
         { newOrderButton() }
-        <Button
-          type="button"
-          variant="text"
-          color="secondary"
-          size="small"
-          onClick={ () => fromNavBarRedirectTo(role) }
-        >
-          Meus Pedidos
-        </Button>
+        { myOrdersButton() }
         <Button
           type="button"
           variant="text"

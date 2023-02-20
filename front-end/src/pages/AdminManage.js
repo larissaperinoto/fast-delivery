@@ -2,13 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import {
   Typography,
   Container,
-  Table,
-  TableBody,
+
   Stack } from '@mui/material';
 import { methodPost, methodGet } from '../services/requests';
 import Context from '../context/Context';
-import { RegisterForm, Navbar, ErrorMessage, UserDetailsRow } from '../components';
-import TableHeadAdminManage from '../components/TableHeadAdminManage';
+import { RegisterForm, Navbar, ErrorMessage } from '../components';
+import RegisteredUsersTable from '../components/RegisteredUsersTable';
 
 export default function AdminManage() {
   const { setErrorMessage } = useContext(Context);
@@ -31,26 +30,13 @@ export default function AdminManage() {
     <>
       <Navbar />
       <Container>
-        <Container maxWidth="lg">
-          <Typography sx={ { mt: 3, mb: 3 } }>Cadastrar novo usuário</Typography>
-          <Stack alignItems="flex-start">
-            <RegisterForm handleRegister={ registerNewSeller } direction="row" />
+        <Stack direction="row" display="flex" flexWrap="wrap" justifyContent="center">
+          <Stack direction="column">
+            <Typography sx={ { mt: 3, mb: 3 } }>Cadastrar novo usuário</Typography>
+            <RegisterForm handleRegister={ registerNewSeller } direction="column" />
             <ErrorMessage />
           </Stack>
-        </Container>
-        <Stack sx={ { mt: 3, overflowX: 'auto', maxWidth: '100%' } }>
-          <Typography sx={ { mt: 5, mb: 3 } }>Usuários cadastrados</Typography>
-          <Table maxWidth="sm">
-            <TableHeadAdminManage />
-            <TableBody>
-              { users && users.map(({ id, name, email, role }) => (<UserDetailsRow
-                key={ id }
-                name={ name }
-                email={ email }
-                role={ role }
-              />))}
-            </TableBody>
-          </Table>
+          <RegisteredUsersTable users={ users } />
         </Stack>
       </Container>
     </>

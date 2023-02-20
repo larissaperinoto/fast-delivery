@@ -7,6 +7,7 @@ import RegisterForm from './RegisterForm';
 import SelectRole from './SelectRole';
 import UserDetailsRow from './UserDetailsRow';
 import TableHeadOrderDetails from './TableHeadOrderDetails';
+import TableHeadAdminManage from './TableHeadAdminManage';
 
 export {
   ErrorMessage,
@@ -18,4 +19,5 @@ export {
   SelectRole,
   UserDetailsRow,
   TableHeadOrderDetails,
+  TableHeadAdminManage,
 };
