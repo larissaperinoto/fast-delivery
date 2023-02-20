@@ -1,4 +1,4 @@
-const token = JSON.parse(localStorage.getItem('user')).token || '';
+const { token } = JSON.parse(localStorage.getItem('user')) || '';
 
 const HOST = process.env.REACT_APP_API_HOST || 'localhost';
 const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || 'http';
