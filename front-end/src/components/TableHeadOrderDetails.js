@@ -5,7 +5,7 @@ import {
   TableCell,
 } from '@mui/material';
 
-export default function TableHeadDetails() {
+export default function TableHeadOrderDetails() {
   const path = window.location.pathname;
   return (
     <TableHead>

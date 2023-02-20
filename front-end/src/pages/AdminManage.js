@@ -3,14 +3,12 @@ import {
   Typography,
   Container,
   Table,
-  TableHead,
-  TableRow,
-  TableCell,
   TableBody,
   Stack } from '@mui/material';
 import { methodPost, methodGet } from '../services/requests';
 import Context from '../context/Context';
 import { RegisterForm, Navbar, ErrorMessage, UserDetailsRow } from '../components';
+import TableHeadAdminManage from '../components/TableHeadAdminManage';
 
 export default function AdminManage() {
   const { setErrorMessage } = useContext(Context);
@@ -40,17 +38,10 @@ export default function AdminManage() {
             <ErrorMessage />
           </Stack>
         </Container>
-        <Container>
+        <Stack sx={ { mt: 3, overflowX: 'auto', maxWidth: '100%' } }>
           <Typography sx={ { mt: 5, mb: 3 } }>Usuários cadastrados</Typography>
           <Table maxWidth="sm">
-            <TableHead>
-              <TableRow>
-                <TableCell>Nome</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Tipo</TableCell>
-                <TableCell>Remover</TableCell>
-              </TableRow>
-            </TableHead>
+            <TableHeadAdminManage />
             <TableBody>
               { users && users.map(({ id, name, email, role }) => (<UserDetailsRow
                 key={ id }
@@ -60,7 +51,7 @@ export default function AdminManage() {
               />))}
             </TableBody>
           </Table>
-        </Container>
+        </Stack>
       </Container>
     </>
   );

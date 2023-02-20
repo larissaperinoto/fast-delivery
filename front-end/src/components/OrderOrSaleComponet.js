@@ -8,7 +8,7 @@ import {
   TableBody,
 } from '@mui/material';
 import moment from 'moment';
-import { TableHeadDetails, ProductDetailsRow } from '.';
+import { TableHeadOrderDetails, ProductDetailsRow } from '.';
 import ContainedButton from './ContainedButton';
 
 export default function OrderOrSaleComponet({ sale }) {
@@ -33,18 +33,20 @@ export default function OrderOrSaleComponet({ sale }) {
         <Typography>{ moment(sale.saleDate).format('DD/MM/YYYY')}</Typography>
         <Typography>{ sale.status }</Typography>
       </Stack>
-      <Table sx={ { mt: 3 } }>
-        <TableHeadDetails />
-        <TableBody>
-          { sale.products.map((product) => (<ProductDetailsRow
-            key={ product.id }
-            id={ product.id }
-            price={ product.price }
-            name={ product.name }
-            quantity={ product.SalesProduct.quantity }
-          />))}
-        </TableBody>
-      </Table>
+      <Stack sx={ { mt: 3, overflowX: 'auto', maxWidth: '100%' } }>
+        <Table>
+          <TableHeadOrderDetails />
+          <TableBody>
+            { sale.products.map((product) => (<ProductDetailsRow
+              key={ product.id }
+              id={ product.id }
+              price={ product.price }
+              name={ product.name }
+              quantity={ product.SalesProduct.quantity }
+            />))}
+          </TableBody>
+        </Table>
+      </Stack>
       <Typography variant="h6" sx={ { mt: 3 } }>
         { `TOTAL R$ ${sale.totalPrice.replace('.', ',')}` }
       </Typography>

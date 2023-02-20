@@ -12,8 +12,7 @@ import {
   Select } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { TableHeadDetails } from '../components';
-import Navbar from '../components/Navbar';
+import { TableHeadOrderDetails, Navbar } from '../components';
 import Context from '../context/Context';
 import { methodGet, methodPost } from '../services/requests';
 
@@ -126,7 +125,7 @@ export default function Checkout() {
     <Container maxWidth="md" sx={ { mt: 5 } }>
       <Navbar />
       <Table>
-        <TableHeadDetails />
+        <TableHeadOrderDetails />
         <TableBody>
           { ordersCheckout.map((order, i) => (
             <TableRow

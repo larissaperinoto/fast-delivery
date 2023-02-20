@@ -6,7 +6,7 @@ import ProductDetailsRow from './ProductDetailsRow';
 import RegisterForm from './RegisterForm';
 import SelectRole from './SelectRole';
 import UserDetailsRow from './UserDetailsRow';
-import TableHeadDetails from './TableHeadDetails';
+import TableHeadOrderDetails from './TableHeadOrderDetails';
 
 export {
   ErrorMessage,
@@ -17,5 +17,5 @@ export {
   RegisterForm,
   SelectRole,
   UserDetailsRow,
-  TableHeadDetails,
+  TableHeadOrderDetails,
 };
