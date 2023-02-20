@@ -14,7 +14,7 @@ export default function OrdersOrSales() {
       if (window.location.pathname.includes('seller')) {
         requestedList = await methodGet(`/sales/seller/${id}`);
       } else {
-        requestedList = await methodGet(`/sales/user/${id}`);
+        requestedList = await methodGet(`/sales/customer/${id}`);
       }
       setList(requestedList);
     };
