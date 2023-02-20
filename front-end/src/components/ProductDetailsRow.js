@@ -2,7 +2,7 @@ import React from 'react';
 import { number, string } from 'prop-types';
 import { TableRow, TableCell } from '@mui/material';
 
-export default function ProductDetailsCard({ id, price, name, quantity }) {
+export default function ProductDetailsRow({ id, price, name, quantity }) {
   return (
     <TableRow key={ id }>
       <TableCell>{ id }</TableCell>
@@ -20,7 +20,7 @@ export default function ProductDetailsCard({ id, price, name, quantity }) {
   );
 }
 
-ProductDetailsCard.propTypes = {
+ProductDetailsRow.propTypes = {
   id: number,
   saleProduct: string,
   price: number,

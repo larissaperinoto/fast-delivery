@@ -115,7 +115,7 @@ Navigate to the root folder of the project
       email: seller@email.com
       passsword: secret_seller_password
 
-#### Login as an administrator
+##### Login as an administrator
 
   To log in as a seller, use the following credentials
 

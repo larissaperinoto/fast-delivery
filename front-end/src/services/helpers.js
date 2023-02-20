@@ -14,14 +14,10 @@ export const fromLoginRedirectTo = (role) => {
   }
 };
 
-export const fromNavBarRedirectTo = (role, route) => {
+export const fromNavBarRedirectTo = (role) => {
   switch (role) {
   case 'customer':
-    if (route.includes('orders')) {
-      window.location.pathname = '/customer/products';
-    } else {
-      window.location.pathname = '/customer/orders';
-    }
+    window.location.pathname = '/customer/orders';
     break;
   case 'seller':
     window.location.pathname = '/seller/orders';

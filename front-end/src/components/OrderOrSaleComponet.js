@@ -3,13 +3,13 @@ import { string, number, array, object, objectOf } from 'prop-types';
 import {
   Typography,
   Stack,
-  Button,
   Table,
   Container,
   TableBody,
 } from '@mui/material';
 import moment from 'moment';
-import { TableHeadDetails, ProductDetailsCard } from '.';
+import { TableHeadDetails, ProductDetailsRow } from '.';
+import ContainedButton from './ContainedButton';
 
 export default function OrderOrSaleComponet({ sale }) {
   const minOrderNumber = 3;
@@ -35,7 +35,7 @@ export default function OrderOrSaleComponet({ sale }) {
       <Table sx={ { mt: 3 } }>
         <TableHeadDetails />
         <TableBody>
-          { sale.products.map((product) => (<ProductDetailsCard
+          { sale.products.map((product) => (<ProductDetailsRow
             key={ product.id }
             id={ product.id }
             price={ product.price }
@@ -44,19 +44,11 @@ export default function OrderOrSaleComponet({ sale }) {
           />))}
         </TableBody>
       </Table>
-      <Stack direction="row" sx={ { mt: 3 } } justifyContent="space-between">
-        <Typography variant="h6">
-          { `TOTAL R$ ${sale.totalPrice.replace('.', ',')}` }
-        </Typography>
-        <Button
-          type="button"
-          variant="contained"
-          color="secondary"
-          size="small"
-          disabled
-        >
-          Marcar como recebido
-        </Button>
+      <Typography variant="h6" sx={ { mt: 3 } }>
+        { `TOTAL R$ ${sale.totalPrice.replace('.', ',')}` }
+      </Typography>
+      <Stack direction="row" sx={ { mt: 3 } } justifyContent="flex-end">
+        <ContainedButton text="Marcar como entregue" disabled="true" />
       </Stack>
     </Container>
   );
