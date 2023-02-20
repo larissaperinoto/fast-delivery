@@ -56,11 +56,15 @@ export default function Login() {
       sx={ { mt: 20 } }
     >
       <Stack direction="column" spacing={ 2 } alignItems="center">
+        <img
+          src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/null/external-delivery-cyber-monday-flaticons-lineal-color-flat-icons.png"
+          alt="Motorcycle delivery"
+        />
         <Typography
           variant="h1"
           sx={ { fontSize: 40 } }
         >
-          Delivery App
+          Fast Delivery
         </Typography>
         <FormControl>
           <Stack direction="column" spacing={ 2 }>

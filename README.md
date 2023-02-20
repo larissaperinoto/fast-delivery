@@ -1,13 +1,13 @@
-# Delivery App
+# Fast Delivery
 
-[Trybe](https://www.betrybe.com/) is a technology school focused on training Web Developers and the Delivery App project was proposed as an activity to improve studies on back-end development.
+[Trybe](https://www.betrybe.com/) is a technology school focused on training Web Developers and the Fast Delivery project was proposed as an activity to improve studies on back-end development.
 
 The project was developed with the following team: [Raissa Vasconcelos](https://github.com/RaissaVasconcelos), [Rafael Alencar](https://github.com/rafaeldev13), [Luiz Junior](https://github.com/jcaluiz), [Yan Chapetta](https://github.com/chapetta).
 
 
 ## Description
 
-Delivery App is a Full Stack application to support a beer distributor. This app supports customers, sellers and the administrator person.
+Fast Delivery is a Full Stack application to support a beer distributor. This app supports customers, sellers and the administrator person.
 
 #### Costumer
 
@@ -89,15 +89,15 @@ Navigate to the root folder of the project
 
   </br>
 
-  In the root of the project, upload the <strong>delivery_app_frontend</strong>, <strong>delivery_app_backend</strong> and <strong>delivery_app_db</strong> containers using docker-compose.
+  In the root of the project, upload the <strong>fast_delivery_frontend</strong>, <strong>fast_delivery_backend</strong> and <strong>fast_delivery_db</strong> containers using docker-compose.
 
       docker-compose up -d
 
   Acess the containers logs:
 
-      frontend: docker logs --details delivery_app_frontend
-      backend: docker logs --details delivery_app_backend
-      bd: docker logs --details delivery_app_db
+      frontend: docker logs --details fast_delivery_frontend
+      backend: docker logs --details fast_delivery_backend
+      bd: docker logs --details fast_delivery_db
 
 
 </details>
