@@ -10,7 +10,7 @@ import {
   Stack } from '@mui/material';
 import { methodPost, methodGet } from '../services/requests';
 import Context from '../context/Context';
-import { RegisterForm, Navbar, ErrorMessage, UserDetailsCard } from '../components';
+import { RegisterForm, Navbar, ErrorMessage, UserDetailsRow } from '../components';
 
 export default function AdminManage() {
   const { setErrorMessage } = useContext(Context);
@@ -52,7 +52,7 @@ export default function AdminManage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              { users && users.map(({ id, name, email, role }) => (<UserDetailsCard
+              { users && users.map(({ id, name, email, role }) => (<UserDetailsRow
                 key={ id }
                 name={ name }
                 email={ email }

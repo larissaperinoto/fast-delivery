@@ -2,7 +2,7 @@ import { TableCell, TableRow, Button } from '@mui/material';
 import { string } from 'prop-types';
 import React from 'react';
 
-export default function UserDetailsCard({ name, email, role }) {
+export default function UserDetailsRow({ name, email, role }) {
   return (
     <TableRow>
       <TableCell>{ name }</TableCell>
@@ -17,7 +17,7 @@ export default function UserDetailsCard({ name, email, role }) {
   );
 }
 
-UserDetailsCard.propTypes = {
+UserDetailsRow.propTypes = {
   name: string,
   email: string,
   role: string,

@@ -21,6 +21,7 @@ export default function OrderOrSaleComponet({ sale }) {
         direction="row"
         spacing={ 4 }
         justifyContent="space-between"
+        flexWrap="wrap"
         alignItems="center"
         sx={ { mt: 3 } }
       >

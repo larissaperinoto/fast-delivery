@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 import ProductDetailsRow from './ProductDetailsRow';
 import RegisterForm from './RegisterForm';
 import SelectRole from './SelectRole';
-import UserDetailsCard from './UserDetailsCard';
+import UserDetailsRow from './UserDetailsRow';
 import TableHeadDetails from './TableHeadDetails';
 
 export {
@@ -16,6 +16,6 @@ export {
   ProductDetailsRow,
   RegisterForm,
   SelectRole,
-  UserDetailsCard,
+  UserDetailsRow,
   TableHeadDetails,
 };

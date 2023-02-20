@@ -28,7 +28,9 @@ export default function OrderOrSaleCard({
     <Stack
       type="button"
       direction="row"
+      spacing={ 2 }
       justifyContent="space-around"
+      flexWrap="wrap"
       sx={ { border: 1, cursor: 'pointer', padding: 2, m: 1 } }
       onClick={ () => rediretToDetails() }
     >
