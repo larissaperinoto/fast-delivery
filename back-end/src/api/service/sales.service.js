@@ -46,7 +46,7 @@ const create = async ({ seller, totalPrice, deliveryAddress, deliveryNumber, use
   return { status: StatusCode.Create, message: saleRegistered };
 };
 
-const findAllByUserId = async ({ userId }) => {
+const findByCustomerId = async (userId) => {
   const sales = await Sale.findAll({
     where: { userId },
     include: [
@@ -56,22 +56,29 @@ const findAllByUserId = async ({ userId }) => {
       ],
     });
 
-  if (!sales) {
-    return { status: StatusCode.NotFound, message: 'Not found' };
-  }
+  return sales;
+}
 
-  return { status: StatusCode.OK, message: sales };
-};
-
-const findAllBySellerId = async ({ sellerId }) => {
+const findBySellerId = async (sellerId) => {
   const sales = await Sale.findAll({
-    where: { sellerId },
-    include: [
-      { model: Product,
-        as: 'products',
-        attributes: { exclude: ['urlImage'] } },
+  where: { sellerId },
+  include: [
+    { model: Product,
+      as: 'products',
+      attributes: { exclude: ['urlImage'] } },
     ],
   });
+
+  return sales;
+};
+
+const findSalesByUserId = async ({ id, role }) => {
+  let sales = [];
+  if (role === "customer") {
+    sales = await findByCustomerId(id);
+  } else {
+    sales = await findBySellerId(id);
+  }
 
   if (!sales) {
     return { status: StatusCode.NotFound, message: 'Not found' };
@@ -83,7 +90,6 @@ const findAllBySellerId = async ({ sellerId }) => {
 module.exports = {
   updateStatus,
   findSaleById,
-  findAllByUserId,
+  findSalesByUserId,
   create,
-  findAllBySellerId,
 };

@@ -12,7 +12,6 @@ const authorizationUser = (req, res, next) => {
   if (type) {
     return res.status(401).json({ message: 'Token invalid' });
   }
-
   req.body.user = message;
 
   next();

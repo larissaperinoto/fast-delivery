@@ -9,13 +9,7 @@ export default function OrdersOrSales() {
 
   useEffect(() => {
     const requestList = async () => {
-      const { id } = JSON.parse(localStorage.getItem('user'));
-      let requestedList = '';
-      if (window.location.pathname.includes('seller')) {
-        requestedList = await methodGet(`/sales/seller/${id}`);
-      } else {
-        requestedList = await methodGet(`/sales/customer/${id}`);
-      }
+      const requestedList = await methodGet('/sales/user');
       setList(requestedList);
     };
     requestList();
@@ -25,7 +19,7 @@ export default function OrdersOrSales() {
     <>
       <Navbar />
       <Container maxWidth="md" sx={ { mt: 5 } }>
-        { list && list.map((item, index) => (
+        { list.length && list.map((item, index) => (
           <OrderOrSaleCard
             key={ index }
             id={ item.id }
