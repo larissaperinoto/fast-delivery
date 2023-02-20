@@ -59,6 +59,7 @@ If you are a administrator user, you can login and access the management sellers
 - [Sequelize](https://sequelize.org/)
 - [MySQL](https://www.mysql.com/)
 - [JWT](https://jwt.io/)
+- [Joi](https://joi.dev/)
 - Model-Service-Controller Architecture
 
 ### Back-end tests
@@ -106,18 +107,18 @@ Navigate to the root folder of the project
 ##### Login as a customer
 
  To log in as a user you must register again by clicking on "I don't have an account yet"
- 
+
 ##### Login as a seller
 
   To log in as a seller, use the following credentials
-      
+
       email: seller@email.com
       passsword: secret_seller_password
-      
+
 #### Login as an administrator
-      
+
   To log in as a seller, use the following credentials
-      
+
       email: admin@email.com
       passsword: secret_admin_password
 
