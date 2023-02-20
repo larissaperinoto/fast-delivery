@@ -30,7 +30,7 @@ const findSaleById = async ({ id }) => {
 };
 
 
-const create = async ({ seller, totalPrice, deliveryAddress, deliveryNumber, user: { id }, products}) => {
+const create = async ({ seller, totalPrice, deliveryAddress, deliveryNumber, user: { id }, products }) => {
   const saleRegistered = await Sale.create({
       userId: id,
       sellerId: seller,

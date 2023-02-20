@@ -18,7 +18,7 @@ describe('Testa as rotas da tabela Users', () => {
   describe('Testa método POST na rota /login', () => {
     it('Usuário consegue fazer login com sucesso', async () => {
       sinon.stub(User, "findOne").resolves(customerMock);
-      sinon.stub(jsonwebtoken, 'sign').resolves(tokenMock);
+      sinon.stub(jsonwebtoken, 'sign').returns(tokenMock);
 
       const response = await chai
               .request(app)
@@ -52,7 +52,7 @@ describe('Testa as rotas da tabela Users', () => {
     it('Usuário consegue se registrar com sucesso', async () => {
       sinon.stub(User, "findOne").onCall(0).resolves(undefined).onCall(1).resolves(customerMock);
       sinon.stub(User, "create");
-      sinon.stub(jsonwebtoken, 'sign').resolves(tokenMock);
+      sinon.stub(jsonwebtoken, 'sign').returns(tokenMock);
 
       const response = await chai
               .request(app)

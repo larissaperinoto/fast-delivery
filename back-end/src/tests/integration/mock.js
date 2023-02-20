@@ -35,7 +35,17 @@ const productsMock = [
 
 const saleMock = {
   dataValues: {
-    id: 1
+    id: 1,
+    seller: 2,
+    totalPrice: '8.90',
+    deliveryAddress: 'Rua tal',
+    deliveryNumber: 23,
+    products: [
+      {
+        productId: 1,
+        quantity: 2
+      }
+    ]
   }
 };
 
