@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number, array, object, objectOf } from 'prop-types';
 import {
   Typography,
   Stack,
@@ -10,7 +11,7 @@ import {
 import moment from 'moment';
 import { TableHeadDetails, ProductDetailsCard } from '.';
 
-export default function OrderOrSaleComponet() {
+export default function OrderOrSaleComponet({ sale }) {
   const minOrderNumber = 3;
   const route = window.location.pathname;
 
@@ -60,3 +61,14 @@ export default function OrderOrSaleComponet() {
     </Container>
   );
 }
+
+OrderOrSaleComponet.propTypes = {
+  sale: objectOf({
+    totalPrice: number,
+    status: string,
+    saleDate: string,
+    id: number,
+    sellerInfos: object,
+    products: array,
+  }),
+}.isRequired;

@@ -1,5 +1,5 @@
 import { TableCell, TableRow, Button } from '@mui/material';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import React from 'react';
 
 export default function UserDetailsCard({ name, email, role }) {
@@ -18,7 +18,7 @@ export default function UserDetailsCard({ name, email, role }) {
 }
 
 UserDetailsCard.propTypes = {
-  name: PropTypes.string,
-  email: PropTypes.string,
-  role: PropTypes.string,
+  name: string,
+  email: string,
+  role: string,
 }.isRequired;

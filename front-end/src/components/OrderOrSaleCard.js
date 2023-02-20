@@ -1,7 +1,7 @@
 import React from 'react';
 import { Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { number, string } from 'prop-types';
 import moment from 'moment';
 
 export default function OrderOrSaleCard({
@@ -14,9 +14,10 @@ export default function OrderOrSaleCard({
 }) {
   const history = useNavigate();
   const minOrderNumber = 3;
+  const route = window.location.pathname;
 
   const rediretToDetails = () => {
-    if (window.location.pathname.includes('seller')) {
+    if (route.includes('seller')) {
       history(`/seller/orders/${id}`);
     } else {
       history(`/customer/orders/${id}`);
@@ -35,17 +36,17 @@ export default function OrderOrSaleCard({
       <Typography>{ status }</Typography>
       <Typography>{ moment(saleDate).format('DD/MM/YYYY') }</Typography>
       <Typography>{ `R$ ${totalPrice.toString().replace('.', ',')}` }</Typography>
-      { window.location.pathname.includes('seller')
+      { route.includes('seller')
         && <Typography>{ `${deliveryAddress}, ${deliveryNumber}` }</Typography> }
     </Stack>
   );
 }
 
 OrderOrSaleCard.propTypes = {
-  deliveryNumber: PropTypes.number,
-  id: PropTypes.number,
-  totalPrice: PropTypes.number,
-  saleDate: PropTypes.string,
-  status: PropTypes.string,
-  deliveryAddress: PropTypes.string,
+  deliveryNumber: number,
+  id: number,
+  totalPrice: number,
+  saleDate: string,
+  status: string,
+  deliveryAddress: string,
 }.isRequired;
