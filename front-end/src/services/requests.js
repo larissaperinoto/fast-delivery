@@ -32,6 +32,7 @@ export async function methodPost(body, route) {
 }
 
 export async function methodPut(body, route) {
+  console.log(`${baseURL}${route}`);
   const response = await fetch(`${baseURL}${route}`, {
     method: 'PUT',
     headers: headersParams,
