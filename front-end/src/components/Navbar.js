@@ -14,14 +14,14 @@ export default function Navbar() {
   };
 
   const newOrderButton = () => {
-    if (route.includes('costumer/orders')) {
+    if (route.includes('customer/orders')) {
       return (
         <Button
           type="button"
           variant="text"
           color="secondary"
           size="small"
-          onClick={ () => history('customer/products') }
+          onClick={ () => history('/customer/products') }
         >
           Novo Pedido
         </Button>

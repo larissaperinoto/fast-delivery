@@ -6,10 +6,10 @@ import {
   Table,
   Container,
   TableBody,
+  Button,
 } from '@mui/material';
 import moment from 'moment';
 import { TableHeadOrderDetails, ProductDetailsRow } from '.';
-import ContainedButton from './ContainedButton';
 
 export default function OrderOrSaleComponet({ sale }) {
   const minOrderNumber = 3;
@@ -51,7 +51,16 @@ export default function OrderOrSaleComponet({ sale }) {
         { `TOTAL R$ ${sale.totalPrice.replace('.', ',')}` }
       </Typography>
       <Stack direction="row" sx={ { mt: 3 } } justifyContent="flex-end">
-        <ContainedButton text="Marcar como entregue" disabled="true" />
+        <Button
+          type="button"
+          variant="contained"
+          color="secondary"
+          size="small"
+          disabled={ sale.status === 'Em trânsito' }
+          // onClick={ () => handleClick() }
+        >
+          Marcar como entregue
+        </Button>
       </Stack>
     </Container>
   );
