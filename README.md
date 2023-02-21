@@ -67,6 +67,9 @@ If you are a administrator user, you can login and access the management sellers
 - [Chai](https://www.chaijs.com/)
 - [Sinon](https://sinonjs.org/)
 
+### Documentation
+- [Swagger](https://swagger.io/)
+
 ### Code alignment
 - [ESlint](https://eslint.org/)
 
