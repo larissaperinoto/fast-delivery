@@ -10,7 +10,6 @@ const updateStatus = async (id, { status }) => {
   return { status: StatusCode.OK, message: 'Updated' };
 };
 
-
 const findSaleById = async ({ id }) => {
   const sale = await Sale.findOne({
     where: { id },
@@ -18,7 +17,9 @@ const findSaleById = async ({ id }) => {
       { model: Product,
         as: 'products',
         attributes: { exclude: ['urlImage'] } },
-      { model: User, as: 'sellerInfos'},
+      { model: User,
+        as: 'sellerInfos',
+        attributes: { exclude: ['password', 'role'] }},
     ],
   });
 

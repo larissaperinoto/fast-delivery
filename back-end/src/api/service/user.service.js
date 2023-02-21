@@ -36,7 +36,10 @@ const findAll = async () => {
   const users = await User.findAll({ where: {[Op.or]: [
     { role: 'seller' },
     { role: 'customer' }
-  ]}});
+  ]},
+  attributes: {
+    exclude: ['password']
+  }});
 
   return { status: statusCode.OK, message: users };
 };

@@ -1,8 +1,9 @@
 const { Product } = require('../../database/models');
+const StatusCode = require('../shared/statusCode');
 
 const findAll = async () => {
   const products = await Product.findAll();
-  return products;
+  return { status: StatusCode.OK, message: products };
 };
 
 module.exports = {
