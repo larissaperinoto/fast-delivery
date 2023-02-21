@@ -1,0 +1,477 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Fast Delivery API",
+    "description": "The Fast Delivery API helps to manage and support a beer distributor.",
+    "contact": {
+      "url": "https://larissaperinoto.com.br/",
+      "email": "perinotolarissa@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "Login",
+        "description": "Allows the login of customers, sellers and administrator who already have a record in the database",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "customer@email.com",
+                    "password": "secret_customer_password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "summary": "Create new user",
+        "description": "Allows register new users in the database",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "customer@email.com",
+                    "password": "secret_customer_password",
+                    "name": "Customer name"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "get": {
+        "summary": "Read all customers and sellers",
+        "description": "Returns an array with all customers and sellers registered in the database.",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "items": {
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "role": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/:role": {
+      "get": {
+        "summary": "Read a list of users by role",
+        "description": "Returns a list of users corresponding to the role sent by the route if it exists",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "role",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "role": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+   "/sales/:id": {
+      "put": {
+        "summary": "Update a sale by id",
+        "tags": ["Sales"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "properties": {
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "content": {
+              "aplication/json": {
+                "type": "Updated"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Read a sale by Id",
+        "tags": ["Sales"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale"
+                }
+              }
+            }
+          }
+        }
+      }
+   },
+   "/sales": {
+      "post": {
+        "summary": "Create new sale",
+        "tags": ["Sales"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "aplication/json": {
+              "schema": {
+                "properties": {
+                  "seller": {
+                    "type": "string"
+                  },
+                  "totalPrice": {
+                    "type": "string"
+                  },
+                  "deliveryAddress": {
+                    "type": "string"
+                  },
+                  "deliveryNumber": {
+                    "type": "string"
+                  },
+                  "products": {
+                    "items": {
+                      "productId": {
+                        "type": "number"
+                      },
+                      "quantity": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "seller": 1,
+                    "totalPrice": "20.50",
+                    "deliveryAddress": "address",
+                    "deliveryNumber": "23",
+                    "products": [
+                      {
+                        "productId": 1,
+                        "quantity": 5
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      }
+    },
+    "/sales/user": {
+      "get": {
+        "summary": "Return a list of sales by the customer or seller Id",
+        "tags": ["Sales"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Sale"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "Return a list of products",
+        "tags": ["Products"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Sale": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "userId": {
+            "type": "number"
+          },
+          "sellerId": {
+            "type": "number"
+          },
+          "totalPrice": {
+            "type": "string"
+          },
+          "deliveryAddress": {
+            "type": "string"
+          },
+          "deliveryNumber": {
+            "type": "string"
+          },
+          "saleDate": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "products": {
+              "items": {
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "string"
+                  },
+                  "SalesProduct": {
+                    "properties": {
+                      "quantity": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+            }
+          },
+          "sellerInfos": {
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "urlImage": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
