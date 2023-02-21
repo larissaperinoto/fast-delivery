@@ -65,7 +65,7 @@
         }
       }
     },
-    "/user": {
+    "/users": {
       "post": {
         "summary": "Create new user",
         "description": "Allows register new users in the database",
@@ -154,7 +154,7 @@
         }
       }
     },
-    "/user/:role": {
+    "/users/:role": {
       "get": {
         "summary": "Read a list of users by role",
         "description": "Returns a list of users corresponding to the role sent by the route if it exists",
@@ -188,6 +188,30 @@
                     }
                   }
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/:id": {
+      "delete": {
+        "summary": "Remove a customer or seller",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "aplication/json": {
+                "type": "Deleted"
               }
             }
           }
@@ -231,7 +255,7 @@
         }
       },
       "get": {
-        "summary": "Read a sale by Id",
+        "summary": "Read a sale by id",
         "tags": ["Sales"],
         "security": [{ "bearerAuth": [] }],
         "parameters": [
@@ -327,7 +351,7 @@
     },
     "/sales/user": {
       "get": {
-        "summary": "Return a list of sales by the customer or seller Id",
+        "summary": "Return a list of sales by the customer or seller id",
         "tags": ["Sales"],
         "security": [{ "bearerAuth": [] }],
         "responses": {

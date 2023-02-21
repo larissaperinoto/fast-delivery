@@ -122,6 +122,12 @@ Navigate to the root folder of the project
       email: admin@email.com
       passsword: secret_admin_password
 
+
+## API Documentation
+
+You can view the API documentation by accessing the **/docs** route or by clicking [here](https://smoggy-reading-production.up.railway.app/docs).
+
+
 ---
 
 Develop by [Larissa Perinoto](www.linkedin.com/in/larissaperinoto), © 2022.
