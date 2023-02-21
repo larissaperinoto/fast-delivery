@@ -10,6 +10,7 @@ export default function SelectRole() {
       labelId="demo-simple-select-label"
       id="demo-simple-select"
       label="Tipo"
+      defaultValue="seller"
       onChange={ ({ target: { value } }) => setRole(value) }
     >
       <MenuItem value="seller" defaultValue>Vendedor</MenuItem>

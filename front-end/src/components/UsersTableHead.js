@@ -1,7 +1,7 @@
 import React from 'react';
 import { TableHead, TableCell, TableRow } from '@mui/material';
 
-export default function TableHeadAdminManage() {
+export default function UsersTableHead() {
   return (
     <TableHead>
       <TableRow>

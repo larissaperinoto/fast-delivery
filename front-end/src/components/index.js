@@ -5,9 +5,9 @@ import ProductCard from './ProductCard';
 import ProductDetailsRow from './ProductDetailsRow';
 import RegisterForm from './RegisterForm';
 import SelectRole from './SelectRole';
-import UserDetailsRow from './UserDetailsRow';
+import UsersTableRow from './UsersTableRow';
 import TableHeadOrderDetails from './TableHeadOrderDetails';
-import TableHeadAdminManage from './TableHeadAdminManage';
+import UsersTableHead from './UsersTableHead';
 
 export {
   ErrorMessage,
@@ -17,7 +17,7 @@ export {
   ProductDetailsRow,
   RegisterForm,
   SelectRole,
-  UserDetailsRow,
+  UsersTableRow,
   TableHeadOrderDetails,
-  TableHeadAdminManage,
+  UsersTableHead,
 };

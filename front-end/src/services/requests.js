@@ -28,6 +28,7 @@ export async function methodPost(body, route) {
     body: JSON.stringify(body),
   });
   const data = await response.json();
+  console.log(data);
   return data;
 }
 
