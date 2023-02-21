@@ -1,6 +1,5 @@
 import {
   Container,
-  TableHead,
   Table,
   TableRow,
   TableCell,
@@ -13,7 +12,7 @@ import {
   Select } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import { TableHeadOrderDetails, Navbar } from '../components';
 import Context from '../context/Context';
 import { methodGet, methodPost } from '../services/requests';
 
@@ -125,42 +124,35 @@ export default function Checkout() {
   return (
     <Container maxWidth="md" sx={ { mt: 5 } }>
       <Navbar />
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Item</TableCell>
-            <TableCell>Descrição</TableCell>
-            <TableCell>Quantidade</TableCell>
-            <TableCell>Valor unitário</TableCell>
-            <TableCell>Sub-total</TableCell>
-            <TableCell>Remover item</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          { ordersCheckout.map((order, i) => (
-            <TableRow
-              key={ order.item }
-            >
-              <TableCell>{order.item}</TableCell>
-              <TableCell>{order.descricao}</TableCell>
-              <TableCell>{order.quantidade}</TableCell>
-              <TableCell>{order.valor.toFixed(2).toString().replace('.', ',')}</TableCell>
-              <TableCell>
-                {order.subTotal.toFixed(2).toString().replace('.', ',')}
-              </TableCell>
-              <TableCell>
-                <Button
-                  type="button"
-                  onClick={ () => setRemoveItem(i, order.descricao) }
-                >
-                  Remover item
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
+      <Stack sx={ { mt: 3, mb: 5, overflowX: 'auto', maxWidth: '100%' } }>
+        <Table>
+          <TableHeadOrderDetails />
+          <TableBody>
+            { ordersCheckout.map((order, i) => (
+              <TableRow
+                key={ order.item }
+              >
+                <TableCell>{order.item}</TableCell>
+                <TableCell>{order.descricao}</TableCell>
+                <TableCell>{order.quantidade}</TableCell>
+                <TableCell>{order.valor.toFixed(2).toString()}</TableCell>
+                <TableCell>
+                  {order.subTotal.toFixed(2).toString().replace('.', ',')}
+                </TableCell>
+                <TableCell>
+                  <Button
+                    type="button"
+                    onClick={ () => setRemoveItem(i, order.descricao) }
+                  >
+                    Remover item
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
 
-        </TableBody>
-      </Table>
+          </TableBody>
+        </Table>
+      </Stack>
       <Typography
         variant="h5"
         sx={ { mt: 5, mb: 2 } }
@@ -168,49 +160,52 @@ export default function Checkout() {
         {`R$ ${totalPrice}`}
       </Typography>
 
-      <Typography
-        variant="h5"
-        sx={ { mt: 5, mb: 2 } }
-      >
-        Detalhes e endereço para entrega
-      </Typography>
-      <Stack direction="row" spacing={ 2 } alignItems="center">
-        <Select
-          onChange={ (e) => setSeller(e.target.value) }
-          value={ seller }
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          label="Selecione o vendedor"
-          size="small"
+      <Container>
+        <Stack
+          direction="column"
+          spacing={ 2 }
+          sx={ { mt: 5, mb: 5 } }
         >
-          { sellers.map(({ name, id }) => (
-            <MenuItem key={ id } value={ id }>
-              { name }
-            </MenuItem>))}
-        </Select>
-        <TextField
-          type="text"
-          placeholder="Endereço"
-          size="small"
-          value={ deliveryAddress }
-          onChange={ (e) => setDeliveryAddress(e.target.value) }
-        />
-        <TextField
-          type="text"
-          placeholder="Número"
-          size="small"
-          value={ deliveryNumber }
-          onChange={ (e) => setDeliveryNumber(e.target.value) }
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="secondary"
-          onClick={ () => registerSale() }
-        >
-          Finalizar Pedido
-        </Button>
-      </Stack>
+          <Typography variant="h5">
+            Detalhes para entrega
+          </Typography>
+          <Select
+            onChange={ ({ target: { value } }) => setSeller(value) }
+            value={ seller }
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            label="Selecione o vendedor"
+            size="small"
+          >
+            { sellers.map(({ name, id }) => (
+              <MenuItem key={ id } value={ id }>
+                { name }
+              </MenuItem>))}
+          </Select>
+          <TextField
+            type="text"
+            placeholder="Endereço"
+            size="small"
+            value={ deliveryAddress }
+            onChange={ ({ target: { value } }) => setDeliveryAddress(value) }
+          />
+          <TextField
+            type="text"
+            placeholder="Número"
+            size="small"
+            value={ deliveryNumber }
+            onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="secondary"
+            onClick={ () => registerSale() }
+          >
+            Finalizar Pedido
+          </Button>
+        </Stack>
+      </Container>
     </Container>
   );
 }

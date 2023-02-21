@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { string, Function } from 'prop-types';
 import {
   Button,
   TextField,
@@ -67,6 +67,6 @@ export default function RegisterForm({ handleRegister, direction }) {
 }
 
 RegisterForm.propTypes = {
-  direction: PropTypes.string,
-  handleRegister: PropTypes.Function,
+  direction: string,
+  handleRegister: Function,
 }.isRequired;

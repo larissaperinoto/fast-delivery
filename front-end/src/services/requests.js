@@ -13,7 +13,6 @@ const headersParams = {
 };
 
 export async function methodGet(route) {
-  console.log(`${baseURL}${route}`);
   const response = await fetch(`${baseURL}${route}`, {
     method: 'GET',
     headers: headersParams,
@@ -29,6 +28,7 @@ export async function methodPost(body, route) {
     body: JSON.stringify(body),
   });
   const data = await response.json();
+  console.log(data);
   return data;
 }
 
@@ -37,6 +37,15 @@ export async function methodPut(body, route) {
     method: 'PUT',
     headers: headersParams,
     body: JSON.stringify(body),
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function methodDelete(route) {
+  const response = await fetch(`${baseURL}${route}`, {
+    method: 'DELETE',
+    headers: headersParams,
   });
   const data = await response.json();
   return data;

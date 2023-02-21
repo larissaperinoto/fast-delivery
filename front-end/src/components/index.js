@@ -2,18 +2,22 @@ import ErrorMessage from './ErrorMessage';
 import Navbar from './Navbar';
 import OrderOrSaleCard from './OrderOrSaleCard';
 import ProductCard from './ProductCard';
-import ProductDetailsCard from './ProductDetailsCard';
+import ProductDetailsRow from './ProductDetailsRow';
 import RegisterForm from './RegisterForm';
 import SelectRole from './SelectRole';
-import UserDetailsCard from './UserDetailsCard';
+import UsersTableRow from './UsersTableRow';
+import TableHeadOrderDetails from './TableHeadOrderDetails';
+import UsersTableHead from './UsersTableHead';
 
 export {
   ErrorMessage,
   Navbar,
   OrderOrSaleCard,
   ProductCard,
-  ProductDetailsCard,
+  ProductDetailsRow,
   RegisterForm,
   SelectRole,
-  UserDetailsCard,
+  UsersTableRow,
+  TableHeadOrderDetails,
+  UsersTableHead,
 };

@@ -1,8 +1,8 @@
 const productsService = require('../service/products.service');
 
 const findAll = async (req, res) => {
-  const products = await productsService.findAll();
-  return res.status(200).json(products);
+  const { status, message } = await productsService.findAll();
+  return res.status(status).json(message);
 };
 
 module.exports = {

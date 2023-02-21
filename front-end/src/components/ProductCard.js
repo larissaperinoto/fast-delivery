@@ -44,7 +44,7 @@ export default function ProductCard({
       spacing={ 2 }
       alignItems="center"
       justifyContent="center"
-      sx={ { padding: 2, mt: 2 } }
+      sx={ { padding: 2, mt: 2, mb: 2 } }
     >
       <Typography variant="h6">{name}</Typography>
       <img

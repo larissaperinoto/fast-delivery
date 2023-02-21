@@ -27,14 +27,20 @@ const create = async ({ name, email, password, role }) => {
 
   await User.create({ name, email, password: md5(password), role });
 
-  return login({ email, password });
+  const user = await login({ email, password });
+
+  return user;
 };
 
 const findAll = async () => {
   const users = await User.findAll({ where: {[Op.or]: [
     { role: 'seller' },
     { role: 'customer' }
-  ]}});
+  ]},
+  attributes: {
+    exclude: ['password']
+  }});
+
   return { status: statusCode.OK, message: users };
 };
 
@@ -44,11 +50,14 @@ const findByRole = async ({ role }) => {
     attributes: { exclude: ['password'] }
   });
   return { status: StatusCode.OK, message: users };
-}
+};
+
+const remove = async ({ id }) => await User.destroy({ where: { id } });
 
 module.exports = {
   login,
   create,
   findAll,
   findByRole,
+  remove,
 };

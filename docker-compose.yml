@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   frontend:
-    container_name: delivery_app_frontend
+    container_name: fast_delivery_frontend
     build: ./front-end
     ports:
       - 3000:3000
@@ -10,7 +10,7 @@ services:
     volumes:
       - ./front-end:/app-frontend
   backend:
-    container_name: delivery_app_backend
+    container_name: fast_delivery_backend
     build: ./back-end
     ports:
       - 3001:3001
@@ -26,7 +26,7 @@ services:
       - MYSQLPASSWORD=password
   db:
     image: mysql:8.0.21
-    container_name: delivery_app_db
+    container_name: fast_delivery_db
     platform: linux/x86_64
     ports:
       - 3306:3306

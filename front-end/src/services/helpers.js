@@ -1,4 +1,4 @@
-const redirectTo = (role) => {
+export const fromLoginRedirectTo = (role) => {
   switch (role) {
   case 'customer':
     window.location.pathname = '/customer/products';
@@ -14,4 +14,15 @@ const redirectTo = (role) => {
   }
 };
 
-export default redirectTo;
+export const fromNavBarRedirectTo = (role) => {
+  switch (role) {
+  case 'customer':
+    window.location.pathname = '/customer/orders';
+    break;
+  case 'seller':
+    window.location.pathname = '/seller/orders';
+    break;
+  default:
+    break;
+  }
+};
