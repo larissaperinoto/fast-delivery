@@ -40,3 +40,12 @@ export async function methodPut(body, route) {
   const data = await response.json();
   return data;
 }
+
+export async function methodDelete(route) {
+  const response = await fetch(`${baseURL}${route}`, {
+    method: 'DELETE',
+    headers: headersParams,
+  });
+  const data = await response.json();
+  return data;
+}

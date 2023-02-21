@@ -1,15 +1,18 @@
 import { TableCell, TableRow, Button } from '@mui/material';
-import { string } from 'prop-types';
+import { string, number, Function } from 'prop-types';
 import React from 'react';
 
-export default function UserDetailsRow({ name, email, role }) {
+export default function UserDetailsRow({ name, email, role, id, removeUser }) {
   return (
     <TableRow>
       <TableCell>{ name }</TableCell>
       <TableCell>{ email }</TableCell>
       <TableCell>{ role }</TableCell>
       <TableCell>
-        <Button>
+        <Button
+          type="button"
+          onClick={ () => removeUser(id) }
+        >
           Excluir
         </Button>
       </TableCell>
@@ -21,4 +24,6 @@ UserDetailsRow.propTypes = {
   name: string,
   email: string,
   role: string,
+  id: number,
+  removeUser: Function,
 }.isRequired;

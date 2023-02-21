@@ -46,7 +46,7 @@ export default function Navbar() {
   };
 
   return (
-    <Container maxWidth="lg" sx={ { mt: 5, mb: 5 } }>
+    <Container sx={ { mt: 5, mb: 5 } }>
       <Stack
         direction="row"
         spacing={ 5 }

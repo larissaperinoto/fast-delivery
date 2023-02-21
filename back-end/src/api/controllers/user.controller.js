@@ -1,4 +1,5 @@
 const userService = require('../service/user.service');
+const StatusCode = require('../shared/statusCode');
 
 const login = async (req, res) => {
   const { status, message } = await userService.login(req.body);
@@ -20,9 +21,15 @@ const findByRole = async (req, res) => {
   return res.status(status).json(message);
 };
 
+const remove = async (req, res) => {
+  await userService.remove(req.params);
+  return res.status(StatusCode.OK).json("Deleted");
+}
+
 module.exports = {
   login,
   create,
   findAll,
   findByRole,
+  remove,
 };

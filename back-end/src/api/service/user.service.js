@@ -50,11 +50,14 @@ const findByRole = async ({ role }) => {
     attributes: { exclude: ['password'] }
   });
   return { status: StatusCode.OK, message: users };
-}
+};
+
+const remove = async ({ id }) => await User.destroy({ where: { id } });
 
 module.exports = {
   login,
   create,
   findAll,
   findByRole,
+  remove,
 };

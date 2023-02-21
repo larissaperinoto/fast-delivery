@@ -9,5 +9,6 @@ route.post('/users', userController.create);
 route.use(authorizationUser);
 route.get('/users', userController.findAll);
 route.get('/users/:role', userController.findByRole);
+route.delete('/users/:id', userController.remove)
 
 module.exports = route;
